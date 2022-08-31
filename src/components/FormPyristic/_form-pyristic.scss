@@ -1,0 +1,20 @@
+@use '@carbon/react/scss/theme' as *;
+@use '@carbon/react/scss/breakpoint' as *;
+
+.form-container {
+    background-color: $layer-02;
+    margin-left: 15%;
+    margin-bottom: 5%;
+    width: 70%;
+    @include breakpoint-down(md) {
+        width: 85%;
+        margin-left: 7%;
+    }
+}
+
+.notification-position {
+    position: absolute;
+    right: 0;
+    top:10%;
+}
+

@@ -1,0 +1,22 @@
+@use './components/NavBar/nav-bar';
+@use './components/Banner/banner';
+@use './components/Footer/footer';
+@use './components/ProgressStepsBar/progress-bar';
+@use './components/FormPyristic/form-pyristic';
+@use './components/EditorForm/editor-form';
+@use './content/LandingPage/landing-page';
+@use './content/RepoPage/repo-page';
+@use './components/Info/info';
+@use '@carbon/react/scss/theme' as *;
+@use '@carbon/react/scss/breakpoint' as *;
+
+.gray-background {
+    background-color: $layer-01;
+    position: relative;
+    margin-right:-0.5%;
+}
+
+.white-container {
+    background-color: white;
+    position: relative;
+}

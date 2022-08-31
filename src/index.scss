@@ -1,0 +1,16 @@
+@use '@carbon/react';
+@use '@carbon/react/scss/breakpoint' as *;
+@use '@carbon/react/scss/spacing' as *;
+@use '@carbon/react/scss/zone';
+
+.cds--content {
+  margin-top: 3rem;
+  padding: 0%;
+  padding-left: $spacing-08;
+  background: var(--cds-background);
+}
+
+.cds--content .cds--css-grid {
+  max-width: 100%;
+
+}

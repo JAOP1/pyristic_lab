@@ -1,0 +1,19 @@
+@use '@carbon/react/scss/spacing' as *;
+@use '@carbon/react/scss/type' as *;
+
+.banner{
+  background-image: url('../../assets/tab-illo.png');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: right;
+  padding-top: $spacing-05;
+  padding-bottom: $spacing-07 * 4;
+  padding-left: $spacing-06;
+}
+
+
+.landing-page__heading {
+    @include type-style('productive-heading-05');
+  }
+
+  

@@ -1,0 +1,5 @@
+@use '@carbon/react/scss/type' as *;
+
+.heading {
+    @include type-style('productive-heading-04');
+  }
