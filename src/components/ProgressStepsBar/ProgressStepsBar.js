@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import {
     ProgressIndicator,
@@ -7,9 +7,14 @@ import {
 
 
 const ProgressStepsBar = ({ progressItems }) => {
-
+    const [index, setIndex] = useState(0)
     return(
-            <ProgressIndicator className='progress-bar-position'>
+            <ProgressIndicator 
+                currentIndex={index} 
+                onChange={ (e) =>  setIndex(e) } 
+                className='progress-bar-position'
+                spaceEqually={true}
+            >
             {
                 progressItems.map( (item, ind) => (
                     <ProgressStep key={ind}
@@ -36,12 +41,27 @@ ProgressStepsBar.propTypes = {
 ProgressStepsBar.defaultProps = {
     progressItems: [
         {
-            label:'Optimization problem',
+            label:'Step 1',
             description:'Step 1: Include the optimization problem.',
-            current:true
         },
         {
-            label:'Crossover operator',
+            label:'Step 2',
+            description:'Step 2: Selection of crossover operator.'
+        },
+        {
+            label:'Step 1',
+            description:'Step 1: Include the optimization problem.',
+        },
+        {
+            label:'Step 2',
+            description:'Step 2: Selection of crossover operator.'
+        },
+        {
+            label:'Step 1',
+            description:'Step 1: Include the optimization problem.',
+        },
+        {
+            label:'Step 2',
             description:'Step 2: Selection of crossover operator.'
         }
     ]

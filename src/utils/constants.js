@@ -1,8 +1,19 @@
-const AG_COUNTINUOS_MUTATION_OP = [
+import { Equation } from 'react-equation';
+
+export const AG_COUNTINUOS_MUTATION_OP = [
     {
         label:'Binary mutation',
         method_name:'BinaryMutator',
-        equation:'5m + 1/2m * sin(π)',
+        description_render: (
+            <>
+            <p>
+                The method works using the following equation:
+            </p>
+            <Equation
+                value={'5m + 1/2m'}
+            />
+            </>
+        ),
         params:[
             {
                 label:'mutation probability',
@@ -77,7 +88,7 @@ const AG_COUNTINUOS_MUTATION_OP = [
     } 
 ];
 
-const AG_CONTINUOS_CROSSOVER_OP = [
+export const AG_CONTINUOS_CROSSOVER_OP = [
     {
         label:'Discrete crossover',
         method_name:'DiscreteCrossover',
@@ -127,7 +138,7 @@ const AG_CONTINUOS_CROSSOVER_OP = [
     }
 ];
 
-const AG_PARENT_SELECTION = [
+export const AG_PARENT_SELECTION = [
     {
         label:'Tournament selection',
         method_name:'TournamentSampler',
@@ -152,7 +163,7 @@ const AG_PARENT_SELECTION = [
     },
 ];
 
-const SURVIVOR_SELECTION = [
+export const SURVIVOR_SELECTION = [
     {
         label:'Merge selection',
         method_name:'MergeSelector',
@@ -164,10 +175,3 @@ const SURVIVOR_SELECTION = [
         params:[]
     }
 ];
-
-module.exports = {
-    AG_COUNTINUOS_MUTATION_OP,
-    AG_CONTINUOS_CROSSOVER_OP,
-    AG_PARENT_SELECTION,
-    SURVIVOR_SELECTION
-};

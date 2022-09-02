@@ -39,17 +39,8 @@ const FormPyristic = ({itemList, title}) => {
 
     const createHelpText = () => {
         let text = TEXT_SELECTION_DROPDOWN;
-        if(itemSelected){
-            text = (
-                <>
-                <p>
-                    The method {itemSelected.label} works using the following equation:
-                </p>
-                <Equation
-                    value={itemSelected.equation}
-                />
-                </>
-            );
+        if(itemSelected.description_render){
+            text = itemSelected.description_render;
             console.log('texto:', text);
         }
         setModalText(text);

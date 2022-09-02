@@ -5,8 +5,6 @@ import './app.scss';
 import NavBar from './components/NavBar';
 import Banner from './components/Banner';
 import Footer from './components/Footer';
-import LandingPage from './content/LandingPage';
-import RepoPage from './content/RepoPage';
 import ContinuosOptimizationPage from './content/ContinuosOptimizationPage/ContinuosOptimizationPage';
 class App extends Component {
   render() {
@@ -19,8 +17,6 @@ class App extends Component {
           <Banner/>
           <Switch>
             <Route exact path='/' component={ContinuosOptimizationPage} />
-            <Route path="/land" component={LandingPage} />
-            <Route path="/repos" component={RepoPage} />
           </Switch>
           <Theme theme='g100'>
             <Footer/>

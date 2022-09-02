@@ -23,9 +23,9 @@ const ContinuosOptimizationPage = () => {
                 <Tab>Evolutionary Strategy</Tab>
                 <Tab>Evolutive programming</Tab>
             </TabList>
-            <ProgressStepsBar/>
             <TabPanels>
                 <TabPanel>
+            <ProgressStepsBar/>
                     <FormPyristic itemList={ AG_COUNTINUOS_MUTATION_OP } title={'Mutation operand'}/>
                 </TabPanel>
                 <TabPanel>
