@@ -14,10 +14,9 @@ import {
     Column,
     Link
   } from '@carbon/react';
-import { _ } from 'core-js';
-import { Equation } from 'react-equation';
+import { useDispatch } from 'react-redux';
 
-const FormPyristic = ({itemList, title}) => {
+const FormPyristic = ({itemList, title, globalStorageHandler}) => {
     const TEXT_SELECTION_DROPDOWN = (
         <p>Select the wanted method desired to execute during the process, every method is 
         described in 
@@ -28,13 +27,15 @@ const FormPyristic = ({itemList, title}) => {
     );
     const [itemSelected, setItemSelected] = useState(undefined);
     const [modalText, setModalText] = useState(undefined);
+    const dispatch = useDispatch();
 
     const submitHandler = (arrayArguments) => {
         const methodConfig = {
             operator_name: itemSelected.method_name,
             parameters: arrayArguments
         };
-        console.log('Config method:', methodConfig);
+        setItemSelected(undefined);
+        dispatch(globalStorageHandler(methodConfig));
     };
 
     const createHelpText = () => {
@@ -61,7 +62,8 @@ const FormPyristic = ({itemList, title}) => {
                                 helperText='Select the method'
                                 label='No selected method.'
                                 items={itemList}
-                                itemToString={(item) => item.label}
+                                // itemToString={(item) => item.label}
+                                selectedItem={itemSelected}
                                 onChange={ (e) => {
                                     setItemSelected(e.selectedItem);
                                 }}
@@ -103,12 +105,11 @@ const FormMethod = ({params , submitHandler}) => {
     useMemo(() => {
         if(paramList.length){
             let values = paramList.map(obj => obj.initialValue);
-            paramList.forEach( obj => delete obj['initialValue'] );
             setArrayValues(values);
         }
     }, [paramList]);
 
-    if(paramList.length === 0){
+    if(params === undefined){
         return (
             <FormGroup
                 legendText={'Arguments of method selected.'}
@@ -134,13 +135,13 @@ const FormMethod = ({params , submitHandler}) => {
                             key={ind}
                             value={arrayValues[ind]}
                             invalidText={'Invalid value, check the specifications.'}
-                            onChange={(e) => {
-                                if(_.isNan(e.target.value))
-                                    return;
+                            onChange={(e, { value }) => {
                                 let tmp_array = [ ...arrayValues ];
-                                tmp_array[ind] = parseFloat(e.target.value);
-                                console.log('tipo', typeof tmp_array[ind]);
-                                console.log(tmp_array);
+                                const _value = parseFloat(value);
+                                if(Number.isNaN(_value)){
+                                    return;
+                                }
+                                tmp_array[ind] = _value;
                                 setArrayValues(tmp_array);
                                 }
                             }

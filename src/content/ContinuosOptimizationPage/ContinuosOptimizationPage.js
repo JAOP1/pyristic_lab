@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
     Tabs,
     Tab,
@@ -12,30 +12,106 @@ import {
 import ProgressStepsBar from '../../components/ProgressStepsBar';
 import FormPyristic from '../../components/FormPyristic';
 import EditorForm from '../../components/EditorForm/EditorForm';
-import { AG_COUNTINUOS_MUTATION_OP } from '../../utils/constants';
-const ContinuosOptimizationPage = () => {
+import { 
+    AG_COUNTINUOS_MUTATION_OP,
+    AG_CONTINUOS_CROSSOVER_OP,
+    AG_PARENT_SELECTION,
+    SURVIVOR_SELECTION
+} from '../../utils/constants';
+import { 
+    mutationUpdated,
+    crossoverUpdated,
+    survivorSelectionUpdated,
+    parentSelectionUpdated
+} from '../../features/AGStore';
 
+const ContinuosOptimizationPage = () => {
+    const [disableAlgorithms, setDisableAlgorithms] = useState(false);
+    const SETTINGS_AG = [
+        {
+            title:'Parent selection',
+            item_list:AG_PARENT_SELECTION,
+            handler:  parentSelectionUpdated
+        },
+        {
+            title:'Crossover operator',
+            item_list:AG_CONTINUOS_CROSSOVER_OP,
+            handler: crossoverUpdated
+        },
+        {
+            title:'Mutation operator',
+            item_list:AG_COUNTINUOS_MUTATION_OP,
+            handler: mutationUpdated
+        },
+        {
+            title:'Survivor selection',
+            item_list:SURVIVOR_SELECTION,
+            handler: survivorSelectionUpdated
+        },
+    ];
+    const TABS_AG = [
+        {
+            label:'Step 1',
+            description:'Step 1: Select parent selection method.',
+        },
+        {
+            label:'Step 2',
+            description:'Step 1: Select crossover method.',
+        },
+        {
+            label:'Step 3',
+            description:'Step 1: Select mutation method.',
+        },
+        {
+            label:'Step 4',
+            description:'Step 1: Select survivor selection method.',
+        },
+    ]
     return (
         <div className='continuos-page '>
             <Tabs defaultSelectedIndex={0}>
-            <TabList className="gray-background" aria-label="Tab navigation">
-                <Tab>Genetic</Tab>
-                <Tab>Evolutionary Strategy</Tab>
-                <Tab>Evolutive programming</Tab>
-            </TabList>
-            <TabPanels>
-                <TabPanel>
-                    <ProgressStepsBar/>
-                    <FormPyristic itemList={ AG_COUNTINUOS_MUTATION_OP } title={'Mutation operand'}/>
-                </TabPanel>
-                <TabPanel>
-                    <ProblemEditorPage />
-                </TabPanel>
-            </TabPanels>
+                <Theme theme={'g10'}>
+                    <TabList aria-label="Tab navigation">
+                        <Tab>Problem</Tab>
+                        <Tab disabled={disableAlgorithms}>Genetic</Tab>
+                        <Tab disabled={disableAlgorithms}>Evolutionary Strategy</Tab>
+                        <Tab disabled={disableAlgorithms}>Evolutive programming</Tab>
+                    </TabList>
+                </Theme>
+                <TabPanels>
+                    <TabPanel>
+                        <ProblemEditorPage />
+                    </TabPanel>
+                    <TabPanel>
+                        <FormStepsView 
+                            formItems={SETTINGS_AG}
+                            tabs={TABS_AG}
+                        />
+                    </TabPanel>
+                    <TabPanel>
+                    </TabPanel>
+                </TabPanels>
             </Tabs>
         </div>
     );
 };
+
+const FormStepsView = ({ formItems, tabs }) => {
+    const [ currentView, setCurrentView] = useState(0);
+    return(
+        <>
+            <ProgressStepsBar
+                progressItems={tabs}
+                callBack={(ind) =>  setCurrentView(ind)}
+            />
+            <FormPyristic 
+                itemList={ formItems[currentView].item_list }
+                title={ formItems[currentView].title }
+                globalStorageHandler={ formItems[currentView].handler}
+            />
+        </>
+    );
+} 
 
 const ProblemEditorPage = () => {
     const ARRAY_ITEMS = [

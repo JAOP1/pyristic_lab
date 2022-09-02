@@ -7,14 +7,3 @@
 @use './components/Info/info';
 @use '@carbon/react/scss/theme' as *;
 @use '@carbon/react/scss/breakpoint' as *;
-
-.gray-background {
-    background-color: $layer-01;
-    position: relative;
-    margin-right:-0.5%;
-}
-
-.white-container {
-    background-color: white;
-    position: relative;
-}

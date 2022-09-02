@@ -1,8 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit'
-import bannerReducer from './features/NavTitle';
+import continuosAGReduces from './features/AGStore';
 
 export default configureStore({
   reducer: {
-    banner: bannerReducer
+    continuosAG: continuosAGReduces
   }
 })

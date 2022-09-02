@@ -6,12 +6,11 @@ const Banner = () => {
     const location = useLocation();
 
     const getTitle = () => {
-        console.log(location);
         switch(location.pathname){
             case '/':
-                return 'Continuos';
+                return 'Problem type: Continuos';
             default:
-                return 'Combinatorial';
+                return 'Problem type: Combinatorial';
         }
     };
     return(

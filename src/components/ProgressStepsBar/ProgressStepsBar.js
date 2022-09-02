@@ -6,12 +6,15 @@ import {
 } from '@carbon/react';
 
 
-const ProgressStepsBar = ({ progressItems }) => {
+const ProgressStepsBar = ({ progressItems, callBack }) => {
     const [index, setIndex] = useState(0)
     return(
             <ProgressIndicator 
                 currentIndex={index} 
-                onChange={ (e) =>  setIndex(e) } 
+                onChange={ (e) => { 
+                    callBack(e);
+                    setIndex(e); 
+                }} 
                 className='progress-bar-position'
                 spaceEqually={true}
             >
@@ -51,18 +54,7 @@ ProgressStepsBar.defaultProps = {
         {
             label:'Step 1',
             description:'Step 1: Include the optimization problem.',
-        },
-        {
-            label:'Step 2',
-            description:'Step 2: Selection of crossover operator.'
-        },
-        {
-            label:'Step 1',
-            description:'Step 1: Include the optimization problem.',
-        },
-        {
-            label:'Step 2',
-            description:'Step 2: Selection of crossover operator.'
+            complete:true
         }
     ]
 };
