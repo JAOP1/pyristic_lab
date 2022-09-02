@@ -25,7 +25,7 @@ const ContinuosOptimizationPage = () => {
             </TabList>
             <TabPanels>
                 <TabPanel>
-            <ProgressStepsBar/>
+                    <ProgressStepsBar/>
                     <FormPyristic itemList={ AG_COUNTINUOS_MUTATION_OP } title={'Mutation operand'}/>
                 </TabPanel>
                 <TabPanel>

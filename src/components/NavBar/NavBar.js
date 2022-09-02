@@ -29,7 +29,7 @@ const NavBar = () => {
           <Subtract />
           Continuos
         </SideNavMenuItem>
-        <SideNavMenuItem href="/">
+        <SideNavMenuItem href="/combinatorial">
           <Subtract />
           Combinatorial
         </SideNavMenuItem>

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Route, Switch } from 'react-router-dom';
+// import { Route, Switch } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import { Content, Theme } from '@carbon/react';
 import './app.scss';
 import NavBar from './components/NavBar';
@@ -15,9 +16,10 @@ class App extends Component {
         </Theme>
         <Content>
           <Banner/>
-          <Switch>
-            <Route exact path='/' component={ContinuosOptimizationPage} />
-          </Switch>
+          <Routes>
+            <Route  path='/' element={<ContinuosOptimizationPage/>} />
+            <Route  path='/combinatorial' element={<ContinuosOptimizationPage/>} />
+          </Routes>
           <Theme theme='g100'>
             <Footer/>
           </Theme>
