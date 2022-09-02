@@ -12,11 +12,9 @@ const ProgressStepsBar = ({ progressItems }) => {
             <ProgressIndicator className='progress-bar-position'>
             {
                 progressItems.map( (item, ind) => (
-                <>
                     <ProgressStep key={ind}
                         { ...item }
                     />
-                </>
                 ))
             }
             </ProgressIndicator>

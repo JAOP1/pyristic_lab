@@ -25,6 +25,7 @@ function EditorForm({ title }) {
             accept={['.py','.txt']}
             buttonLabel={'Upload File'}
             style={{marginTop:'-16px'}}
+            iconDescription={'Close'}
           />
           <Button
             size='md'

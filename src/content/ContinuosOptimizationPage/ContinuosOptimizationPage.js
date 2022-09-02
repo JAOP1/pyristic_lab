@@ -1,21 +1,18 @@
 import React from 'react';
 import {
-    Button,
     Tabs,
     Tab,
     TabList,
     TabPanels,
     TabPanel,
-    Grid,
-    Column,
     Theme,
     Accordion,
     AccordionItem,
   } from '@carbon/react';
-  import ProgressStepsBar from '../../components/ProgressStepsBar';
+import ProgressStepsBar from '../../components/ProgressStepsBar';
 import FormPyristic from '../../components/FormPyristic';
 import EditorForm from '../../components/EditorForm/EditorForm';
-
+import { AG_COUNTINUOS_MUTATION_OP } from '../../utils/constants';
 const ContinuosOptimizationPage = () => {
 
     return (
@@ -29,7 +26,7 @@ const ContinuosOptimizationPage = () => {
             <ProgressStepsBar/>
             <TabPanels>
                 <TabPanel>
-                    <FormPyristic/>
+                    <FormPyristic itemList={ AG_COUNTINUOS_MUTATION_OP } title={'Mutation operand'}/>
                 </TabPanel>
                 <TabPanel>
                     <ProblemEditorPage />
@@ -61,11 +58,9 @@ const ProblemEditorPage = () => {
                 {
                     ARRAY_ITEMS.map((item, ind)=>
                         (
-                            <>
-                            <AccordionItem title={item.accordion_title}>
+                            <AccordionItem key={ind} title={item.accordion_title}>
                                 <EditorForm title={item.code_title}/>
                             </AccordionItem>
-                            </>
                         )
                 )} 
             </Accordion>

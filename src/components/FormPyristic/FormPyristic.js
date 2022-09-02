@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { HelpFilled } from '@carbon/react/icons';
 import {
     Button,
@@ -10,10 +10,14 @@ import {
     Modal,
     NumberInput,
     ToastNotification,
+    Grid,
+    Column,
+    Link
   } from '@carbon/react';
-import { Link } from 'react-router-dom';
+import { _ } from 'core-js';
+import { Equation } from 'react-equation';
 
-const FormPyristic = ({itemList}) => {
+const FormPyristic = ({itemList, title}) => {
     const TEXT_SELECTION_DROPDOWN = (
         <p>Select the wanted method desired to execute during the process, every method is 
         described in 
@@ -25,33 +29,68 @@ const FormPyristic = ({itemList}) => {
     const [itemSelected, setItemSelected] = useState(undefined);
     const [modalText, setModalText] = useState(undefined);
 
-    useEffect(() => console.log("hook",itemSelected),[itemSelected]);
+    const submitHandler = (arrayArguments) => {
+        const methodConfig = {
+            operator_name: itemSelected.method_name,
+            parameters: arrayArguments
+        };
+        console.log('Config method:', methodConfig);
+    };
+
+    const createHelpText = () => {
+        let text = TEXT_SELECTION_DROPDOWN;
+        if(itemSelected){
+            text = (
+                <>
+                <p>
+                    The method {itemSelected.label} works using the following equation:
+                </p>
+                <Equation
+                    value={itemSelected.equation}
+                />
+                </>
+            );
+            console.log('texto:', text);
+        }
+        setModalText(text);
+    };
+
     return (
         <div>
-            <div className='form-container'>            
-                <Stack as='menu' orientation='horizontal'>
+            <div className='form-container'> 
+                <Grid as='menu' condensed>
+                    <Column md={4} sm={4}>
+                        <h3>{title}</h3>
+                    </Column>
+                    <Column lg={{offset:12}} md={{offset:4}}>
+                        <Stack as='menu' orientation='horizontal'>
 
-                    <Dropdown 
-                        id='form'
-                        helperText='Select the method'
-                        label='No selected method.'
-                        items={itemList}
-                        itemsToString={(item) => item.label}
-                        onChange={ (e) => {
-                            console.log(e);
-                            setItemSelected(e.selectedItem)
-                        }}
-                    />
-                    <Button
-                        renderIcon={ HelpFilled }
-                        iconDescription="Help"
-                        hasIconOnly
-                        onClick={() => setModalText(TEXT_SELECTION_DROPDOWN)}
-                        size='md'
-                    />
-                </Stack>
+                            <Dropdown 
+                                id='form'
+                                helperText='Select the method'
+                                label='No selected method.'
+                                items={itemList}
+                                itemToString={(item) => item.label}
+                                onChange={ (e) => {
+                                    setItemSelected(e.selectedItem);
+                                }}
+                            />
+                            <Button
+                                renderIcon={ HelpFilled }
+                                iconDescription="Help"
+                                hasIconOnly
+                                onClick={() => createHelpText()}
+                                size='md'
+                            />
+                        </Stack>
+                    </Column>
+                </Grid>
+                
                 <hr/>
-                <FormMethod params={itemSelected}/>
+                <FormMethod 
+                    params={itemSelected} 
+                    submitHandler={submitHandler}
+                />
             </div>
             <Modal
             open={modalText !== undefined} 
@@ -65,13 +104,24 @@ const FormPyristic = ({itemList}) => {
   };
 
 
-const FormMethod = ({params}) => {
-    const paramList = params?.params || []
-    const [arrayValues,  setArrayValues] = useState(Array(paramList.length).fill(0));
+const FormMethod = ({params , submitHandler}) => {
+    const paramList = params?.params || [];
+    const [arrayValues,  setArrayValues] = useState(undefined);
     const [status, setStatus] = useState(undefined);
+    
+    useMemo(() => {
+        if(paramList.length){
+            let values = paramList.map(obj => obj.initialValue);
+            paramList.forEach( obj => delete obj['initialValue'] );
+            setArrayValues(values);
+        }
+    }, [paramList]);
+
     if(paramList.length === 0){
         return (
-            <FormGroup>
+            <FormGroup
+                legendText={'Arguments of method selected.'}
+            >
                 <Stack gap={3}>
                     <NumberInputSkeleton/>
                     <NumberInputSkeleton/>
@@ -82,27 +132,37 @@ const FormMethod = ({params}) => {
         );
     }
     return (
-        <FormGroup>
+        <FormGroup 
+        legendText={'Arguments of method selected.'}
+        >
             <Stack gap={3}>
-            {
-                paramList.map((obj, ind) => (
-                    <NumberInput
-                        // id="carbon-number"
-                        value={obj.defaultValue}
-                        label={obj.label}
-                        onChange={(e) => {
-                            let tmp_array = [ ...arrayValues ];
-                            tmp_array[ind] = e;
-                            setArrayValues(tmp_array);
+            {   arrayValues && (
+                    paramList.map((obj, ind) => (
+                        <NumberInput
+                            id={`input_number_${ind}`}
+                            key={ind}
+                            value={arrayValues[ind]}
+                            invalidText={'Invalid value, check the specifications.'}
+                            onChange={(e) => {
+                                if(_.isNan(e.target.value))
+                                    return;
+                                let tmp_array = [ ...arrayValues ];
+                                tmp_array[ind] = parseFloat(e.target.value);
+                                console.log('tipo', typeof tmp_array[ind]);
+                                console.log(tmp_array);
+                                setArrayValues(tmp_array);
+                                }
                             }
-                        }
-                        allowEmpty={false}
-                        invalidText="Number is not valid"
-                    />
-                ))
-            }
+                            { ...obj }
+                        />
+                    )
+                )
+            )}
             <Button
-                onClick={() => setStatus('success')}
+                onClick={() => {
+                    submitHandler(arrayValues);
+                    setStatus('success');
+                }}
             >
                 Submit
             </Button>
@@ -125,26 +185,19 @@ const FormMethod = ({params}) => {
 FormPyristic.defaultProps = {
     itemList: [
         {
-            label:'Optimization problem',
-            params:[{
-                label:'parametro 1',
-                defaultValue:2
-            }, 
-            {
-                label:'parametro 1',
-                defaultValue:2
-            }]
-        },
-        {
-            label:'Crossover operator',
-            params:[{
-                label:'parametro 2',
-                defaultValue:2
-            }, 
-            {
-                label:'parametro 2',
-                defaultValue:2
-            }]        
+            label:'Test example input',
+            method_name:'NameClassMethodPyristic',
+            equation:'5m + 1/2m * sin(π)',
+            params:[
+                {
+                    label:'Example argument',
+                    initialValue:0.2,
+                    min:0,
+                    max:1,
+                    helperText:'The number should stay between [0,1]',
+                    step:0.1
+                }
+            ]
         }
     ]
 };
