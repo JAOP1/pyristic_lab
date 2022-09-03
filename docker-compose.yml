@@ -1,0 +1,10 @@
+version: "3.9"
+services:
+  pyristic_client:
+    build: .
+    ports:
+      - 3000:3000
+  pyristic_api:
+    image: "armandortiz/pyristic-api:v1"
+    ports:
+      - 80:80

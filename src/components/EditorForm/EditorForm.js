@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Editor from "@monaco-editor/react";
 import { HelpFilled, SendAlt } from '@carbon/react/icons';

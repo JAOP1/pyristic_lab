@@ -9,8 +9,7 @@ import {
     Accordion,
     AccordionItem,
   } from '@carbon/react';
-import ProgressStepsBar from '../../components/ProgressStepsBar';
-import FormPyristic from '../../components/FormPyristic';
+import FormStepsView from '../../components/FormStepsView';
 import EditorForm from '../../components/EditorForm/EditorForm';
 import { 
     AG_COUNTINUOS_MUTATION_OP,
@@ -96,22 +95,6 @@ const ContinuosOptimizationPage = () => {
     );
 };
 
-const FormStepsView = ({ formItems, tabs }) => {
-    const [ currentView, setCurrentView] = useState(0);
-    return(
-        <>
-            <ProgressStepsBar
-                progressItems={tabs}
-                callBack={(ind) =>  setCurrentView(ind)}
-            />
-            <FormPyristic 
-                itemList={ formItems[currentView].item_list }
-                title={ formItems[currentView].title }
-                globalStorageHandler={ formItems[currentView].handler}
-            />
-        </>
-    );
-} 
 
 const ProblemEditorPage = () => {
     const ARRAY_ITEMS = [

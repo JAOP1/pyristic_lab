@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { HelpFilled } from '@carbon/react/icons';
 import {
     Button,
@@ -12,29 +12,22 @@ import {
     ToastNotification,
     Grid,
     Column,
-    Link
   } from '@carbon/react';
 import { useDispatch } from 'react-redux';
+import { TEXT_SELECTION_DROPDOWN } from '../../utils/texts';
 
-const FormPyristic = ({itemList, title, globalStorageHandler}) => {
-    const TEXT_SELECTION_DROPDOWN = (
-        <p>Select the wanted method desired to execute during the process, every method is 
-        described in 
-        <Link href='https://jaop1.github.io/pyristic/'>
-            pyristic documentation
-        </Link>
-        </p> 
-    );
+export const FormPyristic = ({itemList, title, globalStorageHandler}) => {
     const [itemSelected, setItemSelected] = useState(undefined);
     const [modalText, setModalText] = useState(undefined);
     const dispatch = useDispatch();
+
+    useEffect(() => setItemSelected(undefined), [title]);
 
     const submitHandler = (arrayArguments) => {
         const methodConfig = {
             operator_name: itemSelected.method_name,
             parameters: arrayArguments
         };
-        setItemSelected(undefined);
         dispatch(globalStorageHandler(methodConfig));
     };
 
@@ -42,7 +35,6 @@ const FormPyristic = ({itemList, title, globalStorageHandler}) => {
         let text = TEXT_SELECTION_DROPDOWN;
         if(itemSelected.description_render){
             text = itemSelected.description_render;
-            console.log('texto:', text);
         }
         setModalText(text);
     };
@@ -62,8 +54,6 @@ const FormPyristic = ({itemList, title, globalStorageHandler}) => {
                                 helperText='Select the method'
                                 label='No selected method.'
                                 items={itemList}
-                                // itemToString={(item) => item.label}
-                                selectedItem={itemSelected}
                                 onChange={ (e) => {
                                     setItemSelected(e.selectedItem);
                                 }}
@@ -194,4 +184,4 @@ FormPyristic.defaultProps = {
     ]
 };
 
-  export default FormPyristic;
+export default FormPyristic;
