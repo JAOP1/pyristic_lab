@@ -6,11 +6,9 @@ import {
     TabPanels,
     TabPanel,
     Theme,
-    Accordion,
-    AccordionItem,
   } from '@carbon/react';
 import FormStepsView from '../../components/FormStepsView';
-import EditorForm from '../../components/EditorForm/EditorForm';
+import ProblemEditorPage from './ProblemView';
 import { 
     AG_COUNTINUOS_MUTATION_OP,
     AG_CONTINUOS_CROSSOVER_OP,
@@ -23,6 +21,7 @@ import {
     survivorSelectionUpdated,
     parentSelectionUpdated
 } from '../../features/AGStore';
+import AreaChartComponent from '../../components/AreaChart';
 
 const ContinuosOptimizationPage = () => {
     const [disableAlgorithms, setDisableAlgorithms] = useState(false);
@@ -88,6 +87,7 @@ const ContinuosOptimizationPage = () => {
                         />
                     </TabPanel>
                     <TabPanel>
+                        {/* <AreaChartComponent /> */}
                     </TabPanel>
                 </TabPanels>
             </Tabs>
@@ -95,35 +95,4 @@ const ContinuosOptimizationPage = () => {
     );
 };
 
-
-const ProblemEditorPage = () => {
-    const ARRAY_ITEMS = [
-        {
-            accordion_title:'Minimization function',
-            code_title:'Function'
-        },
-        {
-            accordion_title:'Constraints',
-            code_title:'Array constraints'
-        },
-        {
-            accordion_title:'Additionals',
-            code_title:'Problem bounds'
-        }
-    ];
-    return (
-        <Theme theme='g10'>
-            <Accordion>
-                {
-                    ARRAY_ITEMS.map((item, ind)=>
-                        (
-                            <AccordionItem key={ind} title={item.accordion_title}>
-                                <EditorForm title={item.code_title}/>
-                            </AccordionItem>
-                        )
-                )} 
-            </Accordion>
-        </Theme>
-    );
-};
 export default ContinuosOptimizationPage;

@@ -33,7 +33,7 @@ export const FormPyristic = ({itemList, title, globalStorageHandler}) => {
 
     const createHelpText = () => {
         let text = TEXT_SELECTION_DROPDOWN;
-        if(itemSelected.description_render){
+        if(itemSelected?.description_render){
             text = itemSelected.description_render;
         }
         setModalText(text);

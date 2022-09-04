@@ -10,7 +10,7 @@ import {
   Stack
 } from '@carbon/react';
 
-function EditorForm({ title }) {
+function EditorForm({ title, sendCallback }) {
   const [textCode, setTextCode] = useState('# ¡Hello pyristic!');
 
   return (
@@ -26,11 +26,13 @@ function EditorForm({ title }) {
             buttonLabel={'Upload File'}
             style={{marginTop:'-16px'}}
             iconDescription={'Close'}
+            disabled={true}
           />
           <Button
             size='md'
             iconDescription='Send code'
             renderIcon={ SendAlt }
+            onClick={() => sendCallback(textCode)}
             hasIconOnly
           />
           <Button
@@ -48,7 +50,6 @@ function EditorForm({ title }) {
       defaultLanguage="python"
       value={textCode}
       onChange={(e) => {
-        console.log(textCode);
         setTextCode(e)
       }}
     />
