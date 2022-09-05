@@ -1,8 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit'
-import continuosAGReduces from './features/AGStore';
+import continuosAGReduce from './storage_reducers/AGStore';
+import continuosEEReduce from './storage_reducers/EEStore'
 
 export default configureStore({
   reducer: {
-    continuosAG: continuosAGReduces
+    continuosAG: continuosAGReduce,
+    continuosEE: continuosEEReduce
   }
 })

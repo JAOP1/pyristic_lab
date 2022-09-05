@@ -8,14 +8,23 @@ import {
 
 
 const ProgressStepsBar = ({ progressItems, callBack, storageKey }) => {
-    const [index, setIndex] = useState(0)
+    const [index, setIndex] = useState(0);
+    const [stepsVisited, setStepsVisited] = useState(new Set());
     const currentConfig = useSelector((state) => state[storageKey]);
 
+    const hasSelectedMethod = (keyStorage) =>  currentConfig[keyStorage].operator_name !== 'No selected';
+    const hasVisited = (ind) => stepsVisited.has(ind); 
+    const updateVisitedItems = (ind) => {
+        let updateVisited = new Set(stepsVisited);
+        updateVisited.add(ind);
+        setStepsVisited(updateVisited);
+    };
     return(
             <ProgressIndicator 
                 currentIndex={index} 
                 onChange={ (e) => { 
                     callBack(e);
+                    updateVisitedItems(index);
                     setIndex(e); 
                 }} 
                 className='progress-bar-position'
@@ -25,7 +34,8 @@ const ProgressStepsBar = ({ progressItems, callBack, storageKey }) => {
                 progressItems.map( (item, ind) => (
                     <ProgressStep 
                         key={ind}
-                        complete={ currentConfig[item.keyGlobalStorage].operator_name !== 'No selected' }
+                        complete={ hasSelectedMethod(item.keyGlobalStorage) }
+                        invalid={ !hasSelectedMethod(item.keyGlobalStorage) && hasVisited(ind)}
                         label={item.label}
                         description={item.description}
                     />

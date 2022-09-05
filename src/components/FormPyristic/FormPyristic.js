@@ -14,7 +14,7 @@ import {
     Column,
   } from '@carbon/react';
 import { useDispatch } from 'react-redux';
-import { TEXT_SELECTION_DROPDOWN } from '../../utils/texts';
+import { TEXT_SELECTION_DROPDOWN } from '../../constants/texts';
 
 export const FormPyristic = ({itemList, title, globalStorageHandler}) => {
     const [itemSelected, setItemSelected] = useState(undefined);
