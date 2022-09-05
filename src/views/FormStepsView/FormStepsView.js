@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import ProgressStepsBar from '../ProgressStepsBar';
-import FormPyristic from '../FormPyristic';
+import ProgressStepsBar from '../../components/ProgressStepsBar';
+import FormPyristic from '../../components/FormPyristic';
 
 export const FormStepsView = ({ formItems, tabs, algorithm }) => {
     const [ currentView, setCurrentView] = useState(0);

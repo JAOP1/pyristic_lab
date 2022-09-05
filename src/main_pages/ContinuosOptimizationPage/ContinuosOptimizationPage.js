@@ -7,31 +7,34 @@ import {
     TabPanel,
     Theme,
   } from '@carbon/react';
-import FormStepsView from '../../components/FormStepsView';
-import ProblemEditorPage from './ProblemView';
+import FormStepsView from '../../views/FormStepsView';
+import ContinuosOptimizationEditor from '../../views/ContinuosOptimizationEditor/ContinuosOptimizationEditor';
+import CrossOptimizationDashboard from '../../views/CrossOptimizationDashboard/CrossOptimizationDashboard';
 import { 
     SETTINGS_AG,
     TABS_AG
 } from '../../constants/evolutionarySettingView';
-// import AreaChartComponent from '../../components/AreaChart';
 
 const ContinuosOptimizationPage = () => {
-    const [disableAlgorithms, setDisableAlgorithms] = useState(false);
 
     return (
         <div className='continuos-page '>
             <Tabs defaultSelectedIndex={0}>
                 <Theme theme={'g10'}>
                     <TabList aria-label="Tab navigation">
+                        <Tab>Optimize</Tab>
                         <Tab>Problem</Tab>
-                        <Tab disabled={disableAlgorithms}>Genetic</Tab>
-                        <Tab disabled={disableAlgorithms}>Evolutionary Strategy</Tab>
-                        <Tab disabled={disableAlgorithms}>Evolutive programming</Tab>
+                        <Tab>Genetic</Tab>
+                        <Tab>Evolutionary Strategy</Tab>
+                        <Tab>Evolutive programming</Tab>
                     </TabList>
                 </Theme>
                 <TabPanels>
                     <TabPanel>
-                        <ProblemEditorPage />
+                        <CrossOptimizationDashboard />
+                    </TabPanel>
+                    <TabPanel>
+                        <ContinuosOptimizationEditor />
                     </TabPanel>
                     <TabPanel>
                         <FormStepsView 

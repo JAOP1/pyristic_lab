@@ -1,8 +1,9 @@
+@use './views/CrossOptimizationDashboard/cross-optimization-dashboard';
 @use './components/NavBar/nav-bar';
 @use './components/Banner/banner';
 @use './components/Footer/footer';
 @use './components/ProgressStepsBar/progress-bar';
-@use './components/FormStepsView/form-steps-view';
+@use './views/FormStepsView/form-steps-view';
 @use './components/FormPyristic/form-pyristic';
 @use './components/EditorForm/editor-form';
 @use './components/AreaChart/area-chart';

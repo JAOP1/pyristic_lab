@@ -1,106 +1,95 @@
+import React from 'react';
+import PropTypes from 'prop-types';
+import { 
+    LineChart,
+    Line,
+    XAxis,
+    YAxis, 
+    CartesianGrid, 
+    Tooltip, 
+    Legend, 
+    ResponsiveContainer 
+} from 'recharts';
 
-// import { AreaChart } from "@carbon/charts";
+const data = [
+  {
+    name: 'Page A',
+    uv: 4000,
+    pv: 2400,
+    amt: 2400,
+  },
+  {
+    name: 'Page B',
+    uv: 3000,
+    pv: 1398,
+    amt: 2210,
+  },
+  {
+    name: 'Page C',
+    uv: 2000,
+    pv: 9800,
+    amt: 2290,
+  },
+  {
+    name: 'Page D',
+    uv: 2780,
+    pv: 3908,
+    amt: 2000,
+  },
+  {
+    name: 'Page E',
+    uv: 1890,
+    pv: 4800,
+    amt: 2181,
+  },
+  {
+    name: 'Page F',
+    uv: 2390,
+    pv: 3800,
+    amt: 2500,
+  },
+  {
+    name: 'Page G',
+    uv: 3490,
+    pv: 4300,
+    amt: 2100,
+  },
+];
 
-// const AreaChartComponent = ({ data }) => {
-//     const options = {
-//         "title": "Area (discrete domain)",
-//         "axes": {
-//             "bottom": {
-//                 "title": "2019 Annual Sales Figures",
-//                 "mapsTo": "key",
-//                 "scaleType": "labels"
-//             },
-//             "left": {
-//                 "mapsTo": "value",
-//                 "title": "Conversion rate",
-//                 "scaleType": "linear"
-//             }
-//         },
-//         "height": "400px"
-//     };
-//     return ( <AreaChart data={data} options={options}/>);
-// };
+const AreaChartComponent = ({ data }) => {
+    console.log("datos", data);
 
-// AreaChartComponent.defaultProps = {
-//     data:  [
-//         {
-//             "group": "Dataset 1",
-//             "value": 10000,
-//             "key": "a"
-//         },
-//         {
-//             "group": "Dataset 1",
-//             "value": 65000,
-//             "key": "b"
-//         },
-//         {
-//             "group": "Dataset 1",
-//             "value": 10000,
-//             "key": "c"
-//         },
-//         {
-//             "group": "Dataset 1",
-//             "value": 49213,
-//             "key": "d"
-//         },
-//         {
-//             "group": "Dataset 1",
-//             "value": 51213,
-//             "key": "e"
-//         },
-//         {
-//             "group": "Dataset 2",
-//             "value": 20000,
-//             "key": "a"
-//         },
-//         {
-//             "group": "Dataset 2",
-//             "value": 25000,
-//             "key": "b"
-//         },
-//         {
-//             "group": "Dataset 2",
-//             "value": 60000,
-//             "key": "c"
-//         },
-//         {
-//             "group": "Dataset 2",
-//             "value": 30213,
-//             "key": "d"
-//         },
-//         {
-//             "group": "Dataset 2",
-//             "value": 55213,
-//             "key": "e"
-//         },
-//         {
-//             "group": "Dataset 3",
-//             "value": 30000,
-//             "key": "a"
-//         },
-//         {
-//             "group": "Dataset 3",
-//             "value": 20000,
-//             "key": "b"
-//         },
-//         {
-//             "group": "Dataset 3",
-//             "value": 40000,
-//             "key": "c"
-//         },
-//         {
-//             "group": "Dataset 3",
-//             "value": 60213,
-//             "key": "d"
-//         },
-//         {
-//             "group": "Dataset 3",
-//             "value": 25213,
-//             "key": "e"
-//         }
-//     ]
-    
-// };
-// export default AreaChartComponent;
+    return (
+      <>
+        <h3 style={{color:'#4f4f4f', marginTop:'2%'}}> Results in the objective function</h3>
+        <ResponsiveContainer  width="95%" height={350}>
+        <LineChart
+          width={500}
+          height={300}
+          data={data}
+          margin={{
+            top: 5,
+            right: 30,
+            left: 20,
+            bottom: 5,
+          }}
+        >
+          <CartesianGrid strokeDasharray="3 3" />
+          <XAxis dataKey="name" />
+          <YAxis />
+          <Tooltip />
+          <Legend />
+          <Line type="monotone" dataKey="pv" stroke="#8884d8" activeDot={{ r: 8 }} />
+          <Line type="monotone" dataKey="uv" stroke="#82ca9d" />
+        </LineChart>
+        </ResponsiveContainer>
+      </>
+    );
+};
 
+AreaChartComponent.defaultProps = {
+    data
+};
+
+export default AreaChartComponent;
 

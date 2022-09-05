@@ -6,7 +6,7 @@ import './app.scss';
 import NavBar from './components/NavBar';
 import Banner from './components/Banner';
 import Footer from './components/Footer';
-import ContinuosOptimizationPage from './content/ContinuosOptimizationPage/ContinuosOptimizationPage';
+import ContinuosOptimizationPage from './main_pages/ContinuosOptimizationPage/ContinuosOptimizationPage';
 class App extends Component {
   render() {
     return (

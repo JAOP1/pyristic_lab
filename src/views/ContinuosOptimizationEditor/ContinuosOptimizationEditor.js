@@ -8,7 +8,7 @@ import {
 import axios from 'axios'; 
 import EditorForm from '../../components/EditorForm/EditorForm';
 
-const ProblemEditorPage = () => {
+const ContinuosOptimizationEditor = () => {
     const ARRAY_ITEMS = [
         {
             accordion_title:'Minimization function',
@@ -75,4 +75,4 @@ const ProblemEditorPage = () => {
     );
 };
 
-export default ProblemEditorPage
+export default ContinuosOptimizationEditor;
