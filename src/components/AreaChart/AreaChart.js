@@ -1,5 +1,4 @@
-// import "@carbon/styles/css/styles.css";
-// import "@carbon/charts/styles.css";
+
 // import { AreaChart } from "@carbon/charts";
 
 // const AreaChartComponent = ({ data }) => {

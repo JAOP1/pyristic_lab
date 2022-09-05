@@ -49,7 +49,7 @@ const ProblemEditorPage = () => {
     return (
         <>
         <Theme theme='g10'>
-            <Accordion>
+            <Accordion style={{ marginBottom:'20%'}}>
                 {
                     ARRAY_ITEMS.map((item, ind)=>
                         (
@@ -67,7 +67,7 @@ const ProblemEditorPage = () => {
                 title="Submit state"
                 kind={status}
                 onClose={() => setStatus(undefined)}
-                subtitle= {status==='success' ?"The code has been successful submitted.": 'Try again.'}
+                subtitle= {status==='success' ?"The code has been successful submitted.": 'Try again, something wrong happened.'}
                 className={'notification-position'}
             />
         )}

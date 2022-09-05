@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import {
     ProgressIndicator,
@@ -6,8 +7,10 @@ import {
 } from '@carbon/react';
 
 
-const ProgressStepsBar = ({ progressItems, callBack }) => {
+const ProgressStepsBar = ({ progressItems, callBack, storageKey }) => {
     const [index, setIndex] = useState(0)
+    const currentConfig = useSelector((state) => state[storageKey]);
+
     return(
             <ProgressIndicator 
                 currentIndex={index} 
@@ -20,8 +23,11 @@ const ProgressStepsBar = ({ progressItems, callBack }) => {
             >
             {
                 progressItems.map( (item, ind) => (
-                    <ProgressStep key={ind}
-                        { ...item }
+                    <ProgressStep 
+                        key={ind}
+                        complete={ currentConfig[item.keyGlobalStorage].operator_name !== 'No selected' }
+                        label={item.label}
+                        description={item.description}
                     />
                 ))
             }

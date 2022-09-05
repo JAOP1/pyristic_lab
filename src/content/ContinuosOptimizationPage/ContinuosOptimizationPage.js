@@ -21,7 +21,7 @@ import {
     survivorSelectionUpdated,
     parentSelectionUpdated
 } from '../../features/AGStore';
-import AreaChartComponent from '../../components/AreaChart';
+// import AreaChartComponent from '../../components/AreaChart';
 
 const ContinuosOptimizationPage = () => {
     const [disableAlgorithms, setDisableAlgorithms] = useState(false);
@@ -51,18 +51,22 @@ const ContinuosOptimizationPage = () => {
         {
             label:'Step 1',
             description:'Step 1: Select parent selection method.',
+            keyGlobalStorage:'parent_selection'
         },
         {
             label:'Step 2',
             description:'Step 1: Select crossover method.',
+            keyGlobalStorage:'crossover'
         },
         {
             label:'Step 3',
             description:'Step 1: Select mutation method.',
+            keyGlobalStorage:'mutation'
         },
         {
             label:'Step 4',
             description:'Step 1: Select survivor selection method.',
+            keyGlobalStorage:'survivor_selection'
         },
     ]
     return (
@@ -84,6 +88,7 @@ const ContinuosOptimizationPage = () => {
                         <FormStepsView 
                             formItems={SETTINGS_AG}
                             tabs={TABS_AG}
+                            algorithm={'continuosAG'}
                         />
                     </TabPanel>
                     <TabPanel>
