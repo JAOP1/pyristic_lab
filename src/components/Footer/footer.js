@@ -19,7 +19,7 @@ const Footer = () => {
             </Column>
             <Column as='section' lg={12} md={5} sm={4}>
                         <p className="copyright-text">
-                            Made with love and supported by Armando.
+                            Made and supported by the pyristic team.
                         </p>
             </Column>
             <Column as='section' lg={4} md={3} sm={4}>

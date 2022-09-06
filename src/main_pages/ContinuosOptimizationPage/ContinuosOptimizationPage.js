@@ -17,26 +17,12 @@ import {
     SETTINGS_AG,
     TABS_AG
 } from '../../constants/evolutionarySettingView';
-
+import { list_inputs_algorithms } from '../../constants/continuosGeneralParams';
 
 const ContinuosOptimizationPage = () => {
     const AG_storage = useSelector((state) => state.continuosAG);
     const EE_storage = useSelector((state) => state.continuosEE);
     const EP_storage = useSelector((state) => state.continuosEP);
-    const algorithms = [
-        {
-            name:'Genetic Algorithm',
-            id:'AG'
-        },
-        {
-            name:'Evolutive Programming',
-            id:'EP'
-        },
-        {
-            name:'Evolutionary Strategy',
-            id:'EE'
-        }
-    ];
 
     return (
         <div className='continuos-page '>
@@ -53,7 +39,7 @@ const ContinuosOptimizationPage = () => {
                 <TabPanels>
                     <TabPanel>
                         <CrossOptimizationDashboard 
-                            algorithms={algorithms}
+                            algorithms={list_inputs_algorithms}
                             dictMethods={{
                                 AG:AG_storage,
                                 EE:EE_storage,

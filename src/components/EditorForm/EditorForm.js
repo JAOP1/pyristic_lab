@@ -12,7 +12,7 @@ import {
 
 function EditorForm({ title, sendCallback }) {
   const [textCode, setTextCode] = useState('# ¡Hello pyristic!');
-
+  const [uploadStatus, setUploadStatus] = useState('uploading');
   return (
     <>
     <Grid as='menu' condensed>
@@ -22,11 +22,21 @@ function EditorForm({ title, sendCallback }) {
       <Column lg={{offset:13}} md={{offset:5}}>
         <Stack orientation='horizontal'>
           <FileUploader 
-            accept={['.py','.txt']}
+            accept={['.py']}
             buttonLabel={'Upload File'}
             style={{marginTop:'-16px'}}
             iconDescription={'Close'}
-            disabled={true}
+            filenameStatus={uploadStatus}
+            onChange={(e) => {
+              setUploadStatus('uploading');
+              let file = e.target.files[0];
+              var fr = new FileReader();
+              fr.onload = function(e) {
+                  setTextCode(e.target.result);
+                  setUploadStatus('complete');
+              };
+              fr.readAsText(file);
+            }}
           />
           <Button
             size='md'

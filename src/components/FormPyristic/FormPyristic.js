@@ -152,7 +152,7 @@ const FormMethod = ({params , submitHandler}) => {
             { status && (
                 <ToastNotification
                     role="status"
-                    timeout={2000}
+                    timeout={750}
                     title="Submit state"
                     kind={status}
                     onClose={() => setStatus(undefined)}

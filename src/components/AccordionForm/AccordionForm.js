@@ -21,7 +21,7 @@ const AccordionForm = ({ arrayParameterSections }) => {
         <Accordion style={{marginTop:'2%'}}>
             {
                 arrayParameterSections.map((section) => (
-                    <AccordionItem title={section.title}>
+                    <AccordionItem key={`accordionItem-${section.id}`} title={section.name}>
                         <Grid>
                             {
                                 section.parameters.map((param, ind) => (

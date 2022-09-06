@@ -17,6 +17,7 @@ import AccordionForm from '../../components/AccordionForm';
 
 const CrossOptimizationDashboard = ({ algorithms, dictMethods }) => {
     const [selectedAlgorithms, setSelectedAlgorithms] = useState({});
+    const [inputsByAlgorithm, setInputsByAlgorithm] = useState([]);
     // const callOptimizationAlgorithm = (fileName) => {
     //     return async(text) => {
     //         try{
@@ -35,6 +36,19 @@ const CrossOptimizationDashboard = ({ algorithms, dictMethods }) => {
     //         }
     //     };
     // }
+    const updateListInputsAlgorithm = (checked, id) => {
+        let ind;
+        let tmp_list = [ ...inputsByAlgorithm ];
+        const find_index =  (array, id) => array.findIndex((item) => item.id === id);
+        if(checked){
+            ind = find_index(algorithms, id);
+            tmp_list.push(algorithms[ind]);
+        } else {
+            ind = find_index(tmp_list, id);
+            tmp_list.splice(ind,1);
+        }
+        setInputsByAlgorithm(tmp_list);
+    };
     
     const onChangeCheckbox = (checked, id) => {
         let checkedAlgorithms = {...selectedAlgorithms};
@@ -67,9 +81,12 @@ const CrossOptimizationDashboard = ({ algorithms, dictMethods }) => {
                                     <Checkbox 
                                         key={algorithm.id}
                                         labelText={algorithm.name} 
-                                        id={algorithm.name} 
-                                        checked={selectedAlgorithms[algorithm.name] || false}
-                                        onChange={(event,{ checked, id}) => onChangeCheckbox(checked,id)}
+                                        id={algorithm.id} 
+                                        checked={selectedAlgorithms[algorithm.id] || false}
+                                        onChange={(event,{ checked, id}) =>{ 
+                                            updateListInputsAlgorithm(checked,id);
+                                            onChangeCheckbox(checked,id);
+                                        }}
                                         disabled={!hasRequiredMethods(algorithm.id)}
                                     />
                                 ))
@@ -80,7 +97,7 @@ const CrossOptimizationDashboard = ({ algorithms, dictMethods }) => {
                         </Button>
                     </Column>
                     <Column lg={12} md={5} sm={4}>
-                        <AccordionForm/>
+                        <AccordionForm arrayParameterSections={inputsByAlgorithm}/>
                     </Column>
                 </Grid>
             </Theme>
