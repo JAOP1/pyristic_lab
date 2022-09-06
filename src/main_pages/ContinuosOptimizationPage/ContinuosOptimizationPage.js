@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 import {
     Tabs,
     Tab,
@@ -6,7 +7,9 @@ import {
     TabPanels,
     TabPanel,
     Theme,
+    IconTab
   } from '@carbon/react';
+  import { Dashboard, Code } from '@carbon/icons-react';
 import FormStepsView from '../../views/FormStepsView';
 import ContinuosOptimizationEditor from '../../views/ContinuosOptimizationEditor/ContinuosOptimizationEditor';
 import CrossOptimizationDashboard from '../../views/CrossOptimizationDashboard/CrossOptimizationDashboard';
@@ -15,15 +18,33 @@ import {
     TABS_AG
 } from '../../constants/evolutionarySettingView';
 
+
 const ContinuosOptimizationPage = () => {
+    const AG_storage = useSelector((state) => state.continuosAG);
+    const EE_storage = useSelector((state) => state.continuosEE);
+    const EP_storage = useSelector((state) => state.continuosEP);
+    const algorithms = [
+        {
+            name:'Genetic Algorithm',
+            id:'AG'
+        },
+        {
+            name:'Evolutive Programming',
+            id:'EP'
+        },
+        {
+            name:'Evolutionary Strategy',
+            id:'EE'
+        }
+    ];
 
     return (
         <div className='continuos-page '>
             <Tabs defaultSelectedIndex={0}>
                 <Theme theme={'g10'}>
-                    <TabList aria-label="Tab navigation">
-                        <Tab>Optimize</Tab>
-                        <Tab>Problem</Tab>
+                    <TabList aria-label="Tab navigation" iconSize={'lg'}>
+                        <IconTab><Dashboard  aria-label="dashboard" size={20}/></IconTab>
+                        <IconTab><Code aria-label='problemCode' size={20}/></IconTab>
                         <Tab>Genetic</Tab>
                         <Tab>Evolutionary Strategy</Tab>
                         <Tab>Evolutive programming</Tab>
@@ -31,7 +52,14 @@ const ContinuosOptimizationPage = () => {
                 </Theme>
                 <TabPanels>
                     <TabPanel>
-                        <CrossOptimizationDashboard />
+                        <CrossOptimizationDashboard 
+                            algorithms={algorithms}
+                            dictMethods={{
+                                AG:AG_storage,
+                                EE:EE_storage,
+                                EP:EP_storage
+                            }}
+                        />
                     </TabPanel>
                     <TabPanel>
                         <ContinuosOptimizationEditor />
@@ -44,7 +72,6 @@ const ContinuosOptimizationPage = () => {
                         />
                     </TabPanel>
                     <TabPanel>
-                        {/* <AreaChartComponent /> */}
                     </TabPanel>
                     <TabPanel>
 

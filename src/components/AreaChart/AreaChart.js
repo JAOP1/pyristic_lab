@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { 
     LineChart,
     Line,
@@ -57,12 +56,11 @@ const data = [
 ];
 
 const AreaChartComponent = ({ data }) => {
-    console.log("datos", data);
 
     return (
       <>
         <h3 style={{color:'#4f4f4f', marginTop:'2%'}}> Results in the objective function</h3>
-        <ResponsiveContainer  width="95%" height={350}>
+        <ResponsiveContainer  width="100%" height={350}>
         <LineChart
           width={500}
           height={300}
