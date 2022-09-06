@@ -18,6 +18,7 @@ import AccordionForm from '../../components/AccordionForm';
 const CrossOptimizationDashboard = ({ algorithms, dictMethods }) => {
     const [selectedAlgorithms, setSelectedAlgorithms] = useState({});
     const [inputsByAlgorithm, setInputsByAlgorithm] = useState([]);
+    const [isDisabledOptimizeButton, setDisableOptimizeButton] = useState(true);
     // const callOptimizationAlgorithm = (fileName) => {
     //     return async(text) => {
     //         try{
@@ -49,7 +50,6 @@ const CrossOptimizationDashboard = ({ algorithms, dictMethods }) => {
         }
         setInputsByAlgorithm(tmp_list);
     };
-    
     const onChangeCheckbox = (checked, id) => {
         let checkedAlgorithms = {...selectedAlgorithms};
         checkedAlgorithms[id] = checked;
@@ -92,7 +92,9 @@ const CrossOptimizationDashboard = ({ algorithms, dictMethods }) => {
                                 ))
                             }
                         </fieldset>
-                        <Button>
+                        <Button
+                            disabled={isDisabledOptimizeButton}
+                        >
                             Optimize
                         </Button>
                     </Column>

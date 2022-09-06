@@ -13,6 +13,17 @@ import {
 function EditorForm({ title, sendCallback }) {
   const [textCode, setTextCode] = useState('# ¡Hello pyristic!');
   const [uploadStatus, setUploadStatus] = useState('uploading');
+
+  const overwriteCode = (e) => {
+    setUploadStatus('uploading');
+    let file = e.target.files[0];
+    var fr = new FileReader();
+    fr.onload = function(e) {
+        setTextCode(e.target.result);
+        setUploadStatus('complete');
+    };
+    fr.readAsText(file);
+  }
   return (
     <>
     <Grid as='menu' condensed>
@@ -27,16 +38,7 @@ function EditorForm({ title, sendCallback }) {
             style={{marginTop:'-16px'}}
             iconDescription={'Close'}
             filenameStatus={uploadStatus}
-            onChange={(e) => {
-              setUploadStatus('uploading');
-              let file = e.target.files[0];
-              var fr = new FileReader();
-              fr.onload = function(e) {
-                  setTextCode(e.target.result);
-                  setUploadStatus('complete');
-              };
-              fr.readAsText(file);
-            }}
+            onChange={(e) => overwriteCode(e)}
           />
           <Button
             size='md'

@@ -12,6 +12,7 @@ const AccordionForm = ({ arrayParameterSections }) => {
     if(arrayParameterSections.length === 0){
         return(
             <AccordionSkeleton
+                style={{marginTop:'2%'}}
                 count={3}
                 open={false}
             />
