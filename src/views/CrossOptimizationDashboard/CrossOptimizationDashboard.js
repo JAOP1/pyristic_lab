@@ -18,7 +18,9 @@ import AccordionForm from '../../components/AccordionForm';
 const CrossOptimizationDashboard = ({ algorithms, dictMethods }) => {
     const [selectedAlgorithms, setSelectedAlgorithms] = useState({});
     const [inputsByAlgorithm, setInputsByAlgorithm] = useState([]);
+    const [optimizerParameters, setOptimizerParameters] = useState({});
     const [isDisabledOptimizeButton, setDisableOptimizeButton] = useState(true);
+
     // const callOptimizationAlgorithm = (fileName) => {
     //     return async(text) => {
     //         try{
@@ -37,6 +39,18 @@ const CrossOptimizationDashboard = ({ algorithms, dictMethods }) => {
     //         }
     //     };
     // }
+
+    useEffect(() => {
+        if(algorithms){
+            let initialState = {};
+            algorithms.forEach(({id, parameters}) => {
+                initialState[id] = {};
+                parameters.forEach( ({id:id_argument,initialValue}) => initialState[id][id_argument] = initialValue );
+            });
+            setOptimizerParameters(initialState);
+        }
+    }, [algorithms]);
+
     const updateListInputsAlgorithm = (checked, id) => {
         let ind;
         let tmp_list = [ ...inputsByAlgorithm ];
@@ -55,12 +69,18 @@ const CrossOptimizationDashboard = ({ algorithms, dictMethods }) => {
         checkedAlgorithms[id] = checked;
         setSelectedAlgorithms(checkedAlgorithms);
     };
+
+    const onNumberInputChange = (algorithmId, inputId, value) => {
+        let tmp_obj = { ...optimizerParameters };
+        tmp_obj[algorithmId][inputId] = value;
+        setOptimizerParameters(tmp_obj);
+    };
     const hasRequiredMethods = (id) => {
         const isMethod = (A) => A!=='No selected';
         const methods = dictMethods[id];
         const method_names = Object.keys(methods).map((key) => methods[key].operator_name);
         return method_names.every(isMethod);
-    }
+    };
     return (
         <>
             <Theme theme={'g10'}>
@@ -99,7 +119,11 @@ const CrossOptimizationDashboard = ({ algorithms, dictMethods }) => {
                         </Button>
                     </Column>
                     <Column lg={12} md={5} sm={4}>
-                        <AccordionForm arrayParameterSections={inputsByAlgorithm}/>
+                        <AccordionForm 
+                            arrayParameterSections={inputsByAlgorithm}
+                            currentState={optimizerParameters}
+                            callback={onNumberInputChange}
+                        />
                     </Column>
                 </Grid>
             </Theme>
@@ -119,15 +143,45 @@ CrossOptimizationDashboard.defaultProps={
     algorithms: [
         {
             name:'Test Algorithm 1',
-            id:'t1'
+            id:'t1',
+            parameters:[
+                {
+                    label:'Example input 1:',
+                    id:'example_inpunt_1',
+                    initialValue:10,
+                    min:1,
+                    max:1000,
+                    step:1
+                }
+            ]
         },
         {
             name:'Test Algorithm 2',
-            id:'t2'
+            id:'t2',
+            parameters:[
+                {
+                    label:'Example input 12:',
+                    id:'example_inpunt_12',
+                    initialValue:10,
+                    min:1,
+                    max:1000,
+                    step:1
+                }
+            ]
         },
         {
             name:'Test Algorithm 3',
-            id:'t3'
+            id:'t3',
+            parameters:[
+                {
+                    label:'Example input 2:',
+                    id:'example_inpunt_2',
+                    initialValue:10,
+                    min:1,
+                    max:1000,
+                    step:1
+                }
+            ]
         }
     ],
     dictMethods:{

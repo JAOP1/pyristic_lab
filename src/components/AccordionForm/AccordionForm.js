@@ -7,7 +7,9 @@ import {
     Column,
     NumberInput
 } from '@carbon/react';
-const AccordionForm = ({ arrayParameterSections }) => {
+const AccordionForm = ({ arrayParameterSections, currentState, callback }) => {
+
+
 
     if(arrayParameterSections.length === 0){
         return(
@@ -21,26 +23,25 @@ const AccordionForm = ({ arrayParameterSections }) => {
     return(
         <Accordion style={{marginTop:'2%'}}>
             {
-                arrayParameterSections.map((section) => (
-                    <AccordionItem key={`accordionItem-${section.id}`} title={section.name}>
+                arrayParameterSections.map(({ id:algorithmId, name, parameters}) => (
+                    <AccordionItem key={`accordionItem-${algorithmId}`} title={name}>
                         <Grid>
                             {
-                                section.parameters.map((param, ind) => (
-                                    <Column lg={4} md={2} sm={4}>
+                                parameters.map(({id: inputId, initialValue, ...param}, ind) => (
+                                    <Column key={`inputs-${algorithmId}-${inputId}`} lg={5} md={4} sm={4}>
                                         <NumberInput
-                                            id={`input_dash_number_${ind}`}
+                                            id={`input_dash_number_${inputId}`}
                                             key={ind}
-                                            value={1}
+                                            value={ currentState[algorithmId][inputId] }
                                             invalidText={'Invalid value, check the specifications.'}
-                                            // onChange={(e, { value }) => {
-                                            //     let tmp_array = [ ...arrayValues ];
-                                            //     const _value = parseFloat(value);
-                                            //     if(Number.isNaN(_value)){
-                                            //         return;
-                                            //     }
-                                            //     tmp_array[ind] = _value;
-                                            //     setArrayValues(tmp_array);
-                                            //     }
+                                            onChange={(e, { value }) => {
+                                                const _value = parseFloat(value);
+                                                if(Number.isNaN(_value)){
+                                                    return;
+                                                }
+                                                callback(algorithmId, inputId, _value);
+                                            }}
+                                            { ...param }
                                             
                                         />  
                                     </Column>
