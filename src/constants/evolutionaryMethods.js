@@ -245,3 +245,146 @@ export const EP_CONTINUOS_MUTATION_OP = [
         params:[]
     }
 ];
+
+export const EE_CONTINUOS_CROSSOVER_OP = [
+    {
+        label:'Discrete crossover',
+        method_name:'DiscreteCrossover',
+        description_render: (
+            <>
+            <p>
+                The method works using the following equation:
+            </p>
+            <Equation
+                value={'+ 1/2m'}
+            />
+            </>
+        ),
+        params:[]
+    },
+    {
+        label:'Arithmetic crossover',
+        method_name:'IntermediateCrossover',
+        description_render: (
+            <>
+            <p>
+                The method works using the following equation:
+            </p>
+            <Equation
+                value={'A*x + B*(1-x)'}
+            />
+            </>
+        ),
+        params:[
+            {
+                label:'Alpha',
+                initialValue:0.5,
+                min:0,
+                max:1,
+                helperText:'The number should stay between [0,1]',
+                step:0.1
+            } 
+        ]
+    }
+];
+
+export const EE_CONTINUOS_ADAPTIVE_CROSSOVER_OP = [
+    {
+        label:'Discrete crossover',
+        method_name:'DiscreteCrossover',
+        description_render: (
+            <>
+            <p>
+                The method works using the following equation:
+            </p>
+            <Equation
+                value={'+ 1/2m'}
+            />
+            </>
+        ),
+        params:[]
+    },
+    {
+        label:'Arithmetic crossover',
+        method_name:'IntermediateCrossover',
+        description_render: (
+            <>
+            <p>
+                The method works using the following equation:
+            </p>
+            <Equation
+                value={'A*x + B*(1-x)'}
+            />
+            </>
+        ),
+        params:[
+            {
+                label:'Alpha',
+                initialValue:0.5,
+                min:0,
+                max:1,
+                helperText:'The number should stay between [0,1]',
+                step:0.1
+            } 
+        ]
+    }
+];
+
+export const EE_CONTINUOS_MUTATION_OP = [
+    {
+        label:'default',
+        method_name:'SigmaMutator',
+        description_render: (
+            <>
+            <p>
+                The method works using the following equation:
+            </p>
+            <Equation
+                value={'+ 1/2m'}
+            />
+            </>
+        ),
+        params:[]
+    }
+];
+
+export const EE_CONTINUOS_ADAPTIVE_MUTATION_OP = [
+    {
+        label:'Mutation by single sigma per solution',
+        method_name:'SingleSigmaAdaptiveMutator',
+        description_render: (
+            <>
+            <p>
+                The method works using the following equation:
+            </p>
+            <Equation
+                value={'+ 1/2m'}
+            />
+            </>
+        ),
+        params:[ ]
+    },
+    {
+        label:'Mutation by sigma per decision variable  for each solution',
+        method_name:'MultSigmaAdaptiveMutator',
+        description_render: (
+            <>
+            <p>
+                The method works using the following equation:
+            </p>
+            <Equation
+                value={'+ 1/2m'}
+            />
+            </>
+        ),
+        params:[
+            {
+                label:'Decision variables of problem',
+                initialValue:1,
+                min:1,
+                max:100,
+                step:1
+            }
+        ]
+    }
+];

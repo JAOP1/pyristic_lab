@@ -63,6 +63,31 @@ export const list_inputs_algorithms = [
     {
         name:'Evolutionary Strategy',
         id:'EE',
-        parameters: [{}]
+        parameters: [
+            {
+                label:'Number of generations:',
+                id:'generations',
+                initialValue:10,
+                min:1,
+                max:1000,
+                step:1
+            },
+            {
+                label:'Population size:',
+                id:'population_size',
+                initialValue:70,
+                min:1,
+                max:1000,
+                step:1
+            },
+            {
+                label:'Offspring size',
+                id:'offspring_size',
+                initialValue:70,
+                min:1,
+                max:1000,
+                step:1
+            }
+        ]
     }
 ];

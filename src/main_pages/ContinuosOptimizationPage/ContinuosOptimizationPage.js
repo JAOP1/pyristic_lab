@@ -17,7 +17,9 @@ import {
     SETTINGS_AG,
     TABS_AG,
     SETTINGS_EP,
-    TABS_EP
+    TABS_EP,
+    SETTINGS_EE,
+    TABS_EE
 } from '../../constants/evolutionarySettingView';
 import { list_inputs_algorithms } from '../../constants/continuosGeneralParams';
 
@@ -28,7 +30,7 @@ const ContinuosOptimizationPage = () => {
 
     return (
         <div className='continuos-page '>
-            <Tabs defaultSelectedIndex={0}>
+            <Tabs defaultSelectedIndex={1}>
                 <Theme theme={'g10'}>
                     <TabList aria-label="Tab navigation" iconSize={'lg'}>
                         <IconTab><Dashboard  aria-label="dashboard" size={20}/></IconTab>
@@ -60,6 +62,11 @@ const ContinuosOptimizationPage = () => {
                         />
                     </TabPanel>
                     <TabPanel>
+                    <FormStepsView 
+                            formItems={SETTINGS_EE}
+                            tabs={TABS_EE}
+                            algorithm={'continuosEE'}
+                        />                        
                     </TabPanel>
                     <TabPanel>
                         <FormStepsView 

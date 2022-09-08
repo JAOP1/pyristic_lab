@@ -27,34 +27,34 @@ const EESlice = createSlice({
     name: 'continuosEE',
     initialState,
     reducers: {
-        mutationUpdated: (state, method) => { 
+        mutationUpdatedEE: (state, method) => { 
             state['mutation_operator'].operator_name = method.payload.operator_name;
             state['mutation_operator'].parameters = method.payload.parameters;
         },
-        crossoverUpdated: (state, method) => {
+        crossoverUpdatedEE: (state, method) => {
             state['crossover_operator'].operator_name = method.payload.operator_name;
             state['crossover_operator'].parameters = method.payload.parameters;
         },
-        mutatioAdaptiveUpdated: (state, method) => {
+        mutatioAdaptiveUpdatedEE: (state, method) => {
             state['adaptive_mutation_operator'].operator_name = method.payload.operator_name;
             state['adaptive_mutation_operator'].parameters = method.payload.parameters;
         },
-        crossoverAdaptiveUpdated: (state, method) => {
+        crossoverAdaptiveUpdatedEE: (state, method) => {
             state['adaptive_crossover_operator'].operator_name = method.payload.operator_name;
             state['adaptive_crossover_operator'].parameters = method.payload.parameters;
         },
-        survivorSelectionUpdated: (state, method) => {
-            state['survivor_selection'].operator_name = method.payload.operator_name;
-            state['survivor_selection'].parameters = method.payload.parameters;
+        survivorSelectionUpdatedEE: (state, method) => {
+            state['survivor_selector'].operator_name = method.payload.operator_name;
+            state['survivor_selector'].parameters = method.payload.parameters;
         }
       }
 });
 
 export const { 
-    mutationUpdated,
-    crossoverUpdated,
-    survivorSelectionUpdated,
-    crossoverAdaptiveUpdated,
-    mutatioAdaptiveUpdated
+    mutationUpdatedEE,
+    crossoverUpdatedEE,
+    survivorSelectionUpdatedEE,
+    crossoverAdaptiveUpdatedEE,
+    mutatioAdaptiveUpdatedEE
 } = EESlice.actions;
 export default EESlice.reducer;
