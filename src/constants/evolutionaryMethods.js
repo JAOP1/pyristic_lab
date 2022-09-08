@@ -161,6 +161,24 @@ export const AG_PARENT_SELECTION = [
             }
         ]
     },
+    {
+        label:'Roulette selection',
+        method_name:'RouletteSampler',
+        equation:'2 x',
+        params:[]
+    },
+    {
+        label:'Stochastic Universal selection',
+        method_name:'StochasticUniversalSampler',
+        equation:'2 x',
+        params:[]
+    },
+    {
+        label:'Deterministic selection',
+        method_name:'DeterministicSampler',
+        equation:'2 x',
+        params:[]
+    },
 ];
 
 export const SURVIVOR_SELECTION = [
