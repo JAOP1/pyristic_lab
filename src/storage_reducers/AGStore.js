@@ -23,19 +23,19 @@ const AGSlice = createSlice({
     name: 'continuosAG',
     initialState,
     reducers: {
-        mutationUpdated: (state, method) => { 
+        mutationUpdatedAG: (state, method) => { 
             state['mutation_operator'].operator_name = method.payload.operator_name;
             state['mutation_operator'].parameters = method.payload.parameters;
         },
-        crossoverUpdated: (state, method) => {
+        crossoverUpdatedAG: (state, method) => {
             state['crossover_operator'].operator_name = method.payload.operator_name;
             state['crossover_operator'].parameters = method.payload.parameters;
         },
-        parentSelectionUpdated: (state, method) => {
+        parentSelectionUpdatedAG: (state, method) => {
             state['parent_selector'].operator_name = method.payload.operator_name;
             state['parent_selector'].parameters = method.payload.parameters;
         },
-        survivorSelectionUpdated: (state, method) => {
+        survivorSelectionUpdatedAG: (state, method) => {
             state['survivor_selector'].operator_name = method.payload.operator_name;
             state['survivor_selector'].parameters = method.payload.parameters;
         }
@@ -43,9 +43,9 @@ const AGSlice = createSlice({
 });
 
 export const { 
-    mutationUpdated,
-    crossoverUpdated,
-    parentSelectionUpdated,
-    survivorSelectionUpdated 
+    mutationUpdatedAG,
+    crossoverUpdatedAG,
+    parentSelectionUpdatedAG,
+    survivorSelectionUpdatedAG 
 } = AGSlice.actions;
 export default AGSlice.reducer;

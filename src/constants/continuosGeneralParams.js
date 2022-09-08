@@ -41,7 +41,24 @@ export const list_inputs_algorithms = [
     {
         name:'Evolutive Programming',
         id:'EP',
-        parameters: [{},{}]
+        parameters: [
+            {
+                label:'Number of generations:',
+                id:'generations',
+                initialValue:10,
+                min:1,
+                max:1000,
+                step:1
+            },
+            {
+                label:'Population size:',
+                id:'size_population',
+                initialValue:70,
+                min:1,
+                max:1000,
+                step:1
+            },
+        ]
     },
     {
         name:'Evolutionary Strategy',

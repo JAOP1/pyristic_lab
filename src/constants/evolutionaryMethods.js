@@ -175,3 +175,55 @@ export const SURVIVOR_SELECTION = [
         params:[]
     }
 ];
+
+export const EP_CONTINUOS_ADAPTIVE_MUTATION_OP = [
+    {
+        label:'default',
+        method_name:'SigmaEpAdaptiveMutator',
+        description_render: (
+            <>
+            <p>
+                The method works using the following equation:
+            </p>
+            <Equation
+                value={'+ 1/2m'}
+            />
+            </>
+        ),
+        params:[
+            {
+                label:'Decision variables of problem',
+                initialValue:1,
+                min:1,
+                max:100,
+                step:1
+            },
+            {
+                label:'Alpha',
+                initialValue:0.2,
+                min:0,
+                max:1,
+                helperText:'The number should stay between [0,1]',
+                step:0.1
+            }
+        ]
+    }
+];
+
+export const EP_CONTINUOS_MUTATION_OP = [
+    {
+        label:'default',
+        method_name:'SigmaMutator',
+        description_render: (
+            <>
+            <p>
+                The method works using the following equation:
+            </p>
+            <Equation
+                value={'+ 1/2m'}
+            />
+            </>
+        ),
+        params:[]
+    }
+];

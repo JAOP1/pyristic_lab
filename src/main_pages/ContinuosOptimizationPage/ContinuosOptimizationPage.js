@@ -15,7 +15,9 @@ import ContinuosOptimizationEditor from '../../views/ContinuosOptimizationEditor
 import CrossOptimizationDashboard from '../../views/CrossOptimizationDashboard/CrossOptimizationDashboard';
 import { 
     SETTINGS_AG,
-    TABS_AG
+    TABS_AG,
+    SETTINGS_EP,
+    TABS_EP
 } from '../../constants/evolutionarySettingView';
 import { list_inputs_algorithms } from '../../constants/continuosGeneralParams';
 
@@ -60,7 +62,11 @@ const ContinuosOptimizationPage = () => {
                     <TabPanel>
                     </TabPanel>
                     <TabPanel>
-
+                        <FormStepsView 
+                            formItems={SETTINGS_EP}
+                            tabs={TABS_EP}
+                            algorithm={'continuosEP'}
+                        />
                     </TabPanel>
                 </TabPanels>
             </Tabs>
