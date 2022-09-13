@@ -22,13 +22,13 @@ const DataTableDinamic = ({ data, headers}) => {
                 headers={headers}
                 columnCount={headers.length}
                 rowCount={3}
-                showToolbar={false}   
+                showToolbar={false}  
             />
         );
     }
     return(
         <>
-            <DataTable rows={data[index].records} headers={headers}>
+            <DataTable rows={data[index].records} headers={headers} >
                 {
                     ({
                         rows,
@@ -55,7 +55,6 @@ const DataTableDinamic = ({ data, headers}) => {
                                 </TableHead>
                                 <TableBody>
                                     {rows.map((row,row_ind) => {
-                                        console.log(row);
                                         return (<TableRow key={`${data[index].title}-${row_ind}`}>
                                             {row.cells.map((cell, col_ind) => (
                                                 <TableCell key={`${data[index].title}-${row_ind}-${col_ind}`}>{cell.value}</TableCell>

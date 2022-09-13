@@ -54,6 +54,9 @@ const CrossOptimizationDashboard = ({ algorithms, dictMethods }) => {
         setStatsByAlgorithm([]);
         let stats = [];
         for(let algorithm_type of Object.keys(selectedAlgorithms)){
+            if(!selectedAlgorithms[algorithm_type])
+                continue;
+                
             try{
                 const body = createRequestBody(algorithm_type);
                 const Config = {
@@ -74,11 +77,10 @@ const CrossOptimizationDashboard = ({ algorithms, dictMethods }) => {
                     records: ['Mean', 'Median', 'Standard deviation'].map((label, ind) => ({
                         id:`${ind}`,
                         metric:label,
-                        value:result.data[label]
+                        value:parseFloat(result.data[label]).toFixed(3)
                     }))
                 });
                 console.log("response",result);
-                console.log("stats",stats);
             } catch(error){
                 console.log('error:', error.message);
             }
@@ -118,7 +120,7 @@ const CrossOptimizationDashboard = ({ algorithms, dictMethods }) => {
     return (
         <>
             <Theme theme={'g10'}>
-                <Grid>
+                <Grid >
                     <Column lg={4} md={3} sm={4} className='border-rigth'>
                         <NumberInput
                           id="execution"
@@ -126,7 +128,7 @@ const CrossOptimizationDashboard = ({ algorithms, dictMethods }) => {
                           max={50}
                           value={executions}
                           onChange={(event, { value, direction }) => setExecutions(value)}
-                          label="Number of executions"
+                          label="Number of executionss"
                           invalidText="Number is not valid"
                         />
                         <fieldset style={{marginTop:'5%'}}>
@@ -162,7 +164,7 @@ const CrossOptimizationDashboard = ({ algorithms, dictMethods }) => {
                     </Column>
                 </Grid>
             </Theme>
-            <Grid>
+            <Grid style={{marginTop:'2%'}}>
                 <Column lg={12} md={5} sm={4}>
                     <AreaChartComponent />                
                 </Column>
