@@ -119,25 +119,28 @@ const FormMethod = ({params , submitHandler}) => {
         >
             <Stack gap={3}>
             {   arrayValues && (
-                    paramList.map((obj, ind) => (
-                        <NumberInput
-                            id={`input_number_${ind}`}
-                            key={ind}
-                            value={arrayValues[ind]}
-                            invalidText={'Invalid value, check the specifications.'}
-                            onChange={(e, { value }) => {
-                                let tmp_array = [ ...arrayValues ];
-                                const _value = parseFloat(value);
-                                if(Number.isNaN(_value)){
-                                    return;
+                    paramList.map((obj, ind) => {
+                        let {initialValue, ...props} = obj;
+                        return (
+                            <NumberInput
+                                id={`input_number_${ind}`}
+                                key={ind}
+                                value={arrayValues[ind]}
+                                invalidText={'Invalid value, check the specifications.'}
+                                onChange={(e, { value }) => {
+                                    let tmp_array = [ ...arrayValues ];
+                                    const _value = parseFloat(value);
+                                    if(Number.isNaN(_value)){
+                                        return;
+                                    }
+                                    tmp_array[ind] = _value;
+                                    setArrayValues(tmp_array);
+                                    }
                                 }
-                                tmp_array[ind] = _value;
-                                setArrayValues(tmp_array);
-                                }
-                            }
-                            { ...obj }
-                        />
-                    )
+                                { ...props }
+                            />
+                        );
+                    }
                 )
             )}
             <Button

@@ -5,8 +5,6 @@ import {
     Column,
     Checkbox,
     NumberInput,
-    Accordion,
-    AccordionItem,
     Button,
 } from '@carbon/react';
 import axios from 'axios'; 
@@ -19,7 +17,18 @@ const CrossOptimizationDashboard = ({ algorithms, dictMethods }) => {
     const [selectedAlgorithms, setSelectedAlgorithms] = useState({});
     const [inputsByAlgorithm, setInputsByAlgorithm] = useState([]);
     const [optimizerParameters, setOptimizerParameters] = useState({});
+    const [statsByAlgorithm, setStatsByAlgorithm] = useState([]);
     const [executions, setExecutions] = useState(1);
+    const HEADERS = [
+        {
+            key: 'metric',
+            header: 'Metric',
+          },
+          {
+            key: 'value',
+            header: 'Result',
+          },
+    ]
     useEffect(() => {
         if(algorithms){
             let initialState = {};
@@ -31,18 +40,19 @@ const CrossOptimizationDashboard = ({ algorithms, dictMethods }) => {
         }
     }, [algorithms]);
 
-    const createRequestBody = (id) => {
-        let data_body = {};
-        data_body['arguments_optimizer'] = {
-            'arguments': optimizerParameters[id]
-        };
-        data_body['config_operators'] = {
-            'methods': dictMethods[id]
-        };
-        return data_body;
-    };
-
     const callOptimizationAlgorithm = async() => {
+        const createRequestBody = (id) => {
+            let data_body = {};
+            data_body['arguments_optimizer'] = {
+                'arguments': optimizerParameters[id]
+            };
+            data_body['config_operators'] = {
+                'methods': dictMethods[id]
+            };
+            return data_body;
+        };
+        setStatsByAlgorithm([]);
+        let stats = [];
         for(let algorithm_type of Object.keys(selectedAlgorithms)){
             try{
                 const body = createRequestBody(algorithm_type);
@@ -58,14 +68,23 @@ const CrossOptimizationDashboard = ({ algorithms, dictMethods }) => {
                     `http://localhost:80/optimize/evolutionary/${algorithm_type}`,
                     body,
                     Config
-                );
-                console.log('data:', result);
+                );                
+                stats.push({
+                    title:algorithm_type,
+                    records: ['Mean', 'Median', 'Standard deviation'].map((label, ind) => ({
+                        id:`${ind}`,
+                        metric:label,
+                        value:result.data[label]
+                    }))
+                });
+                console.log("response",result);
+                console.log("stats",stats);
             } catch(error){
                 console.log('error:', error.message);
             }
         };
+        setStatsByAlgorithm(stats);
     };
-
     const updateListInputsAlgorithm = (checked, id) => {
         let ind;
         let tmp_list = [ ...inputsByAlgorithm ];
@@ -84,7 +103,6 @@ const CrossOptimizationDashboard = ({ algorithms, dictMethods }) => {
         checkedAlgorithms[id] = checked;
         setSelectedAlgorithms(checkedAlgorithms);
     };
-
     const onNumberInputChange = (algorithmId, inputId, value) => {
         let tmp_obj = { ...optimizerParameters };
         tmp_obj[algorithmId][inputId] = value;
@@ -149,7 +167,7 @@ const CrossOptimizationDashboard = ({ algorithms, dictMethods }) => {
                     <AreaChartComponent />                
                 </Column>
                 <Column lg={4} md={3} sm={4}>
-                    <DataTableDinamic />
+                    <DataTableDinamic  headers={HEADERS} data={statsByAlgorithm}/>
                 </Column>
             </Grid>
         </>
