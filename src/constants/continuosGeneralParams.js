@@ -2,7 +2,7 @@
 export const list_inputs_algorithms = [
     {
         name:'Genetic algorithm',
-        id:'AG',
+        id:'GA',
         parameters: [
             {
                 label:'Number of generations:',

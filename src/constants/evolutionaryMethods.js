@@ -388,3 +388,40 @@ export const EE_CONTINUOS_ADAPTIVE_MUTATION_OP = [
         ]
     }
 ];
+
+export const SETTING_INVALID_SOLUTIONS = [
+    {
+        label:'Adjust to near limit',
+        method_name:'ContinuosFixer',
+        inside_array:true,
+        description_render:(
+            <>
+                <p>
+                    The method works using the following equation:
+                </p>
+                <Equation
+                    value={'+ 1/2m'}
+                />
+            </>
+        ),
+        params:[
+            {
+                label:'Left bound',
+                initialValue:0,
+                min:-100,
+                max:100,
+                helperText:'The number should stay between [-100,100]',
+                step:1
+            },
+            {
+                label:'Right bound',
+                initialValue:1,
+                min:-100,
+                max:100,
+                helperText:'The number should stay between [-100,100]',
+                step:1
+            }
+        ]
+    },
+
+];

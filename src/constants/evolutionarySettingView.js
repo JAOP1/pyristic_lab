@@ -8,25 +8,29 @@ import {
     EE_CONTINUOS_CROSSOVER_OP,
     EE_CONTINUOS_ADAPTIVE_CROSSOVER_OP,
     EE_CONTINUOS_ADAPTIVE_MUTATION_OP,
-    EE_CONTINUOS_MUTATION_OP
+    EE_CONTINUOS_MUTATION_OP,
+    SETTING_INVALID_SOLUTIONS
 } from './evolutionaryMethods';
 import { 
     mutationUpdatedAG,
     crossoverUpdatedAG,
     survivorSelectionUpdatedAG,
-    parentSelectionUpdatedAG
+    parentSelectionUpdatedAG,
+    setInvalidSolutionUpdatedAG
 } from '../storage_reducers/AGStore';
 import {
     mutationUpdatedEP,
     adaptiveMutationUpdatedEP,
-    survivorSelectionUpdatedEP
+    survivorSelectionUpdatedEP,
+    setInvalidSolutionUpdatedEP
 } from '../storage_reducers/EPStore';
 import {
     crossoverUpdatedEE,
     crossoverAdaptiveUpdatedEE,
     mutatioAdaptiveUpdatedEE,
     mutationUpdatedEE,
-    survivorSelectionUpdatedEE
+    survivorSelectionUpdatedEE,
+    setInvalidSolutionUpdatedEE
 } from '../storage_reducers/EEStore';
 
 //------------------- AG form view requirements ----------------------------
@@ -51,6 +55,11 @@ export const SETTINGS_AG = [
         item_list:SURVIVOR_SELECTION,
         handler: survivorSelectionUpdatedAG
     },
+    {
+        title:'Adjust invalid solutions',
+        item_list:SETTING_INVALID_SOLUTIONS,
+        handler: setInvalidSolutionUpdatedAG
+    }, 
 ];
 export const TABS_AG = [
     {
@@ -73,6 +82,11 @@ export const TABS_AG = [
         description:'Step 1: Select survivor selection method.',
         keyGlobalStorage:'survivor_selector'
     },
+    {
+        label:'Step 5',
+        description:'Step 4: Select adjustment invalid solutions method.',
+        keyGlobalStorage:'setter_invalid_solution'
+    },
 ];
 
 //------------------- EP form view requirements ----------------------------
@@ -92,6 +106,11 @@ export const SETTINGS_EP = [
         item_list:SURVIVOR_SELECTION,
         handler: survivorSelectionUpdatedEP
     },
+    {
+        title:'Adjust invalid solutions',
+        item_list:SETTING_INVALID_SOLUTIONS,
+        handler: setInvalidSolutionUpdatedEP
+    }, 
 ];
 
 export const TABS_EP = [
@@ -109,6 +128,11 @@ export const TABS_EP = [
         label:'Step 3',
         description:'Step 1: Select survivor selection method.',
         keyGlobalStorage:'survivor_selector'
+    },
+    {
+        label:'Step 4',
+        description:'Step 4: Select adjustment invalid solutions method.',
+        keyGlobalStorage:'setter_invalid_solution'
     },
 ]
 
@@ -140,6 +164,11 @@ export const SETTINGS_EE = [
         item_list:SURVIVOR_SELECTION,
         handler: survivorSelectionUpdatedEE
     },
+    {
+        title:'Adjust invalid solutions',
+        item_list:SETTING_INVALID_SOLUTIONS,
+        handler: setInvalidSolutionUpdatedEE
+    }, 
 ];
 
 export const TABS_EE = [
@@ -167,5 +196,10 @@ export const TABS_EE = [
         label:'Step 5',
         description:'Step 5: Select survivor selection method.',
         keyGlobalStorage:'survivor_selector'
+    },
+    {
+        label:'Step 6',
+        description:'Step 6: Select adjustment invalid solutions method.',
+        keyGlobalStorage:'setter_invalid_solution'
     },
 ]

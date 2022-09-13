@@ -12,6 +12,10 @@ const initialState = {
     survivor_selector:{
         operator_name:'No selected',
         parameters:[]
+    },
+    setter_invalid_solution:{
+        operator_name:'No selected',
+        parameters:[]
     }
 }
 
@@ -30,6 +34,10 @@ const EPSlice = createSlice({
         survivorSelectionUpdatedEP: (state, method) => {
             state['survivor_selector'].operator_name = method.payload.operator_name;
             state['survivor_selector'].parameters = method.payload.parameters;
+        },
+        setInvalidSolutionUpdatedEP: (state, method) => {
+            state['setter_invalid_solution'].operator_name = method.payload.operator_name;
+            state['setter_invalid_solution'].parameters = method.payload.parameters;
         }
       }
 });
@@ -37,6 +45,7 @@ const EPSlice = createSlice({
 export const { 
     mutationUpdatedEP,
     adaptiveMutationUpdatedEP,
-    survivorSelectionUpdatedEP 
+    survivorSelectionUpdatedEP,
+    setInvalidSolutionUpdatedEP
 } = EPSlice.actions;
 export default EPSlice.reducer;

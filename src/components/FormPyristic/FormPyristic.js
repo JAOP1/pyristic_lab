@@ -89,7 +89,7 @@ export const FormPyristic = ({itemList, title, globalStorageHandler}) => {
 
 const FormMethod = ({params , submitHandler}) => {
     const paramList = params?.params || [];
-    const [arrayValues,  setArrayValues] = useState(undefined);
+    const [arrayValues,  setArrayValues] = useState([]);
     const [status, setStatus] = useState(undefined);
     
     useMemo(() => {
@@ -142,7 +142,10 @@ const FormMethod = ({params , submitHandler}) => {
             )}
             <Button
                 onClick={() => {
-                    submitHandler(arrayValues);
+                    if(paramList.length)
+                        submitHandler(arrayValues);
+                    else
+                        submitHandler([]);
                     setStatus('success');
                 }}
             >

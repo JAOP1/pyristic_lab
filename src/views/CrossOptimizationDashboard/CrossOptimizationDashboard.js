@@ -19,27 +19,7 @@ const CrossOptimizationDashboard = ({ algorithms, dictMethods }) => {
     const [selectedAlgorithms, setSelectedAlgorithms] = useState({});
     const [inputsByAlgorithm, setInputsByAlgorithm] = useState([]);
     const [optimizerParameters, setOptimizerParameters] = useState({});
-    const [isDisabledOptimizeButton, setDisableOptimizeButton] = useState(true);
-
-    // const callOptimizationAlgorithm = (fileName) => {
-    //     return async(text) => {
-    //         try{
-    //             const body = JSON.stringify({ content: text });
-    //             const Config = {
-    //                 headers: {
-    //                 'Content-Type': 'application/json'
-    //                 }
-    //             };
-    //             await axios.post(`http://localhost:80/create-file/${fileName}`,
-    //             body,
-    //             Config);
-    //             setStatus('success');
-    //         } catch(error){
-    //             setStatus('error');
-    //         }
-    //     };
-    // }
-
+    const [executions, setExecutions] = useState(1);
     useEffect(() => {
         if(algorithms){
             let initialState = {};
@@ -50,6 +30,41 @@ const CrossOptimizationDashboard = ({ algorithms, dictMethods }) => {
             setOptimizerParameters(initialState);
         }
     }, [algorithms]);
+
+    const createRequestBody = (id) => {
+        let data_body = {};
+        data_body['arguments_optimizer'] = {
+            'arguments': optimizerParameters[id]
+        };
+        data_body['config_operators'] = {
+            'methods': dictMethods[id]
+        };
+        return data_body;
+    };
+
+    const callOptimizationAlgorithm = async() => {
+        for(let algorithm_type of Object.keys(selectedAlgorithms)){
+            try{
+                const body = createRequestBody(algorithm_type);
+                const Config = {
+                    headers: {
+                    'Content-Type': 'application/json'
+                    },
+                    params: {
+                        num_executions: executions
+                    }
+                };
+                const result = await axios.post(
+                    `http://localhost:80/optimize/evolutionary/${algorithm_type}`,
+                    body,
+                    Config
+                );
+                console.log('data:', result);
+            } catch(error){
+                console.log('error:', error.message);
+            }
+        };
+    };
 
     const updateListInputsAlgorithm = (checked, id) => {
         let ind;
@@ -81,6 +96,7 @@ const CrossOptimizationDashboard = ({ algorithms, dictMethods }) => {
         const method_names = Object.keys(methods).map((key) => methods[key].operator_name);
         return method_names.every(isMethod);
     };
+
     return (
         <>
             <Theme theme={'g10'}>
@@ -90,7 +106,8 @@ const CrossOptimizationDashboard = ({ algorithms, dictMethods }) => {
                           id="execution"
                           min={1}
                           max={50}
-                          value={1}
+                          value={executions}
+                          onChange={(event, { value, direction }) => setExecutions(value)}
                           label="Number of executions"
                           invalidText="Number is not valid"
                         />
@@ -113,7 +130,7 @@ const CrossOptimizationDashboard = ({ algorithms, dictMethods }) => {
                             }
                         </fieldset>
                         <Button
-                            disabled={isDisabledOptimizeButton}
+                            onClick={() => callOptimizationAlgorithm()}
                         >
                             Optimize
                         </Button>

@@ -33,8 +33,12 @@ const ContinuosOptimizationPage = () => {
             <Tabs defaultSelectedIndex={1}>
                 <Theme theme={'g10'}>
                     <TabList aria-label="Tab navigation" iconSize={'lg'}>
-                        <IconTab><Dashboard  aria-label="dashboard" size={20}/></IconTab>
-                        <IconTab><Code aria-label='problemCode' size={20}/></IconTab>
+                        <IconTab label='dashboard'>
+                            <Dashboard  aria-label="dashboard" size={20}/>
+                        </IconTab>
+                        <IconTab label='problem-optimization'>
+                            <Code aria-label='problemCode' size={20}/>
+                        </IconTab>
                         <Tab>Genetic</Tab>
                         <Tab>Evolutionary Strategy</Tab>
                         <Tab>Evolutive programming</Tab>
@@ -45,7 +49,7 @@ const ContinuosOptimizationPage = () => {
                         <CrossOptimizationDashboard 
                             algorithms={list_inputs_algorithms}
                             dictMethods={{
-                                AG:AG_storage,
+                                GA:AG_storage,
                                 EE:EE_storage,
                                 EP:EP_storage
                             }}

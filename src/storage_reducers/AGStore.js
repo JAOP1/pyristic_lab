@@ -16,6 +16,10 @@ const initialState = {
     survivor_selector:{
         operator_name:'No selected',
         parameters:[]
+    },
+    setter_invalid_solution: {
+        operator_name:'No selected',
+        parameters:[]
     }
 }
 
@@ -38,6 +42,10 @@ const AGSlice = createSlice({
         survivorSelectionUpdatedAG: (state, method) => {
             state['survivor_selector'].operator_name = method.payload.operator_name;
             state['survivor_selector'].parameters = method.payload.parameters;
+        },
+        setInvalidSolutionUpdatedAG: (state, method) => {
+            state['setter_invalid_solution'].operator_name = method.payload.operator_name;
+            state['setter_invalid_solution'].parameters = method.payload.parameters;
         }
       }
 });
@@ -46,6 +54,7 @@ export const {
     mutationUpdatedAG,
     crossoverUpdatedAG,
     parentSelectionUpdatedAG,
-    survivorSelectionUpdatedAG 
+    survivorSelectionUpdatedAG,
+    setInvalidSolutionUpdatedAG
 } = AGSlice.actions;
 export default AGSlice.reducer;
