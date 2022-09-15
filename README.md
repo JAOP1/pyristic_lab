@@ -8,3 +8,7 @@ This project has a docker-compose file, it orchestate the API and the front end.
 - `docker compose up`
 
 The command mentioned above pull the current available image of the pyristicAPI and the front end image. After that, you will see both services up. Enjoy solving optimization problems!!! 
+
+
+## Note
+This project is currently in progress, you can find some bugs, but you can contribute :)
