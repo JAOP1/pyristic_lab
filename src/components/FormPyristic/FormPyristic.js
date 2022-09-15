@@ -43,7 +43,7 @@ export const FormPyristic = ({itemList, title, globalStorageHandler}) => {
         <div>
             <div className='form-container'> 
                 <Grid as='menu' condensed>
-                    <Column md={4} sm={4}>
+                    <Column md={4} sm={4} className='container-margin-bottom'>
                         <h3>{title}</h3>
                     </Column>
                     <Column lg={{offset:12}} md={{offset:4}}>
@@ -54,6 +54,7 @@ export const FormPyristic = ({itemList, title, globalStorageHandler}) => {
                                 helperText='Select the method'
                                 label='No selected method.'
                                 items={itemList}
+                                className='dropdown-size'
                                 onChange={ (e) => {
                                     setItemSelected(e.selectedItem);
                                 }}

@@ -70,7 +70,7 @@ const NavBar = () => {
               isActive={isSideNavExpanded}
           />
           <HeaderName href="#" prefix="pyristic">
-            LAB
+            [LAB]
           </HeaderName>
            <SideNav
              aria-label="Side navigation"
