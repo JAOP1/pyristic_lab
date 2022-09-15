@@ -23,9 +23,9 @@ const AreaChartComponent = ({ data }) => {
 
   if(data.length === 0){
     return (
-      <div>
+      <ResponsiveContainer width={'100%'} height={350}>
         <Loading className={'center-item'} withOverlay={false}/>
-      </div>
+      </ResponsiveContainer>
     );
   }
 
