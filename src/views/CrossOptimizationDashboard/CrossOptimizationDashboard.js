@@ -11,7 +11,7 @@ import axios from 'axios';
 import AreaChartComponent from '../../components/AreaChart';
 import DataTableDinamic from '../../components/DataTableDinamic/DataTableDinamic';
 import AccordionForm from '../../components/AccordionForm';
-
+import { HOST } from '../../constants/settings';
 
 const CrossOptimizationDashboard = ({ algorithms, dictMethods }) => {
     const [selectedAlgorithms, setSelectedAlgorithms] = useState({});
@@ -29,7 +29,7 @@ const CrossOptimizationDashboard = ({ algorithms, dictMethods }) => {
             key: 'value',
             header: 'Result',
           },
-    ]
+    ];
     useEffect(() => {
         if(algorithms){
             let initialState = {};
@@ -86,7 +86,7 @@ const CrossOptimizationDashboard = ({ algorithms, dictMethods }) => {
                     }
                 };
                 const result = await axios.post(
-                    `http://localhost:80/optimize/evolutionary/${algorithm_type}`,
+                    `${HOST}/optimize/evolutionary/${algorithm_type}`,
                     body,
                     Config
                 );
