@@ -37,6 +37,7 @@ function EditorForm({ title, sendCallback }) {
             buttonLabel={'Upload File'}
             style={{marginTop:'-16px'}}
             iconDescription={'Close'}
+            buttonKind="secondary"
             filenameStatus={uploadStatus}
             onChange={(e) => overwriteCode(e)}
           />
