@@ -1,8 +1,17 @@
 @use '@carbon/react/scss/spacing' as *;
+@use '@carbon/react/scss/breakpoint' as *;
 
 .progress-bar-position {
     max-width: 60%;
-    margin-left: 16%;
+    margin-left: 13%;
     margin-top: $spacing-08;
     margin-bottom: $spacing-08;
   }
+
+.overflow-position{
+  padding-left: 10%;
+
+  @include breakpoint-down(md){
+    padding-left: 0%;
+  }
+}

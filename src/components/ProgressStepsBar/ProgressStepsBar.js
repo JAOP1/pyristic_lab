@@ -4,6 +4,10 @@ import PropTypes from 'prop-types';
 import {
     ProgressIndicator,
     ProgressStep,
+    Grid,
+    Column,
+    OverflowMenu,
+    OverflowMenuItem
 } from '@carbon/react';
 
 
@@ -20,28 +24,53 @@ const ProgressStepsBar = ({ progressItems, callBack, storageKey }) => {
         setStepsVisited(updateVisited);
     };
     return(
-            <ProgressIndicator 
-                currentIndex={index} 
-                onChange={ (e) => { 
-                    callBack(e);
-                    updateVisitedItems(index);
-                    setIndex(e); 
-                }} 
-                className='progress-bar-position'
-                spaceEqually={true}
-            >
-            {
-                progressItems.map( (item, ind) => (
-                    <ProgressStep 
-                        key={ind}
-                        complete={ hasSelectedMethod(item.keyGlobalStorage) }
-                        invalid={ !hasSelectedMethod(item.keyGlobalStorage) && hasVisited(ind)}
-                        label={item.label}
-                        description={item.description}
-                    />
-                ))
-            }
-            </ProgressIndicator>
+        <Grid>
+            <Column lg={16} md={0} sm={0}>
+                <ProgressIndicator 
+                    currentIndex={index} 
+                    onChange={ (e) => { 
+                        callBack(e);
+                        updateVisitedItems(index);
+                        setIndex(e); 
+                    }} 
+                    className='progress-bar-position'
+                    spaceEqually={true}
+                >
+                {
+                    progressItems.map( (item, ind) => (
+                        <ProgressStep 
+                            key={ind}
+                            complete={ hasSelectedMethod(item.keyGlobalStorage) }
+                            invalid={ !hasSelectedMethod(item.keyGlobalStorage) && hasVisited(ind)}
+                            label={item.label}
+                            description={item.description}
+                        />
+                    ))
+                }
+                </ProgressIndicator>
+            </Column>
+            <Column lg={0} md={8} sm={4} className='overflow-position'>
+                <OverflowMenu
+                ariaLabel="overflow-menu"
+                size="md"
+                >
+                    {
+                        progressItems.map( (item, ind) => (
+                            <OverflowMenuItem 
+                                key={ind} 
+                                itemText={item.label}
+                                onClick={() => {
+                                    callBack(ind);
+                                    setIndex(ind);
+                                }}
+                            />  
+                        ))
+                    }
+                    
+                </OverflowMenu>
+            </Column>
+        </Grid>
+           
 
     );
 };
