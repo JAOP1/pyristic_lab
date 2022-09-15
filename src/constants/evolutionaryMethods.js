@@ -96,6 +96,30 @@ export const AG_CONTINUOS_CROSSOVER_OP = [
         params:[]
     },
     {
+        label:'Arithmetic crossover',
+        method_name:'IntermediateCrossover',
+        description_render: (
+            <>
+            <p>
+                The method works using the following equation:
+            </p>
+            <Equation
+                value={'A*x + B*(1-x)'}
+            />
+            </>
+        ),
+        params:[
+            {
+                label:'Alpha',
+                initialValue:0.5,
+                min:0,
+                max:1,
+                helperText:'The number should stay between [0,1]',
+                step:0.1
+            } 
+        ]
+    },
+    {
         label:'Simulated binary crossover',
         method_name:'SimulatedBinaryCrossover',
         equation:'2 x',

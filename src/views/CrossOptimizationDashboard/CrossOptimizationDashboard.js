@@ -18,6 +18,7 @@ const CrossOptimizationDashboard = ({ algorithms, dictMethods }) => {
     const [inputsByAlgorithm, setInputsByAlgorithm] = useState([]);
     const [optimizerParameters, setOptimizerParameters] = useState({});
     const [statsByAlgorithm, setStatsByAlgorithm] = useState([]);
+    const [dataPlotting, setDataPlotting] = useState([]);
     const [executions, setExecutions] = useState(1);
     const HEADERS = [
         {
@@ -40,6 +41,21 @@ const CrossOptimizationDashboard = ({ algorithms, dictMethods }) => {
         }
     }, [algorithms]);
 
+
+    const saveDataInTable = (id, data, container) => {
+        container.push({
+            title:id,
+            records: ['Mean', 'Median', 'Standard deviation'].map((label, ind) => ({
+                id:`${ind}`,
+                metric:label,
+                value:parseFloat(data.data[label]).toFixed(3)
+            }))
+        });
+    };
+    const savePlottingData = (id, data, container) => {
+        console.log('data plot:', container);
+        data.data['individual_f'].forEach( ( point, ind ) => container[ind][id] = point);
+    };
     const callOptimizationAlgorithm = async() => {
         const createRequestBody = (id) => {
             let data_body = {};
@@ -52,6 +68,8 @@ const CrossOptimizationDashboard = ({ algorithms, dictMethods }) => {
             return data_body;
         };
         setStatsByAlgorithm([]);
+        setDataPlotting([]);
+        let plot_array = [...Array(executions).keys()].map(i => ({ name:i }));
         let stats = [];
         for(let algorithm_type of Object.keys(selectedAlgorithms)){
             if(!selectedAlgorithms[algorithm_type])
@@ -71,20 +89,17 @@ const CrossOptimizationDashboard = ({ algorithms, dictMethods }) => {
                     `http://localhost:80/optimize/evolutionary/${algorithm_type}`,
                     body,
                     Config
-                );                
-                stats.push({
-                    title:algorithm_type,
-                    records: ['Mean', 'Median', 'Standard deviation'].map((label, ind) => ({
-                        id:`${ind}`,
-                        metric:label,
-                        value:parseFloat(result.data[label]).toFixed(3)
-                    }))
-                });
+                );
+                saveDataInTable(algorithm_type, result, stats);             
+                savePlottingData(algorithm_type, result, plot_array);
                 console.log("response",result);
+                console.log('plot:', plot_array);
+                console.log('stats', stats);
             } catch(error){
                 console.log('error:', error.message);
             }
         };
+        setDataPlotting(plot_array);
         setStatsByAlgorithm(stats);
     };
     const updateListInputsAlgorithm = (checked, id) => {
@@ -127,7 +142,13 @@ const CrossOptimizationDashboard = ({ algorithms, dictMethods }) => {
                           min={1}
                           max={50}
                           value={executions}
-                          onChange={(event, { value, direction }) => setExecutions(value)}
+                          onChange={(event, { value, direction }) => {
+                                const _value = parseInt(value);
+                                if(Number.isNaN(_value)){
+                                    return;
+                                }
+                                setExecutions(_value);                                   
+                          }}
                           label="Number of executionss"
                           invalidText="Number is not valid"
                         />
@@ -166,7 +187,7 @@ const CrossOptimizationDashboard = ({ algorithms, dictMethods }) => {
             </Theme>
             <Grid style={{marginTop:'2%'}}>
                 <Column lg={12} md={5} sm={4}>
-                    <AreaChartComponent />                
+                    <AreaChartComponent data={dataPlotting}/>                
                 </Column>
                 <Column lg={4} md={3} sm={4}>
                     <DataTableDinamic  headers={HEADERS} data={statsByAlgorithm}/>
