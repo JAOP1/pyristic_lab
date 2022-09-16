@@ -38,27 +38,32 @@ export const SETTINGS_AG = [
     {
         title:'Parent selection',
         item_list:AG_PARENT_SELECTION,
-        handler:  parentSelectionUpdatedAG
+        handler:  parentSelectionUpdatedAG,
+        getData: (state) => state.continuosAG.parent_selector
     },
     {
         title:'Crossover operator',
         item_list:AG_CONTINUOS_CROSSOVER_OP,
-        handler: crossoverUpdatedAG
+        handler: crossoverUpdatedAG,
+        getData: (state) => state.continuosAG.crossover_operator
     },
     {
         title:'Mutation operator',
         item_list:AG_COUNTINUOS_MUTATION_OP,
-        handler: mutationUpdatedAG
+        handler: mutationUpdatedAG,
+        getData: (state) => state.continuosAG.mutation_operator
     },
     {
         title:'Survivor selection',
         item_list:SURVIVOR_SELECTION,
-        handler: survivorSelectionUpdatedAG
+        handler: survivorSelectionUpdatedAG,
+        getData: (state) => state.continuosAG.survivor_selector
     },
     {
         title:'Adjust invalid solutions',
         item_list:SETTING_INVALID_SOLUTIONS,
-        handler: setInvalidSolutionUpdatedAG
+        handler: setInvalidSolutionUpdatedAG,
+        getData: (state) => state.continuosAG.setter_invalid_solution
     }, 
 ];
 export const TABS_AG = [
@@ -94,22 +99,30 @@ export const SETTINGS_EP = [
     {
         title:'Mutation operator',
         item_list:EP_CONTINUOS_MUTATION_OP,
-        handler:  mutationUpdatedEP
+        handler:  mutationUpdatedEP,
+        getData: (state) => state.continuosEP.mutation_operator
+
     },
     {
         title:'Adaptive mutation operator',
         item_list:EP_CONTINUOS_ADAPTIVE_MUTATION_OP,
-        handler: adaptiveMutationUpdatedEP
+        handler: adaptiveMutationUpdatedEP,
+        getData: (state) => state.continuosEP.adaptive_mutation_operator
+
     },
     {
         title:'Survivor selection',
         item_list:SURVIVOR_SELECTION,
-        handler: survivorSelectionUpdatedEP
+        handler: survivorSelectionUpdatedEP,
+        getData: (state) => state.continuosEP.survivor_selector
+
     },
     {
         title:'Adjust invalid solutions',
         item_list:SETTING_INVALID_SOLUTIONS,
-        handler: setInvalidSolutionUpdatedEP
+        handler: setInvalidSolutionUpdatedEP,
+        getData: (state) => state.continuosEP.setter_invalid_solution
+
     }, 
 ];
 
@@ -142,32 +155,44 @@ export const SETTINGS_EE = [
     {
         title:'Crossover operator',
         item_list:EE_CONTINUOS_CROSSOVER_OP,
-        handler:  crossoverUpdatedEE
+        handler:  crossoverUpdatedEE,
+        getData: (state) => state.continuosEE.crossover_operator
+
     },
     {
         title:'Adaptive crossover operator',
         item_list:EE_CONTINUOS_ADAPTIVE_CROSSOVER_OP,
-        handler:  crossoverAdaptiveUpdatedEE
+        handler:  crossoverAdaptiveUpdatedEE,
+        getData: (state) => state.continuosEE.adaptive_crossover_operator
+
     },    
     {
         title:'Mutation operator',
         item_list:EE_CONTINUOS_MUTATION_OP,
-        handler:  mutationUpdatedEE
+        handler:  mutationUpdatedEE,
+        getData: (state) => state.continuosEE.mutation_operator
+
     },
     {
         title:'Adaptive mutation operator',
         item_list:EE_CONTINUOS_ADAPTIVE_MUTATION_OP,
-        handler: mutatioAdaptiveUpdatedEE
+        handler: mutatioAdaptiveUpdatedEE,
+        getData: (state) => state.continuosEE.adaptive_mutation_operator
+
     },
     {
         title:'Survivor selection',
         item_list:SURVIVOR_SELECTION,
-        handler: survivorSelectionUpdatedEE
+        handler: survivorSelectionUpdatedEE,
+        getData: (state) => state.continuosEE.survivor_selector
+
     },
     {
         title:'Adjust invalid solutions',
         item_list:SETTING_INVALID_SOLUTIONS,
-        handler: setInvalidSolutionUpdatedEE
+        handler: setInvalidSolutionUpdatedEE,
+        getData: (state) => state.continuosEE.setter_invalid_solution
+
     }, 
 ];
 

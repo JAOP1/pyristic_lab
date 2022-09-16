@@ -25,48 +25,48 @@ function EditorForm({ title, sendCallback }) {
     fr.readAsText(file);
   }
   return (
-    <>
-    <Grid as='menu' condensed>
-      <Column sm={4}>
-        <h6 className='heading' style={{marginTop:'10%'}}>{title}</h6>
-      </Column>
-      <Column lg={{offset:13}} md={{offset:5}}>
-        <Stack orientation='horizontal'>
-          <FileUploader 
-            accept={['.py']}
-            buttonLabel={'Upload File'}
-            style={{marginTop:'-16px'}}
-            iconDescription={'Close'}
-            buttonKind="secondary"
-            filenameStatus={uploadStatus}
-            onChange={(e) => overwriteCode(e)}
-          />
-          <Button
-            size='md'
-            iconDescription='Send code'
-            renderIcon={ SendAlt }
-            onClick={() => sendCallback(textCode)}
-            hasIconOnly
-          />
-          <Button
-            renderIcon={ HelpFilled }
-            iconDescription="Help"
-            hasIconOnly
-            size='md'
-          />
-        </Stack>
-      </Column>
-    </Grid>
-    <Editor
-      theme="vs-dark"
-      height="30vh"
-      defaultLanguage="python"
-      value={textCode}
-      onChange={(e) => {
-        setTextCode(e)
-      }}
-    />
-  </>
+    <div className='container-center'>
+      <Grid as='menu' condensed>
+        <Column sm={4}>
+          <h6 className='heading' style={{marginTop:'10%'}}>{title}</h6>
+        </Column>
+        <Column lg={{offset:13}} md={{offset:5}}>
+          <Stack orientation='horizontal'>
+            <FileUploader 
+              accept={['.py']}
+              buttonLabel={'Upload File'}
+              style={{marginTop:'-16px'}}
+              iconDescription={'Close'}
+              buttonKind="secondary"
+              filenameStatus={uploadStatus}
+              onChange={(e) => overwriteCode(e)}
+            />
+            <Button
+              size='md'
+              iconDescription='Send code'
+              renderIcon={ SendAlt }
+              onClick={() => sendCallback(textCode)}
+              hasIconOnly
+            />
+            <Button
+              renderIcon={ HelpFilled }
+              iconDescription="Help"
+              hasIconOnly
+              size='md'
+            />
+          </Stack>
+        </Column>
+      </Grid>
+      <Editor
+        theme="vs-dark"
+        height="30vh"
+        defaultLanguage="python"
+        value={textCode}
+        onChange={(e) => {
+          setTextCode(e)
+        }}
+      />
+    </div>
   );
 }
 

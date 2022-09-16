@@ -1,5 +1,14 @@
 @use '@carbon/react/scss/type' as *;
+@use '@carbon/react/scss/breakpoint' as *;
 
 .heading {
     @include type-style('productive-heading-04');
   }
+
+.container-center{
+  width: 130%;
+
+  @include breakpoint-down(md){
+    width: 95%;
+  }
+}

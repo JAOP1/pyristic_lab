@@ -7,6 +7,8 @@ import {
 } from '@carbon/react';
 import axios from 'axios'; 
 import EditorForm from '../../components/EditorForm/EditorForm';
+import { HOST } from '../../constants/settings';
+
 
 const ContinuosOptimizationEditor = () => {
     const ARRAY_ITEMS = [
@@ -36,7 +38,7 @@ const ContinuosOptimizationEditor = () => {
                     'Content-Type': 'application/json'
                     }
                 };
-                await axios.post(`http://localhost:80/create-file/${fileName}`,
+                await axios.post(`${HOST}/create-file/${fileName}`,
                 body,
                 Config);
                 setStatus('success');

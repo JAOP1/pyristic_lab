@@ -16,6 +16,7 @@ export const FormStepsView = ({ formItems, tabs, algorithm }) => {
                 itemList={ formItems[currentView].item_list }
                 title={ formItems[currentView].title }
                 globalStorageHandler={ formItems[currentView].handler}
+                getDataGlobalStorage={formItems[currentView].getData} 
             />
         </>
     );

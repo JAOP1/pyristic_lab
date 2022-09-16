@@ -13,15 +13,24 @@ import {
     Grid,
     Column,
   } from '@carbon/react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { TEXT_SELECTION_DROPDOWN } from '../../constants/texts';
 
-export const FormPyristic = ({itemList, title, globalStorageHandler}) => {
+export const FormPyristic = ({itemList, title, globalStorageHandler, getDataGlobalStorage}) => {
     const [itemSelected, setItemSelected] = useState(undefined);
     const [modalText, setModalText] = useState(undefined);
+    const [inputArgsByUser, setInputArgsByUser] = useState(undefined);
+    const currentDataOperator = useSelector(getDataGlobalStorage);
     const dispatch = useDispatch();
 
-    useEffect(() => setItemSelected(undefined), [title]);
+    useEffect(() => {
+        setInputArgsByUser(undefined);
+        const foundItem = itemList.find(element => element.method_name === currentDataOperator.operator_name);
+        setItemSelected(foundItem);
+        if(foundItem)
+            setInputArgsByUser(currentDataOperator.parameters);
+        
+    }, [title]);
 
     const submitHandler = (arrayArguments) => {
         const methodConfig = {
@@ -52,12 +61,12 @@ export const FormPyristic = ({itemList, title, globalStorageHandler}) => {
                             <Dropdown 
                                 id='form'
                                 helperText='Select the method'
-                                label='No selected method.'
                                 items={itemList}
                                 className='dropdown-size'
                                 onChange={ (e) => {
                                     setItemSelected(e.selectedItem);
                                 }}
+                                selectedItem={itemSelected || { label:'No selected method.' }}
                             />
                             <Button
                                 renderIcon={ HelpFilled }
@@ -74,6 +83,7 @@ export const FormPyristic = ({itemList, title, globalStorageHandler}) => {
                 <FormMethod 
                     params={itemSelected} 
                     submitHandler={submitHandler}
+                    inputsSaved={inputArgsByUser}
                 />
             </div>
             <Modal
@@ -88,14 +98,14 @@ export const FormPyristic = ({itemList, title, globalStorageHandler}) => {
   };
 
 
-const FormMethod = ({params , submitHandler}) => {
+const FormMethod = ({params , submitHandler, inputsSaved=undefined}) => {
     const paramList = params?.params || [];
     const [arrayValues,  setArrayValues] = useState([]);
     const [status, setStatus] = useState(undefined);
     
     useMemo(() => {
         if(paramList.length){
-            let values = paramList.map(obj => obj.initialValue);
+            let values = inputsSaved? inputsSaved:paramList.map(obj => obj.initialValue);
             setArrayValues(values);
         }
     }, [paramList]);
