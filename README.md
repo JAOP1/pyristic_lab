@@ -9,8 +9,11 @@ This project has a docker-compose file, it orchestate the API and the front end.
 
 The command mentioned above pull the current available image of the pyristicAPI and the front end image. After that, you will see both services up. Enjoy solving optimization problems!!! 
 
-## Current structure
+If you want to remove the containers related to the project, execute the following:
+- `docker compose down`
 
+## Current structure
+TODO
 
 ## Note
 This project is currently in progress, you can find some bugs, but you can contribute :)
