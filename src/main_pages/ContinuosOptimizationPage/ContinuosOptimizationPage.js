@@ -11,8 +11,8 @@ import {
   } from '@carbon/react';
   import { Dashboard, Code } from '@carbon/icons-react';
 import FormStepsView from '../../views/FormStepsView';
-import ContinuosOptimizationEditor from '../../views/ContinuosOptimizationEditor/ContinuosOptimizationEditor';
 import CrossOptimizationDashboard from '../../views/CrossOptimizationDashboard/CrossOptimizationDashboard';
+import AccordionEditorList from '../../views/ContinuosOptimizationEditor/AccordionEditorList';
 import { 
     SETTINGS_AG,
     TABS_AG,
@@ -27,7 +27,23 @@ const ContinuosOptimizationPage = () => {
     const AG_storage = useSelector((state) => state.continuosAG);
     const EE_storage = useSelector((state) => state.continuosEE);
     const EP_storage = useSelector((state) => state.continuosEP);
-
+    const ARRAY_ITEMS = [
+        {
+            accordion_title:'Minimization function',
+            title:'Function',
+            fileName:'function',
+        },
+        {
+            accordion_title:'Constraints',
+            title:'Array constraints',
+            fileName:'constraints'
+        },
+        {
+            accordion_title:'Additionals',
+            title:'Problem bounds',
+            fileName:'search_space'
+        }
+    ];
     return (
         <div className='continuos-page '>
             <Tabs defaultSelectedIndex={1}>
@@ -56,7 +72,9 @@ const ContinuosOptimizationPage = () => {
                         />
                     </TabPanel>
                     <TabPanel>
-                        <ContinuosOptimizationEditor />
+                        <AccordionEditorList 
+                            ARRAY_ITEMS={ARRAY_ITEMS}
+                        />
                     </TabPanel>
                     <TabPanel>
                         <FormStepsView 

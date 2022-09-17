@@ -10,8 +10,8 @@ import {
   Stack
 } from '@carbon/react';
 
-function EditorForm({ title, sendCallback }) {
-  const [textCode, setTextCode] = useState('# ¡Hello pyristic!');
+function EditorForm({ title, sendCallback, initialCodeText }) {
+  const [textCode, setTextCode] = useState(initialCodeText || '# ¡Hello pyristic!');
   const [uploadStatus, setUploadStatus] = useState('uploading');
 
   const overwriteCode = (e) => {

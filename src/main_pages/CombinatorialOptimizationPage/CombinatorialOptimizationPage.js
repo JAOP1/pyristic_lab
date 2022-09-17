@@ -10,18 +10,30 @@ import {
     IconTab
   } from '@carbon/react';
   import { Dashboard, Code } from '@carbon/icons-react';
-import FormStepsView from '../../views/FormStepsView';
-import ContinuosOptimizationEditor from '../../views/ContinuosOptimizationEditor/ContinuosOptimizationEditor';
 import CrossOptimizationDashboard from '../../views/CrossOptimizationDashboard/CrossOptimizationDashboard';
-import { 
-    SETTINGS_AG,
-    TABS_AG,
-} from '../../constants/evolutionarySettingView';
-import { list_inputs_algorithms } from '../../constants/continuosGeneralParams';
+import AccordionEditorList from '../../views/ContinuosOptimizationEditor';
 
 const CombinatorialOptimizationPage = () => {
-    const AG_storage = useSelector((state) => state.continuosAG);
-
+    const OPTIMIZATION_ARRAY_ITEMS = [
+        {
+            accordion_title:'Minimization function',
+            title:'Function',
+            fileName:'function',
+        },
+        {
+            accordion_title:'Constraints',
+            title:'Array constraints',
+            fileName:'constraints'
+        }
+    ];
+    const SA_FEATURES_ARRAY = [
+        {
+            accordion_title:'Method for generate neighbors',
+            title:'Generate neighbor',
+            fileName:'SA_neighbor_generator',
+            initialCodeText:'#Hola mundo'
+        },
+    ];
     return (
         <div className='continuos-page '>
             <Tabs defaultSelectedIndex={1}>
@@ -44,13 +56,13 @@ const CombinatorialOptimizationPage = () => {
                         />
                     </TabPanel>
                     <TabPanel>
-                        <ContinuosOptimizationEditor />
+                        <AccordionEditorList 
+                            ARRAY_ITEMS={OPTIMIZATION_ARRAY_ITEMS} 
+                        />
                     </TabPanel>
                     <TabPanel>
-                        <FormStepsView 
-                            formItems={SETTINGS_AG}
-                            tabs={TABS_AG}
-                            algorithm={'continuosAG'}
+                        <AccordionEditorList 
+                            ARRAY_ITEMS={SA_FEATURES_ARRAY} 
                         />
                     </TabPanel>
                 </TabPanels>

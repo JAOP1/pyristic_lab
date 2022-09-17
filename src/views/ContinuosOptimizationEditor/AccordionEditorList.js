@@ -10,24 +10,7 @@ import EditorForm from '../../components/EditorForm/EditorForm';
 import { HOST } from '../../constants/settings';
 
 
-const ContinuosOptimizationEditor = () => {
-    const ARRAY_ITEMS = [
-        {
-            accordion_title:'Minimization function',
-            code_title:'Function',
-            fileName:'function',
-        },
-        {
-            accordion_title:'Constraints',
-            code_title:'Array constraints',
-            fileName:'constraints'
-        },
-        {
-            accordion_title:'Additionals',
-            code_title:'Problem bounds',
-            fileName:'search_space'
-        }
-    ];
+const AccordionEditorList = ({ ARRAY_ITEMS }) => {
     const [status, setStatus] = useState(undefined);
     const sendText = (fileName) => {
         return async(text) => {
@@ -53,12 +36,16 @@ const ContinuosOptimizationEditor = () => {
         <Theme theme='g10'>
             <Accordion style={{ marginBottom:'20%'}}>
                 {
-                    ARRAY_ITEMS.map((item, ind)=>
-                        (
+                    ARRAY_ITEMS.map((item, ind)=> {
+                        const {accordion_title, fileName, ...validProps} = item;
+                        const editorProps = { sendCallback: sendText(fileName), ...validProps};
+                        console.log(editorProps);
+                        return (
                             <AccordionItem key={ind} title={item.accordion_title}>
-                                <EditorForm title={item.code_title} sendCallback={sendText(item.fileName)}/>
+                                <EditorForm { ...editorProps }/>
                             </AccordionItem>
-                        )
+                        );
+                    }
                 )} 
             </Accordion>
         </Theme>
@@ -77,4 +64,4 @@ const ContinuosOptimizationEditor = () => {
     );
 };
 
-export default ContinuosOptimizationEditor;
+export default AccordionEditorList;
