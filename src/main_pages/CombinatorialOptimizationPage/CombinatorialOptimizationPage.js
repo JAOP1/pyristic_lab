@@ -11,6 +11,8 @@ import {
   import { Dashboard, Code } from '@carbon/icons-react';
 import CrossOptimizationDashboard from '../../views/CrossOptimizationDashboard/CrossOptimizationDashboard';
 import AccordionEditorList from '../../views/ContinuosOptimizationEditor';
+import { list_inputs_algorithms_combinatorial } from '../../constants/continuosGeneralParams';
+import { HOST } from '../../constants/settings';
 
 const CombinatorialOptimizationPage = () => {
     const OPTIMIZATION_ARRAY_ITEMS = [
@@ -55,8 +57,11 @@ const CombinatorialOptimizationPage = () => {
                 <TabPanels>
                     <TabPanel>
                         <CrossOptimizationDashboard 
-                            algorithms={[]}
-                            dictMethods={{}}
+                            algorithms={list_inputs_algorithms_combinatorial}
+                            additionalArgs={{
+                                'SimulatedAnnealing':[]
+                            }}
+                            routeAlgorithm={ ( algorithm ) => `${HOST}/optimize/${algorithm}`}
                         />
                     </TabPanel>
                     <TabPanel>
