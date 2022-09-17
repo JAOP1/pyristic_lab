@@ -7,6 +7,7 @@ import NavBar from './components/NavBar';
 import Banner from './components/Banner';
 import Footer from './components/Footer';
 import ContinuosOptimizationPage from './main_pages/ContinuosOptimizationPage/ContinuosOptimizationPage';
+import CombinatorialOptimizationPage from './main_pages/CombinatorialOptimizationPage';
 class App extends Component {
   render() {
     return (
@@ -18,7 +19,7 @@ class App extends Component {
           <Banner/>
           <Routes>
             <Route  path='/' element={<ContinuosOptimizationPage/>} />
-            <Route  path='/combinatorial' element={<ContinuosOptimizationPage/>} />
+            <Route  path='/combinatorial' element={<CombinatorialOptimizationPage/>} />
           </Routes>
           <Theme theme='g100'>
             <Footer/>
