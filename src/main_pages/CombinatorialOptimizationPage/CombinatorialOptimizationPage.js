@@ -1,5 +1,4 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 import {
     Tabs,
     Tab,
@@ -28,11 +27,16 @@ const CombinatorialOptimizationPage = () => {
     ];
     const SA_FEATURES_ARRAY = [
         {
-            accordion_title:'Method for generate neighbors',
+            accordion_title:'Generate neighbors',
             title:'Generate neighbor',
             fileName:'SA_neighbor_generator',
             initialCodeText:'#Hola mundo'
         },
+        {
+            accordion_title:'Generate initial solution',
+            title:'Generate initial solution',
+            fileName:'generator_initial_solution',
+        }
     ];
     return (
         <div className='continuos-page '>
