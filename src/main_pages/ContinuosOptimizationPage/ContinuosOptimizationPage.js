@@ -11,8 +11,8 @@ import {
   } from '@carbon/react';
   import { Dashboard, Code } from '@carbon/icons-react';
 import FormStepsView from '../../views/FormStepsView';
-import ContinuosOptimizationEditor from '../../views/ContinuosOptimizationEditor/ContinuosOptimizationEditor';
 import CrossOptimizationDashboard from '../../views/CrossOptimizationDashboard/CrossOptimizationDashboard';
+import AccordionEditorList from '../../views/ContinuosOptimizationEditor/AccordionEditorList';
 import { 
     SETTINGS_AG,
     TABS_AG,
@@ -22,12 +22,29 @@ import {
     TABS_EE
 } from '../../constants/evolutionarySettingView';
 import { list_inputs_algorithms } from '../../constants/continuosGeneralParams';
+import { HOST } from '../../constants/settings';
 
 const ContinuosOptimizationPage = () => {
     const AG_storage = useSelector((state) => state.continuosAG);
     const EE_storage = useSelector((state) => state.continuosEE);
     const EP_storage = useSelector((state) => state.continuosEP);
-
+    const ARRAY_ITEMS = [
+        {
+            accordion_title:'Minimization function',
+            title:'Function',
+            fileName:'function',
+        },
+        {
+            accordion_title:'Constraints',
+            title:'Array constraints',
+            fileName:'constraints'
+        },
+        {
+            accordion_title:'Additionals',
+            title:'Problem bounds',
+            fileName:'search_space'
+        }
+    ];
     return (
         <div className='continuos-page '>
             <Tabs defaultSelectedIndex={1}>
@@ -48,15 +65,18 @@ const ContinuosOptimizationPage = () => {
                     <TabPanel>
                         <CrossOptimizationDashboard 
                             algorithms={list_inputs_algorithms}
-                            dictMethods={{
+                            additionalArgs={{
                                 GA:AG_storage,
                                 EE:EE_storage,
                                 EP:EP_storage
                             }}
+                            routeAlgorithm={ ( algorithm ) => `${HOST}/optimize/evolutionary/${algorithm}`}
                         />
                     </TabPanel>
                     <TabPanel>
-                        <ContinuosOptimizationEditor />
+                        <AccordionEditorList 
+                            ARRAY_ITEMS={ARRAY_ITEMS}
+                        />
                     </TabPanel>
                     <TabPanel>
                         <FormStepsView 

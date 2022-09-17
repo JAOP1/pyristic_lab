@@ -91,3 +91,29 @@ export const list_inputs_algorithms = [
         ]
     }
 ];
+
+export const list_inputs_algorithms_combinatorial = [
+    {
+        name:'Simulated Annealing',
+        id:'SimulatedAnnealing',
+        parameters: [
+            {
+                label:'Initial temperature:',
+                id:'initial_temperature',
+                initialValue:1000,
+                min:1,
+                max:10000000,
+                step:10
+            },
+            {
+                label:'Epsilon:',
+                id:'eps',
+                initialValue:0.01,
+                min:0,
+                max:1,
+                step:1
+            },
+           
+        ]
+    },
+];

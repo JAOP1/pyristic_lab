@@ -1,2 +1,2 @@
-import ContinuosOptimizationEditor from "./ContinuosOptimizationEditor";
-export default ContinuosOptimizationEditor;
+import AccordionEditorList from "./AccordionEditorList";
+export default AccordionEditorList;

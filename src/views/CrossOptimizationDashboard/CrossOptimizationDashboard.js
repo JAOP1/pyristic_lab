@@ -11,9 +11,8 @@ import axios from 'axios';
 import AreaChartComponent from '../../components/AreaChart';
 import DataTableDinamic from '../../components/DataTableDinamic/DataTableDinamic';
 import AccordionForm from '../../components/AccordionForm';
-import { HOST } from '../../constants/settings';
 
-const CrossOptimizationDashboard = ({ algorithms, dictMethods }) => {
+const CrossOptimizationDashboard = ({ algorithms, additionalArgs, routeAlgorithm }) => {
     const [selectedAlgorithms, setSelectedAlgorithms] = useState({});
     const [inputsByAlgorithm, setInputsByAlgorithm] = useState([]);
     const [optimizerParameters, setOptimizerParameters] = useState({});
@@ -63,7 +62,7 @@ const CrossOptimizationDashboard = ({ algorithms, dictMethods }) => {
                 'arguments': optimizerParameters[id]
             };
             data_body['config_operators'] = {
-                'methods': dictMethods[id]
+                'methods': additionalArgs[id]
             };
             return data_body;
         };
@@ -86,7 +85,7 @@ const CrossOptimizationDashboard = ({ algorithms, dictMethods }) => {
                     }
                 };
                 const result = await axios.post(
-                    `${HOST}/optimize/evolutionary/${algorithm_type}`,
+                    routeAlgorithm(algorithm_type),
                     body,
                     Config
                 );
@@ -127,7 +126,7 @@ const CrossOptimizationDashboard = ({ algorithms, dictMethods }) => {
     };
     const hasRequiredMethods = (id) => {
         const isMethod = (A) => A!=='No selected';
-        const methods = dictMethods[id];
+        const methods = additionalArgs[id];
         const method_names = Object.keys(methods).map((key) => methods[key].operator_name);
         return method_names.every(isMethod);
     };
@@ -242,7 +241,7 @@ CrossOptimizationDashboard.defaultProps={
             ]
         }
     ],
-    dictMethods:{
+    additionalArgs:{
         t1:{
             method1:{operator_name:'No selected'},
             method2:{operator_name:'No selected'}

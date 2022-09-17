@@ -1,0 +1,2 @@
+import CombinatorialOptimizationPage from "./CombinatorialOptimizationPage";
+export default CombinatorialOptimizationPage;

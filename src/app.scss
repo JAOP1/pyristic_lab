@@ -1,11 +1,13 @@
+@use './main_pages/ContinuosOptimizationPage/continuos-optimization-page';
+@use './main_pages/CombinatorialOptimizationPage/combinatorial-optimization';
 @use './views/CrossOptimizationDashboard/cross-optimization-dashboard';
+@use './views/FormStepsView/form-steps-view';
 @use './components/NavBar/nav-bar';
 @use './components/Banner/banner';
 @use './components/Footer/footer';
 @use './components/AccordionForm/accordion-form';
 @use './components/DataTableDinamic/data-table-dinamic';
 @use './components/ProgressStepsBar/progress-bar';
-@use './views/FormStepsView/form-steps-view';
 @use './components/FormPyristic/form-pyristic';
 @use './components/EditorForm/editor-form';
 @use './components/AreaChart/area-chart';
