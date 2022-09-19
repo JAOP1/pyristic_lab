@@ -12,7 +12,6 @@ import {
 import CrossOptimizationDashboard from '../../views/CrossOptimizationDashboard/CrossOptimizationDashboard';
 import AccordionEditorList from '../../views/ContinuosOptimizationEditor';
 import { list_inputs_algorithms_combinatorial } from '../../constants/continuosGeneralParams';
-import { HOST } from '../../constants/settings';
 
 const CombinatorialOptimizationPage = () => {
     const OPTIMIZATION_ARRAY_ITEMS = [
@@ -61,7 +60,6 @@ const CombinatorialOptimizationPage = () => {
                             additionalArgs={{
                                 'SimulatedAnnealing':[]
                             }}
-                            routeAlgorithm={ ( algorithm ) => `${HOST}/optimize/${algorithm}`}
                         />
                     </TabPanel>
                     <TabPanel>
