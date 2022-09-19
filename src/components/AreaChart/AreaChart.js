@@ -30,7 +30,7 @@ const AreaChartComponent = ({ data }) => {
   }
 
   return (
-    <>
+    <div>
       <h3 style={{color:'#4f4f4f', marginTop:'2%', marginBottom:'3%'}}> Results in the objective function</h3>
       <ResponsiveContainer  width="100%" height={350}>
       <LineChart
@@ -45,8 +45,8 @@ const AreaChartComponent = ({ data }) => {
         }}
       >
         <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="name" />
-        <YAxis />
+        <XAxis dataKey="name" label={{ value: 'Iteration', position: 'insideBottom' }}/>
+        <YAxis label={{ value: 'Objective function', angle: -90, position: 'insideLeft' }}/>
         <Tooltip />
         <Legend />
         {
@@ -58,12 +58,23 @@ const AreaChartComponent = ({ data }) => {
         )}
       </LineChart>
       </ResponsiveContainer>
-    </>
+    </div>
   );
 };
 
 AreaChartComponent.defaultProps = {
-    data:[]
+    data:[
+      {
+        name:'0',
+        type1:1,
+        type2:2
+      },
+      {
+        name:'1',
+        type1:3,
+        type2:2
+      }
+    ]
 };
 
 export default AreaChartComponent;

@@ -8,11 +8,12 @@ import {
     Button,
 } from '@carbon/react';
 import axios from 'axios'; 
+import { getBodyRequest, getAPIRoute } from '../../utils';
 import AreaChartComponent from '../../components/AreaChart';
 import DataTableDinamic from '../../components/DataTableDinamic/DataTableDinamic';
 import AccordionForm from '../../components/AccordionForm';
 
-const CrossOptimizationDashboard = ({ algorithms, additionalArgs, routeAlgorithm }) => {
+const CrossOptimizationDashboard = ({ algorithms, additionalArgs }) => {
     const [selectedAlgorithms, setSelectedAlgorithms] = useState({});
     const [inputsByAlgorithm, setInputsByAlgorithm] = useState([]);
     const [optimizerParameters, setOptimizerParameters] = useState({});
@@ -56,16 +57,6 @@ const CrossOptimizationDashboard = ({ algorithms, additionalArgs, routeAlgorithm
         data.data['individual_f'].forEach( ( point, ind ) => container[ind][id] = point);
     };
     const callOptimizationAlgorithm = async() => {
-        const createRequestBody = (id) => {
-            let data_body = {};
-            data_body['arguments_optimizer'] = {
-                'arguments': optimizerParameters[id]
-            };
-            data_body['config_operators'] = {
-                'methods': additionalArgs[id]
-            };
-            return data_body;
-        };
         setStatsByAlgorithm([]);
         setDataPlotting([]);
         let plot_array = [...Array(executions).keys()].map(i => ({ name:i }));
@@ -75,7 +66,6 @@ const CrossOptimizationDashboard = ({ algorithms, additionalArgs, routeAlgorithm
                 continue;
                 
             try{
-                const body = createRequestBody(algorithm_type);
                 const Config = {
                     headers: {
                     'Content-Type': 'application/json'
@@ -85,8 +75,8 @@ const CrossOptimizationDashboard = ({ algorithms, additionalArgs, routeAlgorithm
                     }
                 };
                 const result = await axios.post(
-                    routeAlgorithm(algorithm_type),
-                    body,
+                    getAPIRoute(algorithm_type),
+                    getBodyRequest(algorithm_type, optimizerParameters, additionalArgs),
                     Config
                 );
                 saveDataInTable(algorithm_type, result, stats);             

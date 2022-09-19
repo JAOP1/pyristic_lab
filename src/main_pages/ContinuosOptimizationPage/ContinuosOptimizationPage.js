@@ -22,7 +22,6 @@ import {
     TABS_EE
 } from '../../constants/evolutionarySettingView';
 import { list_inputs_algorithms } from '../../constants/continuosGeneralParams';
-import { HOST } from '../../constants/settings';
 
 const ContinuosOptimizationPage = () => {
     const AG_storage = useSelector((state) => state.continuosAG);
@@ -70,7 +69,6 @@ const ContinuosOptimizationPage = () => {
                                 EE:EE_storage,
                                 EP:EP_storage
                             }}
-                            routeAlgorithm={ ( algorithm ) => `${HOST}/optimize/evolutionary/${algorithm}`}
                         />
                     </TabPanel>
                     <TabPanel>
