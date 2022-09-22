@@ -10,7 +10,7 @@ import {
   Stack
 } from '@carbon/react';
 
-function EditorForm({ title, sendCallback, initialCodeText }) {
+function EditorForm({ title, sendCallback, initialCodeText, className }) {
   const [textCode, setTextCode] = useState(initialCodeText || '# ¡Hello pyristic!');
   const [uploadStatus, setUploadStatus] = useState('uploading');
 
@@ -25,7 +25,7 @@ function EditorForm({ title, sendCallback, initialCodeText }) {
     fr.readAsText(file);
   }
   return (
-    <div className='container-center'>
+    <div className={ className ||'container-center' } >
       <Grid as='menu' condensed>
         <Column sm={4}>
           <h6 className='heading' style={{marginTop:'10%'}}>{title}</h6>

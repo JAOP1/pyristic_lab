@@ -13,6 +13,7 @@ import {
     Grid,
     Column,
   } from '@carbon/react';
+import EditorForm from '../EditorForm/EditorForm';
 import { useDispatch, useSelector } from 'react-redux';
 import { TEXT_SELECTION_DROPDOWN } from '../../constants/texts';
 
@@ -80,11 +81,22 @@ export const FormPyristic = ({itemList, title, globalStorageHandler, getDataGlob
                 </Grid>
                 
                 <hr/>
-                <FormMethod 
-                    params={itemSelected} 
-                    submitHandler={submitHandler}
-                    inputsSaved={inputArgsByUser}
-                />
+                {
+                    itemSelected?.label === 'customize method' &&
+                    <EditorForm 
+                        title={'test editor'}
+                        sendCallback={() => {console.log("testing editor")}}
+                        className={'editor-width'}
+                    />
+                }
+                {
+                    (itemSelected === undefined || itemSelected?.label !== 'customize method') && 
+                    <FormMethod 
+                        params={itemSelected} 
+                        submitHandler={submitHandler}
+                        inputsSaved={inputArgsByUser}
+                    />
+                }
             </div>
             <Modal
             open={modalText !== undefined} 

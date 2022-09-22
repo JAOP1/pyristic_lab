@@ -85,7 +85,11 @@ export const AG_COUNTINUOS_MUTATION_OP = [
                 step:1
             }
         ]
-    } 
+    },
+    {
+        label:'customize method',
+        method_name:'CustomMutationOP',
+    }
 ];
 
 export const AG_CONTINUOS_CROSSOVER_OP = [
@@ -159,6 +163,10 @@ export const AG_CONTINUOS_CROSSOVER_OP = [
                 step:1
             }
         ]
+    },
+    {
+        label:'customize method',
+        method_name:'CustomCrossoverOP',
     }
 ];
 
@@ -203,6 +211,10 @@ export const AG_PARENT_SELECTION = [
         equation:'2 x',
         params:[]
     },
+    {
+        label:'customize method',
+        method_name:'CustomCrossoverOP',
+    }
 ];
 
 export const SURVIVOR_SELECTION = [
@@ -215,6 +227,10 @@ export const SURVIVOR_SELECTION = [
         label:'Replacement selection',
         method_name:'ReplacementSelector',
         params:[]
+    },
+    {
+        label:'customize method',
+        method_name:'CustomCrossoverOP',
     }
 ];
 
@@ -249,6 +265,10 @@ export const EP_CONTINUOS_ADAPTIVE_MUTATION_OP = [
                 step:0.1
             }
         ]
+    },
+    {
+        label:'customize method',
+        method_name:'CustomCrossoverOP',
     }
 ];
 
@@ -267,6 +287,10 @@ export const EP_CONTINUOS_MUTATION_OP = [
             </>
         ),
         params:[]
+    },
+    {
+        label:'customize method',
+        method_name:'CustomCrossoverOP',
     }
 ];
 
@@ -309,6 +333,10 @@ export const EE_CONTINUOS_CROSSOVER_OP = [
                 step:0.1
             } 
         ]
+    },
+    {
+        label:'customize method',
+        method_name:'CustomCrossoverOP',
     }
 ];
 
@@ -351,6 +379,10 @@ export const EE_CONTINUOS_ADAPTIVE_CROSSOVER_OP = [
                 step:0.1
             } 
         ]
+    },
+    {
+        label:'customize method',
+        method_name:'CustomCrossoverOP',
     }
 ];
 
@@ -369,6 +401,10 @@ export const EE_CONTINUOS_MUTATION_OP = [
             </>
         ),
         params:[]
+    },
+    {
+        label:'customize method',
+        method_name:'CustomCrossoverOP',
     }
 ];
 
@@ -410,6 +446,10 @@ export const EE_CONTINUOS_ADAPTIVE_MUTATION_OP = [
                 step:1
             }
         ]
+    },
+    {
+        label:'customize method',
+        method_name:'CustomCrossoverOP',
     }
 ];
 
@@ -447,5 +487,8 @@ export const SETTING_INVALID_SOLUTIONS = [
             }
         ]
     },
-
+    {
+        label:'customize method',
+        method_name:'CustomCrossoverOP',
+    }
 ];
