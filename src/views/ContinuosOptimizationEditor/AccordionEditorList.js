@@ -39,7 +39,6 @@ const AccordionEditorList = ({ ARRAY_ITEMS }) => {
                     ARRAY_ITEMS.map((item, ind)=> {
                         const {accordion_title, fileName, ...validProps} = item;
                         const editorProps = { sendCallback: sendText(fileName), ...validProps};
-                        console.log(editorProps);
                         return (
                             <AccordionItem key={ind} title={item.accordion_title}>
                                 <EditorForm { ...editorProps }/>
