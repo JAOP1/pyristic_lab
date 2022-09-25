@@ -59,7 +59,7 @@ function EditorForm({ title, sendCallback, initialCodeText, className }) {
       </Grid>
       <Editor
         theme="vs-dark"
-        height="30vh"
+        height="40vh"
         defaultLanguage="python"
         value={textCode}
         onChange={(e) => {

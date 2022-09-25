@@ -13,6 +13,8 @@ import {
     Grid,
     Column,
   } from '@carbon/react';
+import axios from 'axios'; 
+import { HOST } from '../../constants/settings';
 import EditorForm from '../EditorForm/EditorForm';
 import { useDispatch, useSelector } from 'react-redux';
 import { TEXT_SELECTION_DROPDOWN } from '../../constants/texts';
@@ -39,6 +41,26 @@ export const FormPyristic = ({itemList, title, globalStorageHandler, getDataGlob
             parameters: arrayArguments
         };
         dispatch(globalStorageHandler(methodConfig));
+    };
+
+    const sendText = (filename) => {
+        return async(text) => {
+            try{
+                submitHandler([]);
+                const body = JSON.stringify({ content: text });
+                const Config = {
+                    headers: {
+                    'Content-Type': 'application/json'
+                    }
+                };
+                await axios.post(`${HOST}/create-file/${filename}`,
+                body,
+                Config);
+                console.log("Success upload the custom method.")
+            } catch(error){
+                console.log(`error: ${error}`);
+            }
+        };
     };
 
     const createHelpText = () => {
@@ -84,13 +106,14 @@ export const FormPyristic = ({itemList, title, globalStorageHandler, getDataGlob
                 {
                     itemSelected?.label === 'customize method' &&
                     <EditorForm 
-                        title={'test editor'}
-                        sendCallback={() => {console.log("testing editor")}}
+                        title={ itemSelected.label }
+                        sendCallback={ sendText(itemSelected.filename) }
+                        initialCodeText={ itemSelected.initialCode }
                         className={'editor-width'}
                     />
                 }
                 {
-                    (itemSelected === undefined || itemSelected?.label !== 'customize method') && 
+                    itemSelected?.label !== 'customize method' && 
                     <FormMethod 
                         params={itemSelected} 
                         submitHandler={submitHandler}
