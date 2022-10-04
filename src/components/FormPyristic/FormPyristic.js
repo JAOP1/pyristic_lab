@@ -89,6 +89,11 @@ export const FormPyristic = ({itemList, title, globalStorageHandler, getDataGlob
                                 className='dropdown-size'
                                 onChange={ (e) => {
                                     setItemSelected(e.selectedItem);
+                                    
+                                    if(e.selectedItem.method_name !== currentDataOperator.operator_name)
+                                        setInputArgsByUser(undefined);
+                                    else
+                                        setInputArgsByUser(currentDataOperator.parameters);
                                 }}
                                 selectedItem={itemSelected || { label:'No selected method.' }}
                             />
@@ -152,6 +157,7 @@ const FormMethod = ({params , submitHandler, submitStatus, inputsSaved=undefined
     
     useMemo(() => {
         if(paramList.length){
+            console.log("args salvados", inputsSaved);
             let values = inputsSaved? inputsSaved:paramList.map(obj => obj.initialValue);
             setArrayValues(values);
         }
