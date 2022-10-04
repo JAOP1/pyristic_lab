@@ -23,6 +23,7 @@ export const FormPyristic = ({itemList, title, globalStorageHandler, getDataGlob
     const [itemSelected, setItemSelected] = useState(undefined);
     const [modalText, setModalText] = useState(undefined);
     const [inputArgsByUser, setInputArgsByUser] = useState(undefined);
+    const [status, setStatus] = useState(undefined);
     const currentDataOperator = useSelector(getDataGlobalStorage);
     const dispatch = useDispatch();
 
@@ -56,9 +57,9 @@ export const FormPyristic = ({itemList, title, globalStorageHandler, getDataGlob
                 await axios.post(`${HOST}/create-file/${filename}`,
                 body,
                 Config);
-                console.log("Success upload the custom method.")
+                setStatus('success');
             } catch(error){
-                console.log(`error: ${error}`);
+                setStatus('error');
             }
         };
     };
@@ -117,10 +118,22 @@ export const FormPyristic = ({itemList, title, globalStorageHandler, getDataGlob
                     <FormMethod 
                         params={itemSelected} 
                         submitHandler={submitHandler}
+                        submitStatus={setStatus}
                         inputsSaved={inputArgsByUser}
                     />
                 }
             </div>
+            { status && (
+                <ToastNotification
+                    role="status"
+                    timeout={750}
+                    title="Submit state"
+                    kind={status}
+                    onClose={() => setStatus(undefined)}
+                    subtitle="The method selected has been saved."
+                    className={'notification-position'}
+                />
+            )}
             <Modal
             open={modalText !== undefined} 
             onRequestClose={() => setModalText(undefined)}
@@ -133,10 +146,9 @@ export const FormPyristic = ({itemList, title, globalStorageHandler, getDataGlob
   };
 
 
-const FormMethod = ({params , submitHandler, inputsSaved=undefined}) => {
+const FormMethod = ({params , submitHandler, submitStatus, inputsSaved=undefined}) => {
     const paramList = params?.params || [];
     const [arrayValues,  setArrayValues] = useState([]);
-    const [status, setStatus] = useState(undefined);
     
     useMemo(() => {
         if(paramList.length){
@@ -195,23 +207,13 @@ const FormMethod = ({params , submitHandler, inputsSaved=undefined}) => {
                         submitHandler(arrayValues);
                     else
                         submitHandler([]);
-                    setStatus('success');
+                    submitStatus('success');
                 }}
             >
                 Submit
             </Button>
             </Stack>
-            { status && (
-                <ToastNotification
-                    role="status"
-                    timeout={750}
-                    title="Submit state"
-                    kind={status}
-                    onClose={() => setStatus(undefined)}
-                    subtitle="The method selected has been saved."
-                    className={'notification-position'}
-                />
-            )}
+
         </FormGroup>
     )
 };

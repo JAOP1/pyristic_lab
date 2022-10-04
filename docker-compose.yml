@@ -5,6 +5,6 @@ services:
     ports:
       - 3000:3000
   pyristic_api:
-    image: "armandortiz/pyristic_api:v1.6.0"
+    image: "armandortiz/pyristic_api:v1.7.0"
     ports:
       - 80:80

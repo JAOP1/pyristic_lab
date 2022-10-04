@@ -89,7 +89,7 @@ export const AG_COUNTINUOS_MUTATION_OP = [
     {
         label:'customize method',
         method_name:'CustomMethod',
-        filename: 'mutation_operator',
+        filename: 'GA_mutation_operator',
         initialCode: 'import numpy as np\nclass CustomMethod:\n\tdef __init__(self):\n\t\tself.__doc__="custom mutation method."\n\tdef __call__(self, population: np.ndarray)->np.ndarray:\n\t\t"""Description:\n\t\tThis method should mutate the numpy matrix, where every row is an individual\n\t\tand every column is a decision variable.\n\t\t"""\n\t\t#TODO\n'
     }
 ];
@@ -169,7 +169,7 @@ export const AG_CONTINUOS_CROSSOVER_OP = [
     {
         label:'customize method',
         method_name:'CustomMethod',
-        filename:'crossover_operator',
+        filename:'GA_crossover_operator',
         initialCode: 'import numpy as np\nclass CustomMethod:\n\tdef __init__(self):\n\t\tself.__doc__="custom crossover method."\n\tdef __call__(self, population: np.ndarray, parent_ind1: np.ndarray, parent_ind2: np.ndarray)->np.ndarray:\n\t\t"""Description:\n\t\tThis method should apply the desired operations to the population matrix,\n\t\twhere every row is an individual and every column is a decision variable.\n\t\tThe individuals to cross are population[parend_ind1] and population[parent_ind2].\n\t\t"""\n\t\t#TODO\n'
     }
 ];
@@ -218,7 +218,7 @@ export const AG_PARENT_SELECTION = [
     {
         label:'customize method',
         method_name:'CustomMethod',
-        filename:'parent_selector',
+        filename:'GA_parent_selector',
         initialCode: 'import numpy as np\nclass CustomMethod:\n\tdef __init__(self):\n\t\tself.__doc__="custom parent selection method."\n\tdef __call__(self, population_aptitude: np.ndarray )->np.ndarray:\n\t\t"""Description:\n\t\tThis method should return the number of copies of individuals according to the operations below.\n\t\t"""\n\t\t#TODO\n'
     }
 ];
