@@ -157,7 +157,6 @@ const FormMethod = ({params , submitHandler, submitStatus, inputsSaved=undefined
     
     useMemo(() => {
         if(paramList.length){
-            console.log("args salvados", inputsSaved);
             let values = inputsSaved? inputsSaved:paramList.map(obj => obj.initialValue);
             setArrayValues(values);
         }
