@@ -1,7 +1,7 @@
 @use '@carbon/react/scss/theme' as *;
 @use '@carbon/react/scss/breakpoint' as *;
-@use './main_pages/ContinuosOptimizationPage/continuos-optimization-page';
-@use './main_pages/CombinatorialOptimizationPage/combinatorial-optimization';
+@use './layouts/ContinuosOptimizationPage/continuos-optimization-page';
+@use './layouts/CombinatorialOptimizationPage/combinatorial-optimization';
 @use './views/CrossOptimizationDashboard/cross-optimization-dashboard';
 @use './views/FormStepsView/form-steps-view';
 @use './components/NavBar/nav-bar';
