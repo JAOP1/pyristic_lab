@@ -1,3 +1,5 @@
+@use '@carbon/react/scss/theme' as *;
+@use '@carbon/react/scss/breakpoint' as *;
 @use './main_pages/ContinuosOptimizationPage/continuos-optimization-page';
 @use './main_pages/CombinatorialOptimizationPage/combinatorial-optimization';
 @use './views/CrossOptimizationDashboard/cross-optimization-dashboard';
@@ -12,5 +14,4 @@
 @use './components/EditorForm/editor-form';
 @use './components/AreaChart/area-chart';
 @use './components/Info/info';
-@use '@carbon/react/scss/theme' as *;
-@use '@carbon/react/scss/breakpoint' as *;
+@use './components/Logger/logger';

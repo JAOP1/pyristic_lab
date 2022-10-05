@@ -1,11 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit'
-import continuosAGReduce from './storage_reducers/AGStore';
-import continuosEEReduce from './storage_reducers/EEStore';
-import continuosEPReduce from './storage_reducers/EPStore';
+import continuosAGReduce from './reducers/AGStore';
+import continuosEEReduce from './reducers/EEStore';
+import continuosEPReduce from './reducers/EPStore';
+import loggerStore from './reducers/loggerStore';
 export default configureStore({
   reducer: {
     continuosAG: continuosAGReduce,
     continuosEE: continuosEEReduce,
-    continuosEP: continuosEPReduce
+    continuosEP: continuosEPReduce,
+    Logger:loggerStore
   }
 })

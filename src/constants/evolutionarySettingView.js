@@ -17,13 +17,13 @@ import {
     survivorSelectionUpdatedAG,
     parentSelectionUpdatedAG,
     setInvalidSolutionUpdatedAG
-} from '../storage_reducers/AGStore';
+} from '../reducers/AGStore';
 import {
     mutationUpdatedEP,
     adaptiveMutationUpdatedEP,
     survivorSelectionUpdatedEP,
     setInvalidSolutionUpdatedEP
-} from '../storage_reducers/EPStore';
+} from '../reducers/EPStore';
 import {
     crossoverUpdatedEE,
     crossoverAdaptiveUpdatedEE,
@@ -31,7 +31,7 @@ import {
     mutationUpdatedEE,
     survivorSelectionUpdatedEE,
     setInvalidSolutionUpdatedEE
-} from '../storage_reducers/EEStore';
+} from '../reducers/EEStore';
 
 //------------------- AG form view requirements ----------------------------
 export const SETTINGS_AG = [

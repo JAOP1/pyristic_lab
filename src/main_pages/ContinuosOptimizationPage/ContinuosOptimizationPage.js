@@ -10,6 +10,7 @@ import {
     IconTab
   } from '@carbon/react';
   import { Dashboard, Code } from '@carbon/icons-react';
+import Logger from '../../components/Logger';
 import FormStepsView from '../../views/FormStepsView';
 import CrossOptimizationDashboard from '../../views/CrossOptimizationDashboard/CrossOptimizationDashboard';
 import AccordionEditorList from '../../views/ContinuosOptimizationEditor/AccordionEditorList';
@@ -60,6 +61,7 @@ const ContinuosOptimizationPage = () => {
                         <Tab>Evolutive programming</Tab>
                     </TabList>
                 </Theme>
+                <Logger/>
                 <TabPanels>
                     <TabPanel>
                         <CrossOptimizationDashboard 
