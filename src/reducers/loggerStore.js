@@ -1,3 +1,4 @@
+import { v4 as uuidv4 } from 'uuid';
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
@@ -9,7 +10,7 @@ const LoggerSlice = createSlice({
     initialState,
     reducers:{
         addLog: (state, action) => {
-            state.logs.unshift(action.payload);
+            state.logs.unshift({ ...action.payload, id:uuidv4() });
         }
     }
 });

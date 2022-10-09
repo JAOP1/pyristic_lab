@@ -8,16 +8,40 @@ import {
     ComposedModal,
     ModalBody,
     ModalHeader,
+    DataTable,
     Table,
     TableHeader,
     TableHead,
     TableRow,
     TableBody,
-    TableCell
+    TableCell,
+    TableExpandHeader,
+    TableExpandedRow,
+    TableExpandRow,
 } from '@carbon/react';
 
 const Logger = () => {
+    const HEADERS = [
+        {
+            key:'time',
+            header:'Time'
+        },
+        {
+            key:'status',
+            header:'Status'
+        },
+        {
+            key:'action',
+            header:'Action'
+        }
+    ];
+    const DATA = useSelector( state => state.Logger.logs );
     const [isOpen, setOpen] = useState(false);
+
+    const getDetailInformation = (id) => {
+      const items = DATA.filter( item   => item.id === id);
+      return items[0].details;
+    };
     return (
         <>
             <Button
@@ -35,148 +59,48 @@ const Logger = () => {
                     title={'Logs'}
                 />
                 <ModalBody hasScrollingContent>
-                    <Table>
-                        <TableHead>
+                <DataTable rows={DATA} headers={HEADERS}>
+                    {({
+                      rows,
+                      headers,
+                      getHeaderProps,
+                      getRowProps,
+                      getTableProps,
+                    }) => (
+                        <Table {...getTableProps()}>
+                          <TableHead>
                             <TableRow>
-                            <TableHeader>
-                                Name
-                            </TableHeader>
-                            <TableHeader>
-                                Rule
-                            </TableHeader>
-                            <TableHeader>
-                                Status
-                            </TableHeader>
-                            <TableHeader>
-                                Other
-                            </TableHeader>
-                            <TableHeader>
-                                Example
-                            </TableHeader>
+                              <TableExpandHeader id="expand" />
+                              {headers.map((header, i) => (
+                                <TableHeader key={i} {...getHeaderProps({ header })}>
+                                  {header.header}
+                                </TableHeader>
+                              ))}
                             </TableRow>
-                        </TableHead>
-                        <TableBody>
-                            <TableRow>
-                            <TableCell>
-                                Load Balancer 1
-                            </TableCell>
-                            <TableCell>
-                                Round robin
-                            </TableCell>
-                            <TableCell>
-                                Starting
-                            </TableCell>
-                            <TableCell>
-                                Test
-                            </TableCell>
-                            <TableCell>
-                                22
-                            </TableCell>
-                            </TableRow>
-                            <TableRow>
-                            <TableCell>
-                                Load Balancer 2
-                            </TableCell>
-                            <TableCell>
-                                DNS delegation
-                            </TableCell>
-                            <TableCell>
-                                Active
-                            </TableCell>
-                            <TableCell>
-                                Test
-                            </TableCell>
-                            <TableCell>
-                                22
-                            </TableCell>
-                            </TableRow>
-                            <TableRow>
-                            <TableCell>
-                                Load Balancer 3
-                            </TableCell>
-                            <TableCell>
-                                Round robin
-                            </TableCell>
-                            <TableCell>
-                                Disabled
-                            </TableCell>
-                            <TableCell>
-                                Test
-                            </TableCell>
-                            <TableCell>
-                                22
-                            </TableCell>
-                            </TableRow>
-                            <TableRow>
-                            <TableCell>
-                                Load Balancer 4
-                            </TableCell>
-                            <TableCell>
-                                Round robin
-                            </TableCell>
-                            <TableCell>
-                                Disabled
-                            </TableCell>
-                            <TableCell>
-                                Test
-                            </TableCell>
-                            <TableCell>
-                                22
-                            </TableCell>
-                            </TableRow>
-                            <TableRow>
-                            <TableCell>
-                                Load Balancer 5
-                            </TableCell>
-                            <TableCell>
-                                Round robin
-                            </TableCell>
-                            <TableCell>
-                                Disabled
-                            </TableCell>
-                            <TableCell>
-                                Test
-                            </TableCell>
-                            <TableCell>
-                                22
-                            </TableCell>
-                            </TableRow>
-                            <TableRow>
-                            <TableCell>
-                                Load Balancer 6
-                            </TableCell>
-                            <TableCell>
-                                Round robin
-                            </TableCell>
-                            <TableCell>
-                                Disabled
-                            </TableCell>
-                            <TableCell>
-                                Test
-                            </TableCell>
-                            <TableCell>
-                                22
-                            </TableCell>
-                            </TableRow>
-                            <TableRow>
-                            <TableCell>
-                                Load Balancer 7
-                            </TableCell>
-                            <TableCell>
-                                Round robin
-                            </TableCell>
-                            <TableCell>
-                                Disabled
-                            </TableCell>
-                            <TableCell>
-                                Test
-                            </TableCell>
-                            <TableCell>
-                                22
-                            </TableCell>
-                            </TableRow>
-                        </TableBody>
+                          </TableHead>
+                          <TableBody>
+                            {rows.map((row) => {
+                              console.log(row);
+                              return(
+                                <React.Fragment key={row.id}>
+                                  <TableExpandRow expandHeader="expand" {...getRowProps({ row })}>
+                                    {row.cells.map((cell, ind) => (
+                                      <TableCell key={ind}>{cell.value}</TableCell>
+                                    ))}
+                                  </TableExpandRow>
+                                  <TableExpandedRow
+                                    colSpan={headers.length + 1}
+                                    className="demo-expanded-td">
+                                    <h6>Action details:</h6>
+                                    <p>{getDetailInformation(row.id)}</p>
+                                  </TableExpandedRow>
+                                </React.Fragment>
+                              );
+                            })}
+                          </TableBody>
                         </Table>
+                    )}
+                  </DataTable>
                 </ModalBody>
             </ComposedModal>
         </>

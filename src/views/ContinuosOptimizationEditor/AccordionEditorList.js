@@ -5,15 +5,21 @@ import {
     AccordionItem,
     ToastNotification
 } from '@carbon/react';
+import { useDispatch } from 'react-redux';
 import axios from 'axios'; 
 import EditorForm from '../../components/EditorForm/EditorForm';
+import { getTime } from '../../utils';
+import { addLog } from '../../reducers/loggerStore';
 import { HOST } from '../../constants/settings';
-
 
 const AccordionEditorList = ({ ARRAY_ITEMS }) => {
     const [status, setStatus] = useState(undefined);
+    const dispatch = useDispatch();
+
     const sendText = (fileName) => {
         return async(text) => {
+            let action_status = 'success';
+            let error_detail = '';
             try{
                 const body = JSON.stringify({ content: text });
                 const Config = {
@@ -26,7 +32,16 @@ const AccordionEditorList = ({ ARRAY_ITEMS }) => {
                 Config);
                 setStatus('success');
             } catch(error){
+                action_status = 'error';
+                console.log(error);
                 setStatus('error');
+            }finally{
+                dispatch(addLog({
+                    time: getTime(),
+                    status: action_status,
+                    action: `Submitted: ${fileName}`,
+                    details:''
+                }));
             }
         };
     }

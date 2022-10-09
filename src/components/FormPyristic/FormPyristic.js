@@ -17,6 +17,8 @@ import axios from 'axios';
 import { HOST } from '../../constants/settings';
 import EditorForm from '../EditorForm/EditorForm';
 import { useDispatch, useSelector } from 'react-redux';
+import { getTime } from '../../utils';
+import { addLog } from '../../reducers/loggerStore';
 import { TEXT_SELECTION_DROPDOWN } from '../../constants/texts';
 
 export const FormPyristic = ({itemList, title, globalStorageHandler, getDataGlobalStorage}) => {
@@ -42,10 +44,17 @@ export const FormPyristic = ({itemList, title, globalStorageHandler, getDataGlob
             parameters: arrayArguments
         };
         dispatch(globalStorageHandler(methodConfig));
+        dispatch(addLog({
+            time: getTime(),
+            status: 'success',
+            action: `Added ${title} method: ${itemSelected.method_name}`,
+            details:'hola mundo'
+        }))
     };
 
     const sendText = (filename) => {
         return async(text) => {
+            let action_status = 'success';
             try{
                 submitHandler([]);
                 const body = JSON.stringify({ content: text });
@@ -59,7 +68,15 @@ export const FormPyristic = ({itemList, title, globalStorageHandler, getDataGlob
                 Config);
                 setStatus('success');
             } catch(error){
+                action_status = 'error';
                 setStatus('error');
+            }finally{
+                dispatch(addLog({
+                    time: getTime(),
+                    status: action_status,
+                    action: `Submitted: ${filename}`,
+                    details:''
+                }));
             }
         };
     };
