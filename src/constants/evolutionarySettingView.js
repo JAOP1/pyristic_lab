@@ -198,12 +198,12 @@ export const SETTINGS_EE = [
 
 export const TABS_EE = [
     {
-        label:'step 1',
+        label:'Step 1',
         description:'Step 1: Select crossover method',
         keyGlobalStorage:'crossover_operator'
     },
     {
-        label:'step 2',
+        label:'Step 2',
         description:'Step 2: Select adaptive crossover method',
         keyGlobalStorage:'adaptive_crossover_operator'
     },

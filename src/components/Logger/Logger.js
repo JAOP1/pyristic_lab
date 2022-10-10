@@ -48,17 +48,21 @@ const Logger = () => {
                 className={'sticky-right-position'}
                 hasIconOnly
                 renderIcon={ Result }
+                iconDescription={ 'logs' }
                 onClick={ () => setOpen(true) }
             />
             <ComposedModal 
-                size="large"
+                size="lg"
                 open={isOpen}
                 onClose={ () => setOpen(false) }
             >
                 <ModalHeader 
                     title={'Logs'}
                 />
-                <ModalBody hasScrollingContent>
+                <ModalBody 
+                hasScrollingContent
+                aria-label={'scrolled content'}
+                >
                 <DataTable rows={DATA} headers={HEADERS}>
                     {({
                       rows,

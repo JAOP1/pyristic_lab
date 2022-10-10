@@ -8,10 +8,13 @@ import {
     Button,
 } from '@carbon/react';
 import axios from 'axios'; 
+import { useDispatch } from 'react-redux';
 import { getBodyRequest, getAPIRoute } from '../../utils';
 import AreaChartComponent from '../../components/AreaChart';
 import DataTableDinamic from '../../components/DataTableDinamic/DataTableDinamic';
 import AccordionForm from '../../components/AccordionForm';
+import { getTime } from '../../utils';
+import { addLog } from '../../reducers/loggerStore';
 
 const CrossOptimizationDashboard = ({ algorithms, additionalArgs }) => {
     const [selectedAlgorithms, setSelectedAlgorithms] = useState({});
@@ -20,6 +23,8 @@ const CrossOptimizationDashboard = ({ algorithms, additionalArgs }) => {
     const [statsByAlgorithm, setStatsByAlgorithm] = useState([]);
     const [dataPlotting, setDataPlotting] = useState([]);
     const [executions, setExecutions] = useState(1);
+    const dispatch = useDispatch();
+
     const HEADERS = [
         {
             key: 'metric',
@@ -61,10 +66,12 @@ const CrossOptimizationDashboard = ({ algorithms, additionalArgs }) => {
         setDataPlotting([]);
         let plot_array = [...Array(executions).keys()].map(i => ({ name:i }));
         let stats = [];
+        let action_status = 'success';
+        let error_detail = '';
         for(let algorithm_type of Object.keys(selectedAlgorithms)){
             if(!selectedAlgorithms[algorithm_type])
                 continue;
-                
+
             try{
                 const Config = {
                     headers: {
@@ -81,11 +88,18 @@ const CrossOptimizationDashboard = ({ algorithms, additionalArgs }) => {
                 );
                 saveDataInTable(algorithm_type, result, stats);             
                 savePlottingData(algorithm_type, result, plot_array);
-                console.log("response",result);
-                console.log('plot:', plot_array);
-                console.log('stats', stats);
+                action_status='success';
             } catch(error){
-                console.log('error:', error.message);
+                action_status='error';
+                error_detail=`Error during the execution of ${algorithm_type}`;
+                console.log('error:', error);
+            }finally{
+                dispatch(addLog({
+                    time: getTime(),
+                    status: action_status,
+                    action: `Execution metaheuristic`,
+                    details:error_detail
+                }));
             }
         };
         setDataPlotting(plot_array);

@@ -55,6 +55,7 @@ export const FormPyristic = ({itemList, title, globalStorageHandler, getDataGlob
     const sendText = (filename) => {
         return async(text) => {
             let action_status = 'success';
+            let error_detail = '';
             try{
                 submitHandler([]);
                 const body = JSON.stringify({ content: text });
@@ -69,13 +70,14 @@ export const FormPyristic = ({itemList, title, globalStorageHandler, getDataGlob
                 setStatus('success');
             } catch(error){
                 action_status = 'error';
+                error_detail = error.response.data.detail;
                 setStatus('error');
             }finally{
                 dispatch(addLog({
                     time: getTime(),
                     status: action_status,
                     action: `Submitted: ${filename}`,
-                    details:''
+                    details:error_detail
                 }));
             }
         };
@@ -101,6 +103,7 @@ export const FormPyristic = ({itemList, title, globalStorageHandler, getDataGlob
 
                             <Dropdown 
                                 id='form'
+                                label={''}
                                 helperText='Select the method'
                                 items={itemList}
                                 className='dropdown-size'

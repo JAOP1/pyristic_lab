@@ -33,14 +33,14 @@ const AccordionEditorList = ({ ARRAY_ITEMS }) => {
                 setStatus('success');
             } catch(error){
                 action_status = 'error';
-                console.log(error);
+                error_detail = error.response.data.detail;
                 setStatus('error');
             }finally{
                 dispatch(addLog({
                     time: getTime(),
                     status: action_status,
                     action: `Submitted: ${fileName}`,
-                    details:''
+                    details:error_detail
                 }));
             }
         };
