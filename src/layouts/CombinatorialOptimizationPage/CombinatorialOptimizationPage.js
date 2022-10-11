@@ -7,8 +7,9 @@ import {
     TabPanel,
     Theme,
     IconTab
-  } from '@carbon/react';
-  import { Dashboard, Code } from '@carbon/icons-react';
+} from '@carbon/react';
+import { Dashboard, Code } from '@carbon/icons-react';
+import Logger from '../../components/Logger';
 import CrossOptimizationDashboard from '../../views/CrossOptimizationDashboard/CrossOptimizationDashboard';
 import AccordionEditorList from '../../views/ContinuosOptimizationEditor';
 import { list_inputs_algorithms_combinatorial } from '../../constants/continuosGeneralParams';
@@ -53,6 +54,7 @@ const CombinatorialOptimizationPage = () => {
                         <Tab>Simulated Annealing</Tab>
                     </TabList>
                 </Theme>
+                <Logger/>
                 <TabPanels>
                     <TabPanel>
                         <CrossOptimizationDashboard 
