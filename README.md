@@ -7,8 +7,8 @@ It depends on the pyristicAPI project, so this project doesn't work or not has a
 This project has a docker-compose file, it orchestate the API and the front end. The following command should be executed:
 - `docker compose up`
 
-The command mentioned above pull the current available image of the pyristicAPI and the front end image. After that, you will see both services up. If everything works, you could see the UI typing in your browser **http://localhost:3000/**. Enjoy solving optimization problems!!!
-
+The command mentioned above pull the current available image of the pyristicAPI and the front end image. After that, you will see both services up. If everything works, you could see the UI typing in your browser **http://localhost:3000/** as in the image below. Enjoy solving optimization problems!!!
+![Pyristic example](example_view.png)
 
 
 If you want to remove the containers related to the project, execute the following:
