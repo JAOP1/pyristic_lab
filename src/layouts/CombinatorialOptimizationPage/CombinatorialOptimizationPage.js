@@ -40,6 +40,20 @@ const CombinatorialOptimizationPage = () => {
             fileName:'generator_initial_solution',
         }
     ];
+
+    const getBestSolution = (array_solutions) => {
+        return array_solutions.reduce( 
+            (prevObj, currentObj) => prevObj.f > currentObj.f ? currentObj: prevObj
+            , array_solutions[0]
+        );
+    };
+
+    const getWorstSolution = (array_solutions) => {
+        return array_solutions.reduce( 
+            (prevObj, currentObj) => prevObj.f > currentObj.f ? prevObj: currentObj
+            , array_solutions[0]
+        );
+    };
     return (
         <div className='continuos-page '>
             <Tabs defaultSelectedIndex={1}>
@@ -62,6 +76,8 @@ const CombinatorialOptimizationPage = () => {
                             additionalArgs={{
                                 'SimulatedAnnealing':[]
                             }}
+                            getBestSolution={getBestSolution}
+                            getWorstSolution={getWorstSolution}
                         />
                     </TabPanel>
                     <TabPanel>

@@ -15,3 +15,8 @@
 @use './components/AreaChart/area-chart';
 @use './components/Info/info';
 @use './components/Logger/logger';
+@use './components/TextInputContent/text-input-content';
+
+.cds--body--with-modal-open .cds--tooltip, .cds--body--with-modal-open .cds--overflow-menu-options {
+    z-index: 1;
+}

@@ -21,9 +21,9 @@ class App extends Component {
             <Route  path='/' element={<ContinuosOptimizationPage/>} />
             <Route  path='/combinatorial' element={<CombinatorialOptimizationPage/>} />
           </Routes>
-          <Theme theme='g100'>
+          {/* <Theme theme='g100'>
             <Footer/>
-          </Theme>
+          </Theme> */}
         </Content>
       </>
     );

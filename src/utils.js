@@ -44,5 +44,10 @@ export const getAPIRoute = (algorithm) => {
 
 export const getTime = () => {
     const date = new Date();
-    return `${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
+    const format = (item) => ('0'+item).slice(-2); 
+    return `${format(date.getHours())}:${format(date.getMinutes())}:${format(date.getSeconds())}`;
+};
+
+export const formatArrayToString = (array) => {
+    return `[${array.join(',')}]`;
 };

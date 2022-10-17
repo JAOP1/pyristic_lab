@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import {
     Result
@@ -84,7 +84,6 @@ const Logger = () => {
                           </TableHead>
                           <TableBody>
                             {rows.map((row) => {
-                              console.log(row);
                               return(
                                 <React.Fragment key={row.id}>
                                   <TableExpandRow expandHeader="expand" {...getRowProps({ row })}>

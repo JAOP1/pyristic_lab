@@ -48,14 +48,14 @@ export const FormPyristic = ({itemList, title, globalStorageHandler, getDataGlob
             time: getTime(),
             status: 'success',
             action: `Added ${title} method: ${itemSelected.method_name}`,
-            details:'hola mundo'
+            details:`The method has been successfully  updated with the params: ${methodConfig.parameters}`
         }))
     };
 
     const sendText = (filename) => {
         return async(text) => {
             let action_status = 'success';
-            let error_detail = '';
+            let detail = '';
             try{
                 submitHandler([]);
                 const body = JSON.stringify({ content: text });
@@ -70,14 +70,14 @@ export const FormPyristic = ({itemList, title, globalStorageHandler, getDataGlob
                 setStatus('success');
             } catch(error){
                 action_status = 'error';
-                error_detail = error.response.data.detail;
+                detail = error.response.data.detail;
                 setStatus('error');
             }finally{
                 dispatch(addLog({
                     time: getTime(),
                     status: action_status,
                     action: `Submitted: ${filename}`,
-                    details:error_detail
+                    details:detail
                 }));
             }
         };

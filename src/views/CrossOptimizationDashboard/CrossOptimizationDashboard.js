@@ -13,15 +13,16 @@ import { getBodyRequest, getAPIRoute } from '../../utils';
 import AreaChartComponent from '../../components/AreaChart';
 import DataTableDinamic from '../../components/DataTableDinamic/DataTableDinamic';
 import AccordionForm from '../../components/AccordionForm';
-import { getTime } from '../../utils';
+import { TextInputContent } from '../../components/TextInputContent/TextInputContent';
+import { getTime, formatArrayToString } from '../../utils';
 import { addLog } from '../../reducers/loggerStore';
-
-const CrossOptimizationDashboard = ({ algorithms, additionalArgs }) => {
+const CrossOptimizationDashboard = ({ algorithms, additionalArgs, getBestSolution, getWorstSolution }) => {
     const [selectedAlgorithms, setSelectedAlgorithms] = useState({});
     const [inputsByAlgorithm, setInputsByAlgorithm] = useState([]);
     const [optimizerParameters, setOptimizerParameters] = useState({});
     const [statsByAlgorithm, setStatsByAlgorithm] = useState([]);
     const [dataPlotting, setDataPlotting] = useState([]);
+    const [limitSolutions, setLimitSolutions] = useState({ best:'', worst:'' });
     const [executions, setExecutions] = useState(1);
     const dispatch = useDispatch();
 
@@ -46,7 +47,16 @@ const CrossOptimizationDashboard = ({ algorithms, additionalArgs }) => {
         }
     }, [algorithms]);
 
-
+    const setSolutions = (array_solutions) => {
+        const best_sol = getBestSolution(array_solutions);
+        const worst_sol = getWorstSolution(array_solutions);
+        console.log("Best", best_sol);
+        console.log("worst", worst_sol);
+        setLimitSolutions({
+            best:formatArrayToString(best_sol.x),
+            worst:formatArrayToString(worst_sol.x)
+        });
+    };
     const saveDataInTable = (id, data, container) => {
         container.push({
             title:id,
@@ -58,7 +68,6 @@ const CrossOptimizationDashboard = ({ algorithms, additionalArgs }) => {
         });
     };
     const savePlottingData = (id, data, container) => {
-        console.log('data plot:', container);
         data.data['individual_f'].forEach( ( point, ind ) => container[ind][id] = point);
     };
     const callOptimizationAlgorithm = async() => {
@@ -66,12 +75,13 @@ const CrossOptimizationDashboard = ({ algorithms, additionalArgs }) => {
         setDataPlotting([]);
         let plot_array = [...Array(executions).keys()].map(i => ({ name:i }));
         let stats = [];
+        let limit_solutions = [];
         let action_status = 'success';
         let error_detail = '';
         for(let algorithm_type of Object.keys(selectedAlgorithms)){
             if(!selectedAlgorithms[algorithm_type])
                 continue;
-
+            error_detail='';
             try{
                 const Config = {
                     headers: {
@@ -88,22 +98,23 @@ const CrossOptimizationDashboard = ({ algorithms, additionalArgs }) => {
                 );
                 saveDataInTable(algorithm_type, result, stats);             
                 savePlottingData(algorithm_type, result, plot_array);
+                limit_solutions.push(result.data['Best solution'], result.data['Worst solution']);
                 action_status='success';
             } catch(error){
                 action_status='error';
                 error_detail=`Error during the execution of ${algorithm_type}`;
-                console.log('error:', error);
             }finally{
                 dispatch(addLog({
                     time: getTime(),
                     status: action_status,
-                    action: `Execution metaheuristic`,
+                    action: `Finished ${algorithm_type} process.`,
                     details:error_detail
                 }));
             }
         };
         setDataPlotting(plot_array);
         setStatsByAlgorithm(stats);
+        setSolutions(limit_solutions);
     };
     const updateListInputsAlgorithm = (checked, id) => {
         let ind;
@@ -141,19 +152,20 @@ const CrossOptimizationDashboard = ({ algorithms, additionalArgs }) => {
                 <Grid >
                     <Column lg={4} md={3} sm={4} className='border-rigth'>
                         <NumberInput
-                          id="execution"
-                          min={1}
-                          max={50}
-                          value={executions}
-                          onChange={(event, { value, direction }) => {
-                                const _value = parseInt(value);
-                                if(Number.isNaN(_value)){
-                                    return;
-                                }
-                                setExecutions(_value);                                   
-                          }}
-                          label="Number of executionss"
-                          invalidText="Number is not valid"
+                            className={'margin-top'}
+                            id="execution"
+                            min={1}
+                            max={50}
+                            value={executions}
+                            onChange={(event, { value, direction }) => {
+                                    const _value = parseInt(value);
+                                    if(Number.isNaN(_value)){
+                                        return;
+                                    }
+                                    setExecutions(_value);                                   
+                            }}
+                            label="Number of executions:"
+                            invalidText="Number is not valid"
                         />
                         <fieldset style={{marginTop:'5%'}}>
                             <legend style={{color:'#525252'}}>Select the algorithm:</legend>
@@ -174,7 +186,9 @@ const CrossOptimizationDashboard = ({ algorithms, additionalArgs }) => {
                             }
                         </fieldset>
                         <Button
+                            className={'margin-top'}
                             onClick={() => callOptimizationAlgorithm()}
+                            disabled={ !Object.keys(selectedAlgorithms).some( algorithm => selectedAlgorithms[algorithm]) }
                         >
                             Optimize
                         </Button>
@@ -188,75 +202,24 @@ const CrossOptimizationDashboard = ({ algorithms, additionalArgs }) => {
                     </Column>
                 </Grid>
             </Theme>
-            <Grid style={{marginTop:'2%'}}>
+            <Grid className={'margin-top'}>
+                <Column lg={8} md={4} sm={4}>
+                    <TextInputContent id='best_sol' labelText={'Best solution:'} value={ limitSolutions.best }/>
+                </Column>
+                <Column lg={8} md={4} sm={4}>
+                    <TextInputContent id='worst_sol' labelText={'Worst solution:'} value={ limitSolutions.worst }/>
+                </Column>
+            </Grid>
+            <Grid className={'margin-top'}>
                 <Column lg={12} md={5} sm={4}>
                     <AreaChartComponent data={dataPlotting}/>                
                 </Column>
                 <Column lg={4} md={3} sm={4}>
                     <DataTableDinamic  headers={HEADERS} data={statsByAlgorithm}/>
                 </Column>
-            </Grid>
+            </Grid>       
         </>
     );
-};
-
-CrossOptimizationDashboard.defaultProps={
-    algorithms: [
-        {
-            name:'Test Algorithm 1',
-            id:'t1',
-            parameters:[
-                {
-                    label:'Example input 1:',
-                    id:'example_inpunt_1',
-                    initialValue:10,
-                    min:1,
-                    max:1000,
-                    step:1
-                }
-            ]
-        },
-        {
-            name:'Test Algorithm 2',
-            id:'t2',
-            parameters:[
-                {
-                    label:'Example input 12:',
-                    id:'example_inpunt_12',
-                    initialValue:10,
-                    min:1,
-                    max:1000,
-                    step:1
-                }
-            ]
-        },
-        {
-            name:'Test Algorithm 3',
-            id:'t3',
-            parameters:[
-                {
-                    label:'Example input 2:',
-                    id:'example_inpunt_2',
-                    initialValue:10,
-                    min:1,
-                    max:1000,
-                    step:1
-                }
-            ]
-        }
-    ],
-    additionalArgs:{
-        t1:{
-            method1:{operator_name:'No selected'},
-            method2:{operator_name:'No selected'}
-
-        },
-        t2:{
-            method3:{operator_name:'testMethod'},
-            method4:{operator_name:'testAnotherMethod'}
-        },
-        t3:{}
-    }
 };
 
 export default CrossOptimizationDashboard;

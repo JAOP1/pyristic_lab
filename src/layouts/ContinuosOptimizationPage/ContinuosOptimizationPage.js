@@ -45,6 +45,20 @@ const ContinuosOptimizationPage = () => {
             fileName:'search_space'
         }
     ];
+
+    const getBestSolution = (array_solutions) => {
+        return array_solutions.reduce( 
+            (prevObj, currentObj) => prevObj.f < currentObj.f ? currentObj: prevObj
+            , array_solutions[0]
+        );
+    };
+
+    const getWorstSolution = (array_solutions) => {
+        return array_solutions.reduce( 
+            (prevObj, currentObj) => prevObj.f > currentObj.f ? currentObj: prevObj
+            , array_solutions[0]
+        );
+    };
     return (
         <div className='continuos-page '>
             <Tabs defaultSelectedIndex={1}>
@@ -71,6 +85,8 @@ const ContinuosOptimizationPage = () => {
                                 EE:EE_storage,
                                 EP:EP_storage
                             }}
+                            getBestSolution={getBestSolution}
+                            getWorstSolution={getWorstSolution}
                         />
                     </TabPanel>
                     <TabPanel>
@@ -86,7 +102,7 @@ const ContinuosOptimizationPage = () => {
                         />
                     </TabPanel>
                     <TabPanel>
-                    <FormStepsView 
+                        <FormStepsView 
                             formItems={SETTINGS_EE}
                             tabs={TABS_EE}
                             algorithm={'continuosEE'}
