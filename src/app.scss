@@ -9,13 +9,12 @@
 @use './components/Footer/footer';
 @use './components/AccordionForm/accordion-form';
 @use './components/DataTableDinamic/data-table-dinamic';
-@use './components/ProgressStepsBar/progress-bar';
 @use './components/FormPyristic/form-pyristic';
 @use './components/EditorForm/editor-form';
-@use './components/AreaChart/area-chart';
 @use './components/Info/info';
 @use './components/Logger/logger';
 @use './components/TextInputContent/text-input-content';
+@use './components/ProgressStepsBar/progress-bar';
 
 .cds--body--with-modal-open .cds--tooltip, .cds--body--with-modal-open .cds--overflow-menu-options {
     z-index: 1;

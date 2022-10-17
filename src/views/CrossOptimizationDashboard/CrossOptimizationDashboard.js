@@ -10,7 +10,7 @@ import {
 import axios from 'axios'; 
 import { useDispatch } from 'react-redux';
 import { getBodyRequest, getAPIRoute } from '../../utils';
-import AreaChartComponent from '../../components/AreaChart';
+import { CarbonChart } from '../../components/CarbonChart/CarbonChart';
 import DataTableDinamic from '../../components/DataTableDinamic/DataTableDinamic';
 import AccordionForm from '../../components/AccordionForm';
 import { TextInputContent } from '../../components/TextInputContent/TextInputContent';
@@ -50,8 +50,6 @@ const CrossOptimizationDashboard = ({ algorithms, additionalArgs, getBestSolutio
     const setSolutions = (array_solutions) => {
         const best_sol = getBestSolution(array_solutions);
         const worst_sol = getWorstSolution(array_solutions);
-        console.log("Best", best_sol);
-        console.log("worst", worst_sol);
         setLimitSolutions({
             best:formatArrayToString(best_sol.x),
             worst:formatArrayToString(worst_sol.x)
@@ -68,12 +66,13 @@ const CrossOptimizationDashboard = ({ algorithms, additionalArgs, getBestSolutio
         });
     };
     const savePlottingData = (id, data, container) => {
-        data.data['individual_f'].forEach( ( point, ind ) => container[ind][id] = point);
+        const dataPoints = data.data['individual_f'].map( (item, ind) => ({ group:id, y:item, x:ind+1 }));
+        return container.concat(dataPoints);
     };
     const callOptimizationAlgorithm = async() => {
         setStatsByAlgorithm([]);
         setDataPlotting([]);
-        let plot_array = [...Array(executions).keys()].map(i => ({ name:i }));
+        let plot_array = [];
         let stats = [];
         let limit_solutions = [];
         let action_status = 'success';
@@ -97,7 +96,7 @@ const CrossOptimizationDashboard = ({ algorithms, additionalArgs, getBestSolutio
                     Config
                 );
                 saveDataInTable(algorithm_type, result, stats);             
-                savePlottingData(algorithm_type, result, plot_array);
+                plot_array = savePlottingData(algorithm_type, result, plot_array);
                 limit_solutions.push(result.data['Best solution'], result.data['Worst solution']);
                 action_status='success';
             } catch(error){
@@ -112,6 +111,7 @@ const CrossOptimizationDashboard = ({ algorithms, additionalArgs, getBestSolutio
                 }));
             }
         };
+        console.log("datos a graficar", plot_array);
         setDataPlotting(plot_array);
         setStatsByAlgorithm(stats);
         setSolutions(limit_solutions);
@@ -212,12 +212,12 @@ const CrossOptimizationDashboard = ({ algorithms, additionalArgs, getBestSolutio
             </Grid>
             <Grid className={'margin-top'}>
                 <Column lg={12} md={5} sm={4}>
-                    <AreaChartComponent data={dataPlotting}/>                
+                    <CarbonChart data={dataPlotting} />     
                 </Column>
                 <Column lg={4} md={3} sm={4}>
                     <DataTableDinamic  headers={HEADERS} data={statsByAlgorithm}/>
                 </Column>
-            </Grid>       
+            </Grid>  
         </>
     );
 };

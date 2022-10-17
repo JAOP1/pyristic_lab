@@ -8,7 +8,7 @@ import {
     Theme,
     IconTab
 } from '@carbon/react';
-import { Dashboard, Code } from '@carbon/icons-react';
+import { Dashboard24, Code24 } from '@carbon/icons-react';
 import Logger from '../../components/Logger';
 import CrossOptimizationDashboard from '../../views/CrossOptimizationDashboard/CrossOptimizationDashboard';
 import AccordionEditorList from '../../views/ContinuosOptimizationEditor';
@@ -60,10 +60,12 @@ const CombinatorialOptimizationPage = () => {
                 <Theme theme={'g10'}>
                     <TabList aria-label="Tab navigation" iconSize={'lg'}>
                         <IconTab label='dashboard'>
-                            <Dashboard  aria-label="dashboard" size={20}/>
+                            {/* <Dashboard  aria-label="dashboard" size={20}/> */}
+                            <Dashboard24/>
                         </IconTab>
                         <IconTab label='problem-optimization'>
-                            <Code aria-label='problemCode' size={20}/>
+                            {/* <Code aria-label='problemCode' size={20}/> */}
+                            <Code24/>
                         </IconTab>
                         <Tab>Simulated Annealing</Tab>
                     </TabList>
