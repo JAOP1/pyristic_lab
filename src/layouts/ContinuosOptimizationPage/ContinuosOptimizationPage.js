@@ -9,7 +9,7 @@ import {
     Theme,
     IconTab
   } from '@carbon/react';
-  import { Dashboard, Code } from '@carbon/icons-react';
+  import { Dashboard20, Code20 } from '@carbon/icons-react';
 import Logger from '../../components/Logger';
 import FormStepsView from '../../views/FormStepsView';
 import CrossOptimizationDashboard from '../../views/CrossOptimizationDashboard/CrossOptimizationDashboard';
@@ -65,10 +65,12 @@ const ContinuosOptimizationPage = () => {
                 <Theme theme={'g10'}>
                     <TabList aria-label="Tab navigation" iconSize={'lg'}>
                         <IconTab label='dashboard'>
-                            <Dashboard  aria-label="dashboard" size={20}/>
+                            {/* <Dashboard  aria-label="dashboard" size={20}/> */}
+                            <Dashboard20/>
                         </IconTab>
                         <IconTab label='problem-optimization'>
-                            <Code aria-label='problemCode' size={20}/>
+                            {/* <Code aria-label='problemCode' size={20}/> */}
+                            <Code20/>
                         </IconTab>
                         <Tab>Genetic</Tab>
                         <Tab>Evolutionary Strategy</Tab>
