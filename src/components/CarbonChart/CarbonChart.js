@@ -1,8 +1,4 @@
 import React, { useEffect, useState } from "react";
-import ReactDOM from "react-dom";
-
-// import "@carbon/styles/css/styles.css";
-
 import "@carbon/charts/styles.css";
 import { LineChart } from "@carbon/charts-react";
 
