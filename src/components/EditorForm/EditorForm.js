@@ -74,6 +74,7 @@ function EditorForm({ title, sendCallback, initialCodeText, helpText, className 
         onRequestClose={ () => setHelpModal(false) }
         modalHeading={ title }
         modalLabel={ 'Detailed information' }
+        size={'md'}
         passiveModal
         hasScrollingContent
       >

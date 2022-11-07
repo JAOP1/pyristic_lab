@@ -23,7 +23,12 @@ import {
     TABS_EE
 } from '../../constants/evolutionarySettingView';
 import {
-    DESCRIPTION_FUNCTION
+    DESCRIPTION_FUNCTION,
+    DESCRIPTION_CONSTRAINTS,
+    DESCRIPTION_ADDITIONALS,
+    CODE_FUNCTION,
+    CODE_CONSTRAINTS,
+    CODE_ADDITIONALS
 } from '../../constants/texts';
 import { list_inputs_algorithms } from '../../constants/continuosGeneralParams';
 
@@ -36,17 +41,22 @@ const ContinuosOptimizationPage = () => {
             accordion_title:'Minimization function',
             title:'Function',
             fileName:'function',
-            helpText: DESCRIPTION_FUNCTION
+            helpText: DESCRIPTION_FUNCTION,
+            initialCodeText: CODE_FUNCTION
         },
         {
             accordion_title:'Constraints',
             title:'Array constraints',
-            fileName:'constraints'
+            fileName:'constraints',
+            helpText: DESCRIPTION_CONSTRAINTS,
+            initialCodeText:CODE_CONSTRAINTS
         },
         {
             accordion_title:'Additionals',
             title:'Problem bounds',
-            fileName:'search_space'
+            fileName:'search_space',
+            helpText: DESCRIPTION_ADDITIONALS,
+            initialCodeText: CODE_ADDITIONALS
         }
     ];
 
