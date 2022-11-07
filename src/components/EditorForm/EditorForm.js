@@ -7,12 +7,14 @@ import {
   FileUploader,
   Grid,
   Column,
-  Stack
+  Stack,
+  Modal
 } from '@carbon/react';
 
-function EditorForm({ title, sendCallback, initialCodeText, className }) {
+function EditorForm({ title, sendCallback, initialCodeText, helpText, className }) {
   const [textCode, setTextCode] = useState(initialCodeText || '# ¡Hello pyristic!');
   const [uploadStatus, setUploadStatus] = useState('uploading');
+  const [openedHelpModal, setHelpModal] = useState(false);
 
   const overwriteCode = (e) => {
     setUploadStatus('uploading');
@@ -50,6 +52,7 @@ function EditorForm({ title, sendCallback, initialCodeText, className }) {
             />
             <Button
               renderIcon={ HelpFilled }
+              onClick={ () => setHelpModal(true) }
               iconDescription="Help"
               hasIconOnly
               size='md'
@@ -66,6 +69,16 @@ function EditorForm({ title, sendCallback, initialCodeText, className }) {
           setTextCode(e)
         }}
       />
+      <Modal
+        open={ helpText && openedHelpModal }
+        onRequestClose={ () => setHelpModal(false) }
+        modalHeading={ title }
+        modalLabel={ 'Detailed information' }
+        passiveModal
+        hasScrollingContent
+      >
+        {helpText}
+      </Modal>
     </div>
   );
 }

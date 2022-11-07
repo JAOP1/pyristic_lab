@@ -22,6 +22,9 @@ import {
     SETTINGS_EE,
     TABS_EE
 } from '../../constants/evolutionarySettingView';
+import {
+    DESCRIPTION_FUNCTION
+} from '../../constants/texts';
 import { list_inputs_algorithms } from '../../constants/continuosGeneralParams';
 
 const ContinuosOptimizationPage = () => {
@@ -33,6 +36,7 @@ const ContinuosOptimizationPage = () => {
             accordion_title:'Minimization function',
             title:'Function',
             fileName:'function',
+            helpText: DESCRIPTION_FUNCTION
         },
         {
             accordion_title:'Constraints',
