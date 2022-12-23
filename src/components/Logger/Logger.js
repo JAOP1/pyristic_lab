@@ -18,6 +18,9 @@ import {
     TableExpandHeader,
     TableExpandedRow,
     TableExpandRow,
+    TableToolbar,
+    TableToolbarSearch,
+    TableContainer
 } from '@carbon/react';
 
 const Logger = () => {
@@ -29,6 +32,10 @@ const Logger = () => {
         {
             key:'status',
             header:'Status'
+        },
+        {
+            key:'algorithm',
+            header:'Algorithm'
         },
         {
             key:'action',
@@ -70,7 +77,12 @@ const Logger = () => {
                       getHeaderProps,
                       getRowProps,
                       getTableProps,
+                      onInputChange
                     }) => (
+                      <TableContainer>
+                        <TableToolbar>
+                          <TableToolbarSearch onChange={onInputChange} />
+                        </TableToolbar>
                         <Table {...getTableProps()}>
                           <TableHead>
                             <TableRow>
@@ -102,6 +114,7 @@ const Logger = () => {
                             })}
                           </TableBody>
                         </Table>
+                      </TableContainer>
                     )}
                   </DataTable>
                 </ModalBody>

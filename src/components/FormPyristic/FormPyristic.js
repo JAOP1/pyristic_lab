@@ -21,7 +21,7 @@ import { getTime } from '../../utils';
 import { addLog } from '../../reducers/loggerStore';
 import { TEXT_SELECTION_DROPDOWN } from '../../constants/texts';
 
-export const FormPyristic = ({itemList, title, globalStorageHandler, getDataGlobalStorage}) => {
+export const FormPyristic = ({ id, itemList, title, globalStorageHandler, getDataGlobalStorage}) => {
     const [itemSelected, setItemSelected] = useState(undefined);
     const [modalText, setModalText] = useState(undefined);
     const [inputArgsByUser, setInputArgsByUser] = useState(undefined);
@@ -47,6 +47,7 @@ export const FormPyristic = ({itemList, title, globalStorageHandler, getDataGlob
         dispatch(addLog({
             time: getTime(),
             status: 'success',
+            algorithm:id,
             action: `Added ${title} method: ${itemSelected.method_name}`,
             details:`The method has been successfully  updated with the params: ${methodConfig.parameters}`
         }))
@@ -76,6 +77,7 @@ export const FormPyristic = ({itemList, title, globalStorageHandler, getDataGlob
                 dispatch(addLog({
                     time: getTime(),
                     status: action_status,
+                    algorithm:id,
                     action: `Submitted: ${filename}`,
                     details:detail
                 }));

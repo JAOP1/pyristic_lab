@@ -106,7 +106,8 @@ const CrossOptimizationDashboard = ({ algorithms, additionalArgs, getBestSolutio
                 dispatch(addLog({
                     time: getTime(),
                     status: action_status,
-                    action: `Finished ${algorithm_type} process.`,
+                    algorithm: algorithm_type,
+                    action: 'Obtained statistics.',
                     details:error_detail
                 }));
             }

@@ -12,7 +12,8 @@ export const FormStepsView = ({ formItems, tabs, algorithm }) => {
                 callBack={(ind) =>  setCurrentView(ind)}
                 storageKey={algorithm}
             />
-            <FormPyristic 
+            <FormPyristic
+                id={ algorithm }
                 itemList={ formItems[currentView].item_list }
                 title={ formItems[currentView].title }
                 globalStorageHandler={ formItems[currentView].handler}

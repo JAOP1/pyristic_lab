@@ -39,6 +39,7 @@ const AccordionEditorList = ({ ARRAY_ITEMS }) => {
                 dispatch(addLog({
                     time: getTime(),
                     status: action_status,
+                    algorithm:'Optimization problem',
                     action: `Submitted: ${fileName}`,
                     details:error_detail
                 }));
