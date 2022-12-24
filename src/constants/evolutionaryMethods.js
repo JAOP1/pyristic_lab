@@ -1,5 +1,18 @@
 import { Equation } from 'react-equation';
 
+export const AG_COMBINATORIAL_INITIAL_POPULATION = [
+    {
+        label:'customize method',
+        method_name:'CustomMethod',
+        filename: 'GA_initialize_method',
+        // initialCode: ''
+    }
+];
+
+export const AG_COMBINATORIAL_MUTATION_OP = [];
+
+export const AG_COMBINATORIAL_CROSSOVER_OP = [];
+
 export const AG_COUNTINUOS_MUTATION_OP = [
     {
         label:'Binary mutation',

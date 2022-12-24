@@ -1,4 +1,7 @@
-import { 
+import {
+    AG_COMBINATORIAL_INITIAL_POPULATION,
+    AG_COMBINATORIAL_CROSSOVER_OP,
+    AG_COMBINATORIAL_MUTATION_OP,
     AG_COUNTINUOS_MUTATION_OP,
     AG_CONTINUOS_CROSSOVER_OP,
     AG_PARENT_SELECTION,
@@ -32,6 +35,86 @@ import {
     survivorSelectionUpdatedEE,
     setInvalidSolutionUpdatedEE
 } from '../reducers/EEStore';
+import {
+    initializePopulationUpdatedCombinatorialAG,
+    mutationUpdatedCombinatorialAG,
+    crossoverUpdatedCombinatorialAG,
+    parentSelectionUpdatedCombinatorialAG,
+    survivorSelectionUpdatedCombinatorialAG,
+    setInvalidSolutionUpdatedCombinatorialAG
+} from '../reducers/AGCombStore';
+//------------------- AG form view requirements ----------------------------
+export const SETTINGS_COMBINATORIAL_AG = [
+    {
+        title:'Initialize population',
+        item_list:AG_COMBINATORIAL_INITIAL_POPULATION,
+        handler:initializePopulationUpdatedCombinatorialAG,
+        getData: (state) => state.combinatorialAG.initialize_method
+    },
+    {
+        title:'Parent selection',
+        item_list:AG_PARENT_SELECTION,
+        handler:  parentSelectionUpdatedCombinatorialAG,
+        getData: (state) => state.combinatorialAG.parent_selector
+    },
+    {
+        title:'Crossover operator',
+        item_list:AG_COMBINATORIAL_CROSSOVER_OP,
+        handler: crossoverUpdatedCombinatorialAG,
+        getData: (state) => state.combinatorialAG.crossover_operator
+    },
+    {
+        title:'Mutation operator',
+        item_list:AG_COMBINATORIAL_MUTATION_OP,
+        handler: mutationUpdatedCombinatorialAG,
+        getData: (state) => state.combinatorialAG.mutation_operator
+    },
+    {
+        title:'Survivor selection',
+        item_list:SURVIVOR_SELECTION,
+        handler: survivorSelectionUpdatedCombinatorialAG,
+        getData: (state) => state.combinatorialAG.survivor_selector
+    },
+    {
+        title:'Adjust invalid solutions',
+        item_list:SETTING_INVALID_SOLUTIONS,
+        handler: setInvalidSolutionUpdatedCombinatorialAG,
+        getData: (state) => state.combinatorialAG.setter_invalid_solution
+    }, 
+];
+export const TABS_COMBINATORIAL_AG = [
+    {
+        label:'Step 1',
+        description:'Step 1: Create method to initialize population.',
+        keyGlobalStorage:'initialize_method'
+    },
+    {
+        label:'Step 2',
+        description:'Step 2: Select parent selection method.',
+        keyGlobalStorage:'parent_selector'
+    },
+    {
+        label:'Step 3',
+        description:'Step 3: Select crossover method.',
+        keyGlobalStorage:'crossover_operator'
+    },
+    {
+        label:'Step 4',
+        description:'Step 4: Select mutation method.',
+        keyGlobalStorage:'mutation_operator'
+    },
+    {
+        label:'Step 5',
+        description:'Step 5: Select survivor selection method.',
+        keyGlobalStorage:'survivor_selector'
+    },
+    {
+        label:'Step 6',
+        description:'Step 6: Select adjustment invalid solutions method.',
+        keyGlobalStorage:'setter_invalid_solution'
+    },
+];
+
 
 //------------------- AG form view requirements ----------------------------
 export const SETTINGS_AG = [

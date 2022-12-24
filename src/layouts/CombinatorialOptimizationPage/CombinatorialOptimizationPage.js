@@ -1,4 +1,5 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import {
     Tabs,
     Tab,
@@ -9,7 +10,12 @@ import {
     IconTab
 } from '@carbon/react';
 import { Dashboard24, Code24 } from '@carbon/icons-react';
+import {
+    SETTINGS_COMBINATORIAL_AG,
+    TABS_COMBINATORIAL_AG
+} from '../../constants/evolutionarySettingView';
 import Logger from '../../components/Logger';
+import FormStepsView from '../../views/FormStepsView';
 import CrossOptimizationDashboard from '../../views/CrossOptimizationDashboard/CrossOptimizationDashboard';
 import AccordionEditorList from '../../views/ContinuosOptimizationEditor';
 import { list_inputs_algorithms_combinatorial } from '../../constants/continuosGeneralParams';
@@ -40,6 +46,7 @@ const CombinatorialOptimizationPage = () => {
             fileName:'generator_initial_solution',
         }
     ];
+    const AG_storage = useSelector((state) => state.combinatorialAG);
 
     const getBestSolution = (array_solutions) => {
         return array_solutions.reduce( 
@@ -68,6 +75,7 @@ const CombinatorialOptimizationPage = () => {
                             <Code24/>
                         </IconTab>
                         <Tab>Simulated Annealing</Tab>
+                        <Tab>Genetic</Tab>
                     </TabList>
                 </Theme>
                 <Logger/>
@@ -76,7 +84,8 @@ const CombinatorialOptimizationPage = () => {
                         <CrossOptimizationDashboard 
                             algorithms={list_inputs_algorithms_combinatorial}
                             additionalArgs={{
-                                'SimulatedAnnealing':[]
+                                SimulatedAnnealing:[],
+                                CombinatorialAG:AG_storage
                             }}
                             getBestSolution={getBestSolution}
                             getWorstSolution={getWorstSolution}
@@ -90,6 +99,13 @@ const CombinatorialOptimizationPage = () => {
                     <TabPanel>
                         <AccordionEditorList 
                             ARRAY_ITEMS={SA_FEATURES_ARRAY} 
+                        />
+                    </TabPanel>
+                    <TabPanel>
+                        <FormStepsView
+                            formItems={SETTINGS_COMBINATORIAL_AG}
+                            tabs={TABS_COMBINATORIAL_AG}
+                            algorithm={'combinatorialAG'}
                         />
                     </TabPanel>
                 </TabPanels>
