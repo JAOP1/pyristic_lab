@@ -137,6 +137,7 @@ export const FormPyristic = ({ id, itemList, title, globalStorageHandler, getDat
                         title={ itemSelected.label }
                         sendCallback={ sendText(itemSelected.filename) }
                         initialCodeText={ itemSelected.initialCode }
+                        helpText={ itemSelected.helpText }
                         className={'editor-width'}
                     />
                 }

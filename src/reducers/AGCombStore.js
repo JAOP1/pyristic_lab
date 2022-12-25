@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
     initialize_method:{
-        operator_name:'No selected',
+        operator_name:'CustomMethod',
         parameters:[]
     },
     mutation_operator:{

@@ -5,13 +5,55 @@ export const AG_COMBINATORIAL_INITIAL_POPULATION = [
         label:'customize method',
         method_name:'CustomMethod',
         filename: 'GA_initialize_method',
+        helpText:'Hello world'
         // initialCode: ''
     }
 ];
 
-export const AG_COMBINATORIAL_MUTATION_OP = [];
+export const AG_COMBINATORIAL_MUTATION_OP = [
+    {
+        label:'Exchange positions - permutation',
+        method_name:'ExchangeMutator',
+        description_render: (
+            <>
+                TODO
+            </>
+        ),
+        params:[]
+    },
+    {
+        label:'Insertion - permutation',
+        method_name:'InsertionMutator',
+        description_render: (
+            <>
+                TODO
+            </>
+        ),
+        params:[
+            {
+                label:'Number of elements to reallocate:',
+                initialValue:1,
+                min:1,
+                max:10000,
+                helperText:'The number should be a integer number.',
+                step:1
+            } 
+        ]
+    },    
+];
 
-export const AG_COMBINATORIAL_CROSSOVER_OP = [];
+export const AG_COMBINATORIAL_CROSSOVER_OP = [
+    {
+        label:'Permutation Order',
+        method_name:'PermutationOrderCrossover',
+        description_render: (
+            <>
+                TODO
+            </>
+        ),
+        params:[]
+    },
+];
 
 export const AG_COUNTINUOS_MUTATION_OP = [
     {
@@ -475,6 +517,17 @@ export const EE_CONTINUOS_ADAPTIVE_MUTATION_OP = [
 ];
 
 export const SETTING_INVALID_SOLUTIONS = [
+    {
+        label:'None',
+        method_name:'NoneFixer',
+        inside_array:true,
+        description_render:(
+            <>
+                TODO
+            </>
+        ),
+        params:[]       
+    },
     {
         label:'Adjust to near limit',
         method_name:'ContinuosFixer',
