@@ -71,7 +71,7 @@ export const FormPyristic = ({ id, itemList, title, globalStorageHandler, getDat
                 setStatus('success');
             } catch(error){
                 action_status = 'error';
-                detail = error.response.data.detail;
+                detail = error.message;
                 setStatus('error');
             }finally{
                 dispatch(addLog({

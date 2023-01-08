@@ -1,8 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
-    initialize_method:{
-        operator_name:'CustomMethod',
+    init_population:{
+        operator_name:'No selected',
         parameters:[]
     },
     mutation_operator:{
@@ -32,8 +32,8 @@ const CombinatorialAGSlice = createSlice({
     initialState,
     reducers: {
         initializePopulationUpdatedCombinatorialAG: (state, method) =>{
-            state['initialize_method'].operator_name = method.payload.operator_name;
-            state['initialize_method'].parameters = method.payload.parameters;
+            state['init_population'].operator_name = method.payload.operator_name;
+            state['init_population'].parameters = method.payload.parameters;
         },
         mutationUpdatedCombinatorialAG: (state, method) => { 
             state['mutation_operator'].operator_name = method.payload.operator_name;

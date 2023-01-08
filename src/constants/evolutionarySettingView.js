@@ -49,7 +49,7 @@ export const SETTINGS_COMBINATORIAL_AG = [
         title:'Initialize population',
         item_list:AG_COMBINATORIAL_INITIAL_POPULATION,
         handler:initializePopulationUpdatedCombinatorialAG,
-        getData: (state) => state.combinatorialAG.initialize_method
+        getData: (state) => state.combinatorialAG.init_population
     },
     {
         title:'Parent selection',
@@ -86,7 +86,7 @@ export const TABS_COMBINATORIAL_AG = [
     {
         label:'Step 1',
         description:'Step 1: Create method to initialize population.',
-        keyGlobalStorage:'initialize_method'
+        keyGlobalStorage:'init_population'
     },
     {
         label:'Step 2',

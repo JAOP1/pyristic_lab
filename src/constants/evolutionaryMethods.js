@@ -2,9 +2,28 @@ import { Equation } from 'react-equation';
 
 export const AG_COMBINATORIAL_INITIAL_POPULATION = [
     {
+        label:'Random permutations',
+        method_name:'RandomPermutationPopulation',
+        description_render: (
+            <>
+                TODO
+            </>
+        ),
+        params:[
+            {
+                label:'Number of decision variables:',
+                initialValue:1,
+                min:1,
+                max:10000,
+                helperText:'The number should be a integer number.',
+                step:1
+            } 
+        ]
+    },
+    {
         label:'customize method',
         method_name:'CustomMethod',
-        filename: 'GA_initialize_method',
+        filename: 'GA_init_population',
         helpText:'Hello world'
         // initialCode: ''
     }

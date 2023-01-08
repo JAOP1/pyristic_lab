@@ -14,6 +14,10 @@ import {
     SETTINGS_COMBINATORIAL_AG,
     TABS_COMBINATORIAL_AG
 } from '../../constants/evolutionarySettingView';
+import {
+    DESCRIPTION_ADDITIONALS,
+    CODE_ADDITIONALS
+} from '../../constants/texts';
 import Logger from '../../components/Logger';
 import FormStepsView from '../../views/FormStepsView';
 import CrossOptimizationDashboard from '../../views/CrossOptimizationDashboard/CrossOptimizationDashboard';
@@ -31,6 +35,13 @@ const CombinatorialOptimizationPage = () => {
             accordion_title:'Constraints',
             title:'Array constraints',
             fileName:'constraints'
+        },
+        {
+            accordion_title:'Additionals',
+            title:'Problem bounds',
+            fileName:'search_space',
+            helpText: DESCRIPTION_ADDITIONALS,
+            initialCodeText: CODE_ADDITIONALS
         }
     ];
     const SA_FEATURES_ARRAY = [

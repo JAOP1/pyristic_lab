@@ -18,6 +18,7 @@ function createSimulatedAnnealingRequestBody(id, optimizerParameters){
 
 export const getBodyRequest = (algorithm, requiredInputs, additionalInputs) => {
     switch(algorithm){
+        case 'CombinatorialAG':
         case 'GA':
         case 'EP':
         case 'EE':
@@ -31,6 +32,8 @@ export const getBodyRequest = (algorithm, requiredInputs, additionalInputs) => {
 
 export const getAPIRoute = (algorithm) => {
     switch(algorithm){
+        case 'CombinatorialAG':
+            return `${HOST}/optimize/evolutionary/GA`;
         case 'GA':
         case 'EP':
         case 'EE':
