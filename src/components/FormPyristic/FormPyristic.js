@@ -56,7 +56,7 @@ export const FormPyristic = ({ id, itemList, title, globalStorageHandler, getDat
     const sendText = (filename) => {
         return async(text) => {
             let action_status = 'success';
-            let detail = '';
+            let error_detail = '';
             try{
                 submitHandler([]);
                 const body = JSON.stringify({ content: text });
@@ -71,7 +71,7 @@ export const FormPyristic = ({ id, itemList, title, globalStorageHandler, getDat
                 setStatus('success');
             } catch(error){
                 action_status = 'error';
-                detail = error.message;
+                error_detail=error.response.data.detail;
                 setStatus('error');
             }finally{
                 dispatch(addLog({
@@ -79,7 +79,7 @@ export const FormPyristic = ({ id, itemList, title, globalStorageHandler, getDat
                     status: action_status,
                     algorithm:id,
                     action: `Submitted: ${filename}`,
-                    details:detail
+                    details:error_detail
                 }));
             }
         };

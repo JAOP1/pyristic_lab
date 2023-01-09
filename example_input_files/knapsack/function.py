@@ -14,10 +14,11 @@ dist_matrix =[
 
 def function( x ) -> float:
     global dist_matrix
-    total_dist = dist_matrix[x[-1]][0]
+    total_dist = dist_matrix[int(x[-1])][0]
     for i in range(1,len(x)):
-        u,v = x[i], x[i-1]
+        u,v = int(x[i]), int(x[i-1])
         total_dist+= dist_matrix[u][v]
+
     return float(total_dist)
 
 def aptitude_function(x):

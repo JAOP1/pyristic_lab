@@ -101,7 +101,7 @@ const CrossOptimizationDashboard = ({ algorithms, additionalArgs, getBestSolutio
                 action_status='success';
             } catch(error){
                 action_status='error';
-                error_detail=error.message;
+                error_detail=error.response.data.detail;
             }finally{
                 dispatch(addLog({
                     time: getTime(),
