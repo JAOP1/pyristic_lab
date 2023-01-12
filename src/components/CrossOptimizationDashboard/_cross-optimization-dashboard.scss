@@ -1,0 +1,23 @@
+@use '@carbon/react/scss/type' as *;
+@use '@carbon/react/scss/spacing' as *;
+@use '@carbon/react/scss/breakpoint' as *;
+@use '@carbon/react/scss/theme' as *;
+
+.margin-top{
+    margin-top: 2%;
+}
+
+.border-rigth{
+    padding-right: 5%;
+    border-left: 1px;
+    border-color: black;
+    @include breakpoint(lg){
+        border-right: 1px solid $border-disabled;
+    }
+    @include breakpoint(md){
+        border-right: 1px solid $border-disabled;
+    }
+    @include breakpoint-down(md){
+        border-bottom: none;
+    }
+}
