@@ -2,8 +2,8 @@
 @use '@carbon/react/scss/breakpoint' as *;
 @use './layouts/ContinuosOptimizationPage/continuos-optimization-page';
 @use './layouts/CombinatorialOptimizationPage/combinatorial-optimization';
-@use './views/CrossOptimizationDashboard/cross-optimization-dashboard';
-@use './views/FormStepsView/form-steps-view';
+@use './components/CrossOptimizationDashboard/cross-optimization-dashboard';
+@use './components/FormStepsView/form-steps-view';
 @use './components/NavBar/nav-bar';
 @use './components/Banner/banner';
 @use './components/Footer/footer';

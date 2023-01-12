@@ -15,13 +15,17 @@ import {
     TABS_COMBINATORIAL_AG
 } from '../../constants/evolutionarySettingView';
 import {
+    DESCRIPTION_FUNCTION,
+    DESCRIPTION_CONSTRAINTS,
     DESCRIPTION_ADDITIONALS,
+    CODE_FUNCTION,
+    CODE_CONSTRAINTS,
     CODE_ADDITIONALS
 } from '../../constants/texts';
 import Logger from '../../components/Logger';
-import FormStepsView from '../../views/FormStepsView';
-import CrossOptimizationDashboard from '../../views/CrossOptimizationDashboard/CrossOptimizationDashboard';
-import AccordionEditorList from '../../views/ContinuosOptimizationEditor';
+import FormStepsView from '../../components/FormStepsView';
+import CrossOptimizationDashboard from '../../components/CrossOptimizationDashboard/CrossOptimizationDashboard';
+import AccordionEditorList from '../../components/AccordionEditorList';
 import { list_inputs_algorithms_combinatorial } from '../../constants/continuosGeneralParams';
 
 const CombinatorialOptimizationPage = () => {
@@ -30,11 +34,15 @@ const CombinatorialOptimizationPage = () => {
             accordion_title:'Minimization function',
             title:'Function',
             fileName:'function',
+            helpText: DESCRIPTION_FUNCTION,
+            initialCodeText: CODE_FUNCTION
         },
         {
             accordion_title:'Constraints',
             title:'Array constraints',
-            fileName:'constraints'
+            fileName:'constraints',
+            helpText: DESCRIPTION_CONSTRAINTS,
+            initialCodeText:CODE_CONSTRAINTS
         },
         {
             accordion_title:'Additionals',

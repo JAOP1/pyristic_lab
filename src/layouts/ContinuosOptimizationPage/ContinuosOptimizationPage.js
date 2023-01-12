@@ -11,9 +11,9 @@ import {
   } from '@carbon/react';
   import { Dashboard20, Code20 } from '@carbon/icons-react';
 import Logger from '../../components/Logger';
-import FormStepsView from '../../views/FormStepsView';
-import CrossOptimizationDashboard from '../../views/CrossOptimizationDashboard/CrossOptimizationDashboard';
-import AccordionEditorList from '../../views/ContinuosOptimizationEditor/AccordionEditorList';
+import FormStepsView from '../../components/FormStepsView';
+import CrossOptimizationDashboard from '../../components/CrossOptimizationDashboard';
+import AccordionEditorList from '../../components/AccordionEditorList';
 import { 
     SETTINGS_AG,
     TABS_AG,
