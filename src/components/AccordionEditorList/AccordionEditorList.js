@@ -7,7 +7,7 @@ import {
 } from '@carbon/react';
 import { useDispatch } from 'react-redux';
 import axios from 'axios'; 
-import EditorForm from '../../components/EditorForm/EditorForm';
+import EditorForm from '../EditorForm/EditorForm';
 import { getTime } from '../../utils';
 import { addLog } from '../../reducers/loggerStore';
 import { HOST } from '../../constants/settings';
