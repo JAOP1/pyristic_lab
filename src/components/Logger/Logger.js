@@ -57,7 +57,7 @@ const Logger = () => {
       const interval = setInterval(async() => {
         const response = await axios.get(`${HOST}/logs`)
         setConsoleLogs(response.data.content);
-      }, 10000);
+      }, 3000);
       return () => clearInterval(interval);
     }, []);
 
@@ -74,7 +74,8 @@ const Logger = () => {
                 iconDescription={ 'logs' }
                 onClick={ () => setOpen(true) }
             />
-            <ComposedModal 
+            <ComposedModal
+                id = "modal_logs"
                 size="lg"
                 open={isOpen}
                 onClose={ () => setOpen(false) }
@@ -141,13 +142,12 @@ const Logger = () => {
                   }
                   { tab === 1 &&
                     <Editor
-                    theme="vs-dark"
-                    height="40vh"
-                    defaultLanguage="shell"
-                    value={consoleLogs}
-                    options={{ readOnly: true }}
-
-                  />
+                      theme="vs-dark"
+                      height="60vh"
+                      defaultLanguage="shell"
+                      value={consoleLogs}
+                      options={{ readOnly: true }}
+                    />
                   }
                 </ModalBody>
             </ComposedModal>
